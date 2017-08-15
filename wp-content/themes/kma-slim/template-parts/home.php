@@ -15,7 +15,7 @@ $subhead = ($post->page_information_subhead != '' ? $post->page_information_subh
             <slider>
                     <?php
                         $slider = new Slider();
-                        echo $slider->getSlider('home-page-slider');
+                        echo $slider->getSlider('home-page-featured-pieces');
                     ?>
             </slider>
 
@@ -24,4 +24,3 @@ $subhead = ($post->page_information_subhead != '' ? $post->page_information_subh
         </div>
     </article><!-- #post-## -->
 </div>
-<!--<modal v-if="isVisible" @close="isVisible = false"><div class="box" >Welcome!</div></modal>-->

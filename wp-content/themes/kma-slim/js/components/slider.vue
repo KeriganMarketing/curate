@@ -1,16 +1,10 @@
 <template>
     <div class="slider">
-        <div class="slider-left icon is-large" @click="clickPrev" >
-            <i class="fa fa-angle-left is-large" aria-hidden="true"></i>
-        </div>
 
         <div class="slides" @mouseover="togglePause" @mouseleave="togglePause">
             <slot></slot>
         </div>
 
-        <div class="slider-right icon is-large" @click="clickNext" >
-            <i class="fa fa-angle-right is-large" aria-hidden="true"></i>
-        </div>
     </div>
 </template>
 
@@ -28,7 +22,7 @@
         created(){
 
             this.slides = this.$children
-            setInterval(() => { if(this.paused == false){ this.nextSlide() } }, 6000)
+            //setInterval(() => { if(this.paused == false){ this.nextSlide() } }, 6000)
 
         },
 

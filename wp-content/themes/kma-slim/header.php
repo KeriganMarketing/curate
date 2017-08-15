@@ -20,10 +20,10 @@
 <a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'kmaslim' ); ?></a>
 <div id="app">
 <header id="top" class="header">
-    <nav class="navbar is-transparent">
+    <nav class="navbar">
         <div class="navbar-brand">
             <a class="navbar-item" href="/">
-                <img src="<?php echo get_template_directory_uri() . '/img/slim-logo.svg'; ?>" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
+                <img src="<?php echo get_template_directory_uri() . '/img/curate-logo.svg'; ?>" alt="curate, a collaboration with vinings gallery" style="width:100%;" >
             </a>
 
             <div class="navbar-burger burger" id="TopNavBurger" data-target="TopNavMenu" @click="toggleMenu">

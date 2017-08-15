@@ -7,8 +7,8 @@
  */
 
 include('modules/social/sociallinks.php');
-include('modules/testimonials/testimonials.php');
-include('modules/layouts/Layouts.php');
+//include('modules/testimonials/testimonials.php');
+//include('modules/layouts/Layouts.php');
 include('modules/slider/Slider.php');
 
 $socialLinks = new SocialSettingsPage();
@@ -16,15 +16,15 @@ if(is_admin()) {
 	$socialLinks->createPage();
 }
 
-$testimonials = new Testimonials();
-$testimonials->createPostType();
-$testimonials->createAdminColumns();
-$testimonials->createShortcode();
+//$testimonials = new Testimonials();
+//$testimonials->createPostType();
+//$testimonials->createAdminColumns();
+//$testimonials->createShortcode();
 
-$layouts = new Layouts();
-$layouts->createPostType();
-$layouts->createDefaultFormats();
-$layouts->createLayout('two-column','two column page layout','twocol');
+//$layouts = new Layouts();
+//$layouts->createPostType();
+//$layouts->createDefaultFormats();
+//$layouts->createLayout('two-column','two column page layout','twocol');
 
 $slider = new Slider();
 $slider->createPostType();

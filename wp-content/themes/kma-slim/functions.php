@@ -23,7 +23,7 @@ function kmaslim_setup() {
 
 	register_nav_menus( array(
 		'mobile-menu'    => esc_html__( 'Mobile Menu', 'kmaslim' ),
-		'mini-top-right' => esc_html__( 'Mini Menu Top Right', 'kmaslim' ),
+		'footer-menu'    => esc_html__( 'Footer Menu', 'kmaslim' ),
 		'main-menu'      => esc_html__( 'Main Navigation', 'kmaslim' )
 	) );
 
