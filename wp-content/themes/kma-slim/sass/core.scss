@@ -79,10 +79,19 @@
   height:100vh;
   position: relative;
   z-index: 0;
-  top:0; left:0; right:0; bottom:0;
+  height: 100vh;
+  .slide-contents {
+    display: block;
+    height: 100vh;
+    overflow: hidden;
+  }
 }
 
 .navbar-item img {
   max-height: none;
   max-width: 100%;
+}
+
+.invisible{
+  display:none;
 }

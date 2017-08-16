@@ -87,26 +87,31 @@ body * {
 }
 
 //HOME page specific
-
 .hero-label {
-  position: absolute;
+  position: fixed;
   bottom: 30px;
   left: 30px;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 a.clickdown.icon.center {
-  position: relative;
+  position: fixed;
   display: inline-block;
-  height: 40px;
-  width: 40px;
+  height: 60px;
+  width: 60px;
   border: 1px solid #FFF;
   border-radius: 50%;
   text-align: center;
   vertical-align: middle;
-  top: -50px;
   z-index: 30;
   left: 50%;
-  margin-left: -20px;
+  margin-left: -30px;
+  bottom: 30px;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .clickdown i.fa.fa-angle-down {
