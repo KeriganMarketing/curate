@@ -58,7 +58,7 @@
 
             togglePause(){
                 this.paused = !this.paused;
-                console.log('paused: ' + this.paused);
+                //console.log('paused: ' + this.paused);
             }
 
         }

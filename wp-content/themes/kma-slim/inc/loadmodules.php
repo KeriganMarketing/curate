@@ -9,7 +9,8 @@
 include('modules/social/sociallinks.php');
 //include('modules/testimonials/testimonials.php');
 //include('modules/layouts/Layouts.php');
-include('modules/slider/Slider.php');
+//include('modules/slider/Slider.php');
+include('modules/portfolio/Portfolio.php');
 
 $socialLinks = new SocialSettingsPage();
 if(is_admin()) {
@@ -26,6 +27,10 @@ if(is_admin()) {
 //$layouts->createDefaultFormats();
 //$layouts->createLayout('two-column','two column page layout','twocol');
 
-$slider = new Slider();
-$slider->createPostType();
-$slider->createAdminColumns();
+//$slider = new Slider();
+//$slider->createPostType();
+//$slider->createAdminColumns();
+
+$portfolio = new Portfolio();
+$portfolio->createPostType();
+$portfolio->createAdminColumns();

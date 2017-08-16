@@ -229,12 +229,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
     props: {
         image: { required: true },
-        active: { default: false }
+        active: { default: false },
+        artist: '',
+        title: '',
+        link: ''
     },
 
     data: function data() {
@@ -265,12 +272,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -281,14 +282,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
     created: function created() {
-        var _this = this;
 
         this.slides = this.$children;
-        setInterval(function () {
-            if (_this.paused == false) {
-                _this.nextSlide();
-            }
-        }, 6000);
+        //setInterval(() => { if(this.paused == false){ this.nextSlide() } }, 6000)
     },
 
 
@@ -319,7 +315,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         togglePause: function togglePause() {
             this.paused = !this.paused;
-            console.log('paused: ' + this.paused);
+            //console.log('paused: ' + this.paused);
         }
     }
 
@@ -418,7 +414,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\curate\\wp-content\\themes\\kma-slim\\js\\components\\message.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\curate\\wp-content\\themes\\kma-slim\\js\\components\\message.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] message.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -452,7 +448,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\curate\\wp-content\\themes\\kma-slim\\js\\components\\modal.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\curate\\wp-content\\themes\\kma-slim\\js\\components\\modal.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] modal.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -486,7 +482,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\curate\\wp-content\\themes\\kma-slim\\js\\components\\slide.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\curate\\wp-content\\themes\\kma-slim\\js\\components\\slide.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] slide.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -520,7 +516,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\curate\\wp-content\\themes\\kma-slim\\js\\components\\slider.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\curate\\wp-content\\themes\\kma-slim\\js\\components\\slider.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] slider.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -554,7 +550,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\curate\\wp-content\\themes\\kma-slim\\js\\components\\tab.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\curate\\wp-content\\themes\\kma-slim\\js\\components\\tab.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] tab.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -588,7 +584,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\curate\\wp-content\\themes\\kma-slim\\js\\components\\tabs.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\curate\\wp-content\\themes\\kma-slim\\js\\components\\tabs.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] tabs.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -615,13 +611,23 @@ module.exports = Component.exports
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "slide full-bg",
-    class: {
-      'is-active': this.isActive
-    },
     style: ({
       'background-image': 'url(' + _vm.image + ')'
     })
-  }, [_vm._t("default")], 2)
+  }, [_c('div', {
+    staticClass: "hero-label is-dark"
+  }, [_c('h2', {
+    staticClass: "artist-name is-2"
+  }, [_vm._v(_vm._s(_vm.artist))]), _vm._v(" "), _c('p', {
+    staticClass: "title is-3"
+  }, [_vm._v(_vm._s(_vm.title))]), _vm._v(" "), _c('a', {
+    staticClass: "button is-primary",
+    attrs: {
+      "href": {
+        link: _vm.link
+      }
+    }
+  }, [_vm._v("view")])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -662,32 +668,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "slider"
   }, [_c('div', {
-    staticClass: "slider-left icon is-large",
-    on: {
-      "click": _vm.clickPrev
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-angle-left is-large",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  })]), _vm._v(" "), _c('div', {
     staticClass: "slides",
     on: {
       "mouseover": _vm.togglePause,
       "mouseleave": _vm.togglePause
     }
-  }, [_vm._t("default")], 2), _vm._v(" "), _c('div', {
-    staticClass: "slider-right icon is-large",
-    on: {
-      "click": _vm.clickNext
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-angle-right is-large",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  })])])
+  }, [_vm._t("default")], 2)])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
