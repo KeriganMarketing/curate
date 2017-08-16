@@ -12,7 +12,7 @@ $subhead  = ( $post->page_information_subhead != '' ? $post->page_information_su
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
         <div class="section-wrapper full-bg">
 
-            <slider>
+            <portfolioslider>
 				<?php
 				$portfolio = new Portfolio();
 				echo $portfolio->getWorkSlider(null, array(
@@ -25,9 +25,7 @@ $subhead  = ( $post->page_information_subhead != '' ? $post->page_information_su
 					)
                 ) );
 				?>
-            </slider>
-
-            <a class="clickdown icon center" href="#bot"><i class="fa fa-angle-down" aria-hidden="true"></i></a>
+            </portfolioslider>
 
         </div>
     </article><!-- #post-## -->

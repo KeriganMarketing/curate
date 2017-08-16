@@ -122,9 +122,9 @@ class Portfolio {
 	    $resultArray = $this->getWork($taxonomy, $requestArray);
         $output = '';
 
-        $i = 0;
+        $i = 1;
         foreach($resultArray as $item){
-	        $output .= '<slide image="'.$item['photo'].'" artist="'.$item['author'].'" title="'.$item['name'].'" link="'.$item['link'].'" ></slide>';
+	        $output .= '<portfolioslide :id="'.$i.'" image="'.$item['photo'].'" artist="'.$item['author'].'" title="'.$item['name'].'" link="'.$item['link'].'" ></portfolioslide>';
             $i++;
         }
 

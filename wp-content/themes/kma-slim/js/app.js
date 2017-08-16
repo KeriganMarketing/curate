@@ -4,8 +4,8 @@ import message from './components/message.vue';
 import modal from './components/modal.vue';
 import tabs from './components/tabs.vue';
 import tab from './components/tab.vue';
-import slider from './components/slider.vue';
-import slide from './components/slide.vue';
+import portfolioslider from './components/portfolioslider.vue';
+import portfolioslide from './components/portfolioslide.vue';
 
 var app = new Vue({
 
@@ -16,8 +16,8 @@ var app = new Vue({
         modal,
         tabs,
         tab,
-        slider,
-        slide
+        portfolioslider,
+        portfolioslide
     },
 
     data: {

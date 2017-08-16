@@ -137,10 +137,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_tabs_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_tabs_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_tab_vue__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_tab_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_tab_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_slider_vue__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_slider_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_slider_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_slide_vue__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_slide_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_slide_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_portfolioslider_vue__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_portfolioslider_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_portfolioslider_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_portfolioslide_vue__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_portfolioslide_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_portfolioslide_vue__);
 window.Vue = __webpack_require__(20);
 
 
@@ -159,8 +159,8 @@ var app = new Vue({
         modal: __WEBPACK_IMPORTED_MODULE_1__components_modal_vue___default.a,
         tabs: __WEBPACK_IMPORTED_MODULE_2__components_tabs_vue___default.a,
         tab: __WEBPACK_IMPORTED_MODULE_3__components_tab_vue___default.a,
-        slider: __WEBPACK_IMPORTED_MODULE_4__components_slider_vue___default.a,
-        slide: __WEBPACK_IMPORTED_MODULE_5__components_slide_vue___default.a
+        portfolioslider: __WEBPACK_IMPORTED_MODULE_4__components_portfolioslider_vue___default.a,
+        portfolioslide: __WEBPACK_IMPORTED_MODULE_5__components_portfolioslide_vue___default.a
     },
 
     data: {
@@ -233,27 +233,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
     props: {
         image: { required: true },
-        active: { default: false },
         artist: '',
         title: '',
-        link: ''
+        link: '',
+        id: { type: Number, required: true }
     },
 
-    data: function data() {
-        return {
-            isActive: false
-        };
-    },
-    created: function created() {
-        if (this.active == true) {
-            this.isActive = true;
+    computed: {
+        href: function href() {
+            return "#" + this.id++;
+        },
+        slideId: function slideId() {
+            return "slide-" + this.id;
         }
     }
+
 });
 
 /***/ }),
@@ -276,48 +276,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            slides: [],
-            activeSlide: 0,
-            paused: false
+            slides: []
         };
     },
     created: function created() {
 
         this.slides = this.$children;
-        //setInterval(() => { if(this.paused == false){ this.nextSlide() } }, 6000)
     },
 
 
-    methods: {
-        nextSlide: function nextSlide() {
-            this.slides[this.activeSlide]._data.isActive = false;
-            if (this.activeSlide == this.slides.length - 1) {
-                this.activeSlide = -1;
-            }
-            this.activeSlide++;
-            this.slides[this.activeSlide]._data.isActive = true;
-        },
-        prevSlide: function prevSlide() {
-            this.slides[this.activeSlide]._data.isActive = false;
-            this.activeSlide--;
-            if (this.activeSlide == -1) {
-                this.activeSlide = this.slides.length - 1;
-            }
-            this.slides[this.activeSlide]._data.isActive = true;
-        },
-        clickNext: function clickNext() {
-            this.nextSlide();
-            this.togglePause();
-        },
-        clickPrev: function clickPrev() {
-            this.prevSlide();
-            this.togglePause();
-        },
-        togglePause: function togglePause() {
-            this.paused = !this.paused;
-            //console.log('paused: ' + this.paused);
-        }
-    }
+    methods: {}
 
 });
 
@@ -408,7 +376,7 @@ var Component = __webpack_require__(0)(
   /* script */
   __webpack_require__(3),
   /* template */
-  __webpack_require__(17),
+  __webpack_require__(16),
   /* scopeId */
   null,
   /* cssModules */
@@ -476,15 +444,15 @@ var Component = __webpack_require__(0)(
   /* script */
   __webpack_require__(4),
   /* template */
-  __webpack_require__(14),
+  __webpack_require__(18),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\curate\\wp-content\\themes\\kma-slim\\js\\components\\slide.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\curate\\wp-content\\themes\\kma-slim\\js\\components\\portfolioslide.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] slide.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] portfolioslide.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -493,9 +461,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-12126bf0", Component.options)
+    hotAPI.createRecord("data-v-6f75cfbc", Component.options)
   } else {
-    hotAPI.reload("data-v-12126bf0", Component.options)
+    hotAPI.reload("data-v-6f75cfbc", Component.options)
   }
 })()}
 
@@ -510,15 +478,15 @@ var Component = __webpack_require__(0)(
   /* script */
   __webpack_require__(5),
   /* template */
-  __webpack_require__(16),
+  __webpack_require__(15),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\curate\\wp-content\\themes\\kma-slim\\js\\components\\slider.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\curate\\wp-content\\themes\\kma-slim\\js\\components\\portfolioslider.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] slider.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] portfolioslider.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -527,9 +495,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-28fffecc", Component.options)
+    hotAPI.createRecord("data-v-43fb75c0", Component.options)
   } else {
-    hotAPI.reload("data-v-28fffecc", Component.options)
+    hotAPI.reload("data-v-43fb75c0", Component.options)
   }
 })()}
 
@@ -544,7 +512,7 @@ var Component = __webpack_require__(0)(
   /* script */
   __webpack_require__(6),
   /* template */
-  __webpack_require__(15),
+  __webpack_require__(14),
   /* scopeId */
   null,
   /* cssModules */
@@ -578,7 +546,7 @@ var Component = __webpack_require__(0)(
   /* script */
   __webpack_require__(7),
   /* template */
-  __webpack_require__(18),
+  __webpack_require__(17),
   /* scopeId */
   null,
   /* cssModules */
@@ -610,39 +578,6 @@ module.exports = Component.exports
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "slide full-bg",
-    style: ({
-      'background-image': 'url(' + _vm.image + ')'
-    })
-  }, [_c('div', {
-    staticClass: "hero-label is-dark"
-  }, [_c('h2', {
-    staticClass: "artist-name is-2"
-  }, [_vm._v(_vm._s(_vm.artist))]), _vm._v(" "), _c('p', {
-    staticClass: "title is-3"
-  }, [_vm._v(_vm._s(_vm.title))]), _vm._v(" "), _c('a', {
-    staticClass: "button is-primary",
-    attrs: {
-      "href": {
-        link: _vm.link
-      }
-    }
-  }, [_vm._v("view")])])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-12126bf0", module.exports)
-  }
-}
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
     directives: [{
       name: "show",
       rawName: "v-show",
@@ -661,30 +596,26 @@ if (false) {
 }
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "slider"
   }, [_c('div', {
-    staticClass: "slides",
-    on: {
-      "mouseover": _vm.togglePause,
-      "mouseleave": _vm.togglePause
-    }
+    staticClass: "slides"
   }, [_vm._t("default")], 2)])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-28fffecc", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-43fb75c0", module.exports)
   }
 }
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -716,7 +647,7 @@ if (false) {
 }
 
 /***/ }),
-/* 18 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -746,6 +677,56 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-60ce18f7", module.exports)
+  }
+}
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "slide full-bg",
+    style: ({
+      'background-image': 'url(' + _vm.image + ')'
+    }),
+    attrs: {
+      "id": {
+        slideId: _vm.slideId
+      }
+    }
+  }, [_c('div', {
+    staticClass: "hero-label is-dark"
+  }, [_c('h2', {
+    staticClass: "artist-name is-2"
+  }, [_vm._v(_vm._s(_vm.artist))]), _vm._v(" "), _c('p', {
+    staticClass: "title is-3"
+  }, [_vm._v(_vm._s(_vm.title))]), _vm._v(" "), _c('a', {
+    staticClass: "button is-primary",
+    attrs: {
+      "href": {
+        href: _vm.href
+      }
+    }
+  }, [_vm._v("view")])]), _vm._v(" "), _c('a', {
+    staticClass: "clickdown icon center",
+    attrs: {
+      "href": {
+        href: _vm.href
+      }
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-angle-down",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  })])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-6f75cfbc", module.exports)
   }
 }
 
