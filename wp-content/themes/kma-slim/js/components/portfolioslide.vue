@@ -2,11 +2,11 @@
     <div :id=" 'slide-' + id " class="slide" :style="{ 'background-image': 'url(' + image + ')', 'z-index': zindex }" >
         <div class="slide-contents" v-show="isVisible" >
             <div class="hero-label">
-                <h2 class="artist-name is-2">{{ artist }}</h2>
-                <p class="title is-3 invisible">{{ title }}</p>
-                <a :href=" link " class="button is-primary">view</a>
+                <p class="artist-name">{{ artist }}</p>
+                <p class="artist-title invisible">{{ title }}</p>
+                <a :href=" link " class="button is-info">view</a>
             </div>
-            <a class="clickdown icon center" :href=" href " ><i class="fa fa-angle-down" aria-hidden="true"></i></a>
+            <a v-if="islast === false" class="clickdown icon center" :href=" href " v-smooth-scroll ><span class="btn-text">scroll</span><i class="fa fa-angle-down" aria-hidden="true"></i></a>
         </div>
     </div>
 </template>
@@ -20,6 +20,7 @@
             title: '',
             link: '',
             id: { type: Number },
+            islast: { type: Boolean }
         },
 
         data(){

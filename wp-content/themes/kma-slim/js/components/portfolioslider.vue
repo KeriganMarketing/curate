@@ -13,13 +13,20 @@
 
         data(){
             return {
-                slides: []
+                slides: [],
+                sliderHeight: 1080
             };
         },
 
         created(){
 
-            this.slides = this.$children
+            this.slides = this.$children;
+
+        },
+
+        mounted(){
+
+            this.sliderHeight = this.$el.clientHeight;
 
         },
 

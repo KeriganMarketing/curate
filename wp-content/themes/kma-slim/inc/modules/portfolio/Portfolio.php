@@ -168,7 +168,7 @@ class Portfolio {
 		        'author'      => $taxonomies[0]->name,
 		        'featured'    => ( isset( $item->work_details_feature_on_home_page ) ? $item->work_details_feature_on_home_page : null ),
 		        'description' => ( isset( $item->long_description_html ) ? $item->long_description_html : null ),
-		        'link'        => get_permalink( $item->ID ),
+		        'link'        => get_term_link( $taxonomies[0] ),
 	        ) );
 
         }
@@ -189,11 +189,17 @@ class Portfolio {
 
         $i = 1;
         foreach($resultArray as $item){
-	        $output .= '<portfolioslide :id="'.$i.'" image="'.$item['photo'].'" artist="'.$item['author'].'" title="'.$item['name'].'" link="'.$item['link'].'" ></portfolioslide>';
+	        $output .= '<portfolioslide :id="'.$i.'" image="'.$item['photo'].'" artist="'.$item['author'].'" title="'.$item['name'].'" link="'.$item['link'].'" :islast="'.($i==count($resultArray) ? 'true' : 'false' ).'" ></portfolioslide>';
             $i++;
         }
 
         return $output;
+
+    }
+
+    public function getArtists(){
+
+        return get_terms('artist');
 
     }
 

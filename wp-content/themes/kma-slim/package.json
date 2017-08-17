@@ -17,6 +17,7 @@
     "vue": "^2.4.2"
   },
   "dependencies": {
+    "vue-smooth-scroll": "^1.0.13",
     "vue-template-compiler": "^2.4.2"
   }
 }

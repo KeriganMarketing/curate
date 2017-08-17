@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 22);
+/******/ 	return __webpack_require__(__webpack_require__.s = 23);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -129,19 +129,21 @@ module.exports = function normalizeComponent (
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_message_vue__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_message_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_message_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_modal_vue__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_modal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_modal_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_tabs_vue__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_tabs_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_tabs_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_tab_vue__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_tab_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_tab_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_portfolioslider_vue__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_portfolioslider_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_portfolioslider_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_portfolioslide_vue__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_portfolioslide_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_portfolioslide_vue__);
-window.Vue = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_smooth_scroll__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_smooth_scroll___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__node_modules_vue_smooth_scroll__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_message_vue__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_message_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_message_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_modal_vue__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_modal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_modal_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_tabs_vue__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_tabs_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_tabs_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_tab_vue__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_tab_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_tab_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_portfolioslider_vue__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_portfolioslider_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_portfolioslider_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_portfolioslide_vue__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_portfolioslide_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_portfolioslide_vue__);
+window.Vue = __webpack_require__(21);
 
 
 
@@ -149,31 +151,58 @@ window.Vue = __webpack_require__(20);
 
 
 
+
+
+Vue.use(__WEBPACK_IMPORTED_MODULE_0__node_modules_vue_smooth_scroll___default.a);
 
 var app = new Vue({
 
     el: '#app',
 
     components: {
-        message: __WEBPACK_IMPORTED_MODULE_0__components_message_vue___default.a,
-        modal: __WEBPACK_IMPORTED_MODULE_1__components_modal_vue___default.a,
-        tabs: __WEBPACK_IMPORTED_MODULE_2__components_tabs_vue___default.a,
-        tab: __WEBPACK_IMPORTED_MODULE_3__components_tab_vue___default.a,
-        portfolioslider: __WEBPACK_IMPORTED_MODULE_4__components_portfolioslider_vue___default.a,
-        portfolioslide: __WEBPACK_IMPORTED_MODULE_5__components_portfolioslide_vue___default.a
+        message: __WEBPACK_IMPORTED_MODULE_1__components_message_vue___default.a,
+        modal: __WEBPACK_IMPORTED_MODULE_2__components_modal_vue___default.a,
+        tabs: __WEBPACK_IMPORTED_MODULE_3__components_tabs_vue___default.a,
+        tab: __WEBPACK_IMPORTED_MODULE_4__components_tab_vue___default.a,
+        portfolioslider: __WEBPACK_IMPORTED_MODULE_5__components_portfolioslider_vue___default.a,
+        portfolioslide: __WEBPACK_IMPORTED_MODULE_6__components_portfolioslide_vue___default.a
     },
 
     data: {
         isOpen: false,
         modalOpen: false,
         siteby: 'Site by KMA.',
-        copyright: 'Kerigan Marketing Associates. All rights reserved.'
+        copyright: 'Curate.',
+        showSignup: true
     },
 
     methods: {
         toggleMenu: function toggleMenu() {
             this.isOpen = !this.isOpen;
+        },
+        handleScroll: function handleScroll() {
+
+            if (window.scrollY > this.$children[0].$children[this.$children["0"].$children.length - 1].$el.offsetHeight + this.$children[0].$children[this.$children["0"].$children.length - 1].$el.clientHeight) {
+                this.showSignup = false;
+            } else {
+                this.showSignup = true;
+            }
         }
+    },
+
+    created: function created() {
+
+        window.addEventListener('scroll', this.handleScroll);
+    },
+
+    mounted: function mounted() {
+
+        console.log(this.$children[0].$children[this.$children["0"].$children.length - 1].$el.offsetHeight + this.$children[0].$children[this.$children["0"].$children.length - 1].$el.clientHeight);
+    },
+
+    destroyed: function destroyed() {
+
+        window.removeEventListener('scroll', this.handleScroll);
     }
 
 });
@@ -244,7 +273,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         artist: '',
         title: '',
         link: '',
-        id: { type: Number }
+        id: { type: Number },
+        islast: { type: Boolean }
     },
 
     data: function data() {
@@ -290,12 +320,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            slides: []
+            slides: [],
+            sliderHeight: 1080
         };
     },
     created: function created() {
 
         this.slides = this.$children;
+    },
+    mounted: function mounted() {
+
+        this.sliderHeight = this.$el.clientHeight;
     },
 
 
@@ -396,7 +431,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\curate\\wp-content\\themes\\kma-slim\\js\\components\\message.vue"
+Component.options.__file = "D:\\dev\\curate\\wp-content\\themes\\kma-slim\\js\\components\\message.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] message.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -430,7 +465,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\curate\\wp-content\\themes\\kma-slim\\js\\components\\modal.vue"
+Component.options.__file = "D:\\dev\\curate\\wp-content\\themes\\kma-slim\\js\\components\\modal.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] modal.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -464,7 +499,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\curate\\wp-content\\themes\\kma-slim\\js\\components\\portfolioslide.vue"
+Component.options.__file = "D:\\dev\\curate\\wp-content\\themes\\kma-slim\\js\\components\\portfolioslide.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] portfolioslide.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -498,7 +533,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\curate\\wp-content\\themes\\kma-slim\\js\\components\\portfolioslider.vue"
+Component.options.__file = "D:\\dev\\curate\\wp-content\\themes\\kma-slim\\js\\components\\portfolioslider.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] portfolioslider.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -532,7 +567,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\curate\\wp-content\\themes\\kma-slim\\js\\components\\tab.vue"
+Component.options.__file = "D:\\dev\\curate\\wp-content\\themes\\kma-slim\\js\\components\\tab.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] tab.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -566,7 +601,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\curate\\wp-content\\themes\\kma-slim\\js\\components\\tabs.vue"
+Component.options.__file = "D:\\dev\\curate\\wp-content\\themes\\kma-slim\\js\\components\\tabs.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] tabs.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -718,26 +753,32 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "slide-contents"
   }, [_c('div', {
     staticClass: "hero-label"
-  }, [_c('h2', {
-    staticClass: "artist-name is-2"
+  }, [_c('p', {
+    staticClass: "artist-name"
   }, [_vm._v(_vm._s(_vm.artist))]), _vm._v(" "), _c('p', {
-    staticClass: "title is-3 invisible"
+    staticClass: "artist-title invisible"
   }, [_vm._v(_vm._s(_vm.title))]), _vm._v(" "), _c('a', {
-    staticClass: "button is-primary",
+    staticClass: "button is-info",
     attrs: {
       "href": _vm.link
     }
-  }, [_vm._v("view")])]), _vm._v(" "), _c('a', {
+  }, [_vm._v("view")])]), _vm._v(" "), (_vm.islast === false) ? _c('a', {
+    directives: [{
+      name: "smooth-scroll",
+      rawName: "v-smooth-scroll"
+    }],
     staticClass: "clickdown icon center",
     attrs: {
       "href": _vm.href
     }
-  }, [_c('i', {
+  }, [_c('span', {
+    staticClass: "btn-text"
+  }, [_vm._v("scroll")]), _c('i', {
     staticClass: "fa fa-angle-down",
     attrs: {
       "aria-hidden": "true"
     }
-  })])])])
+  })]) : _vm._e()])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -779,6 +820,12 @@ if (false) {
 
 /***/ }),
 /* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+!function(e,t){ true?module.exports=t():"function"==typeof define&&define.amd?define([],t):"object"==typeof exports?exports.VueSmoothScroll=t():e.VueSmoothScroll=t()}(this,function(){return function(e){function t(n){if(o[n])return o[n].exports;var i=o[n]={exports:{},id:n,loaded:!1};return e[n].call(i.exports,i,i.exports,t),i.loaded=!0,i.exports}var o={};return t.m=e,t.c=o,t.p="",t(0)}([function(e,t){"use strict";function o(e){return e<.5?4*e*e*e:(e-1)*(2*e-2)*(2*e-2)+1}var n="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};e.exports={install:function(e){e.directive("smooth-scroll",{inserted:function(e,t){"object"===("undefined"==typeof window?"undefined":n(window))&&void 0!==window.pageYOffset&&e.addEventListener("click",function(e){var n=document.getElementById(this.hash.substring(1));if(n){e.preventDefault(),window.history.pushState&&location.hash!==this.hash&&window.history.pushState("","",this.hash);var i=t.value&&t.value.duration?t.value.duration:500,r=t.value&&t.value.offset?t.value.offset:0,u=Date.now(),f="HTML"===n.nodeName?-window.pageYOffset:n.getBoundingClientRect().top+window.pageYOffset;f+=r;var a=window.requestAnimationFrame||window.mozRequestAnimationFrame||window.webkitRequestAnimationFrame||function(e){window.setTimeout(e,15)},s=function e(){var t=Date.now()-u,r=f;t<i?(r=window.pageYOffset+(f-window.pageYOffset)*o(t/i),a(e)):location.replace("#"+n.id),window.scroll(0,r)};s()}})}})}}}])});
+
+/***/ }),
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10870,10 +10917,10 @@ Vue$3.compile = compileToFunctions;
 
 module.exports = Vue$3;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(21)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(22)))
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports) {
 
 var g;
@@ -10900,7 +10947,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);

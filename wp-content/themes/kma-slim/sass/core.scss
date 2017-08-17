@@ -79,6 +79,18 @@
   max-width: 100%;
 }
 
+.center-vertical {
+  align-items: center;
+}
+
+.content-justified p {
+  text-align: justify;
+}
+
+.is-centered {
+  text-align: center;
+}
+
 .invisible{
   display:none;
 }
