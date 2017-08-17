@@ -1,7 +1,7 @@
 <template>
-    <div :id=" 'slide-' + id " class="slide full-bg" :style="{ 'background-image': 'url(' + image + ')', 'z-index': zindex }" >
+    <div :id=" 'slide-' + id " class="slide" :style="{ 'background-image': 'url(' + image + ')', 'z-index': zindex }" >
         <div class="slide-contents" v-show="isVisible" >
-            <div class="hero-label is-dark">
+            <div class="hero-label">
                 <h2 class="artist-name is-2">{{ artist }}</h2>
                 <p class="title is-3 invisible">{{ title }}</p>
                 <a :href=" link " class="button is-primary">view</a>
@@ -19,7 +19,17 @@
             artist: '',
             title: '',
             link: '',
-            id: { type: Number }
+            id: { type: Number },
+        },
+
+        data(){
+            return {
+                isVisible: false
+            };
+        },
+
+        mounted(){
+            this.isVisible = true
         },
 
         computed: {

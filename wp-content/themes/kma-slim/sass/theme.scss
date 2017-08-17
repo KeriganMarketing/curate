@@ -25,16 +25,16 @@ body * {
 //Sticky Header
 #top {
   width: 100%;
-  position: absolute;
+  position: relative;
   z-index: 3;
   background-color: #e9eef2;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-
+  min-height: 60px;
   @media screen and (min-width: $tablet) {
-    position: fixed;
     min-height: 100px;
+    position: fixed;
     align-items: center;
   }
 
@@ -87,8 +87,32 @@ body * {
 }
 
 //HOME page specific
+.slider {
+
+  .slide {
+    background-size: cover;
+    display: block;
+    position: relative;
+    z-index: 0;
+    height: 0px;
+    padding-top: 46%;
+    @media screen and (min-width: $tablet) {
+      background-attachment: fixed;
+      padding-top: 50%;
+    }
+    @media screen and (min-width: $desktop) {
+      padding-top: 46%;
+    }
+    .slide-contents {
+      display: block;
+      overflow: hidden;
+
+    }
+  }
+}
+
 .hero-label {
-  position: fixed;
+  position: absolute;
   bottom: 30px;
   left: 30px;
   -webkit-backface-visibility: hidden;
@@ -97,8 +121,8 @@ body * {
 }
 
 a.clickdown.icon.center {
-  position: fixed;
-  display: inline-block;
+  position: absolute;
+  display: none;
   height: 60px;
   width: 60px;
   border: 1px solid #FFF;
@@ -112,6 +136,9 @@ a.clickdown.icon.center {
   -webkit-backface-visibility: hidden;
   -moz-backface-visibility: hidden;
   backface-visibility: hidden;
+  @media screen and (min-width: $desktop){
+    display: inline-block;
+  }
 }
 
 .clickdown i.fa.fa-angle-down {
