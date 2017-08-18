@@ -34,3 +34,4 @@ if(is_admin()) {
 $portfolio = new Portfolio();
 $portfolio->createPostType();
 $portfolio->createAdminColumns();
+$portfolio->addTaxonomyMeta();

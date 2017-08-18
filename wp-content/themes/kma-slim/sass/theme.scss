@@ -221,6 +221,12 @@ body {
 
 .about-us {
   padding: 2rem 0;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e2e3e4+0,c3c7ca+100 */
+  background: rgb(226,227,228); /* Old browsers */
+  background: -moz-linear-gradient(top, rgba(226,227,228,1) 0%, rgba(195,199,202,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(226,227,228,1) 0%,rgba(195,199,202,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(226,227,228,1) 0%,rgba(195,199,202,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e3e4', endColorstr='#c3c7ca',GradientType=0 ); /* IE6-9 */
 
   h2 {
     font-size: 2em;
@@ -262,6 +268,57 @@ body {
   }
 }
 
+.featured-artists {
+  background-color: #04313b;
+  padding: 2rem;
+  @media screen and (min-width: $desktop){
+    padding:4rem;
+  }
+
+  h2 {
+    color:#FFF;
+    font-size: 2em;
+    text-align: center;
+    padding: 1rem 0;
+    @media screen and (min-width: $desktop){
+      padding:2.5rem 0;
+    }
+  }
+
+  .artist-thumb {
+    min-width: 200px;
+    background-size: cover;
+
+    .roll-box {
+      display: none;
+      transition: all linear .5s;
+      background-color: transparent;
+    }
+  }
+
+  @media screen and (min-width: $desktop) {
+    .artist-thumb:hover {
+
+      .roll-box {
+        background-color: #dadfe3;
+        display: block;
+        text-align: center;
+        width:100%;
+        height:0;
+        padding-bottom:100%;
+
+        .artist-name {
+          padding: 3.5rem 1rem 1.25rem;
+          font-size: 1.3rem;
+        }
+      }
+
+      .artist-thumb-container {
+        display: none;
+      }
+    }
+  }
+}
 
 //Other pages
 .is-first-desktop {

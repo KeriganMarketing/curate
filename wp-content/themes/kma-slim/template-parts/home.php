@@ -59,32 +59,38 @@ $subhead  = ( $post->page_information_subhead != '' ? $post->page_information_su
         <div class="section-wrapper reveal">
 
             <div id="featured-artists" class="featured-artists">
-                <h2>Featured Artists</h2>
-                <div class="columns is-multiline">
+                <div class="container">
+                    <h2>Featured Artists</h2>
+                    <div class="columns is-multiline">
 
-                    <?php
+                        <?php
 
-                    $artists = $portfolio->getArtists();
-                    echo '<pre>',print_r($artists),'</pre>';
+                        $artists = $portfolio->getArtists();
 
-                    foreach($artists as $artist){
+                        foreach($artists as $artist){
 
-                        $work = $portfolio->getWork(null, array(
-                            'tax_query' => array(
-                                array(
-                                    'key'     => 'slug',
-                                    'value'   => $artist->slug,
-                                    'compare' => '='
-                                )
-                            )
-                        ) );
+                            $work = $portfolio->getWork($artist->slug, array(
+                                'posts_per_page' => 1,
+                            ) );
 
-                        echo '<pre>',print_r($work),'</pre>';
+                            //echo '<pre>',print_r($work),'</pre>';
 
-                    }
+                            ?>
+                            <div class="column is-half-mobile is-3-tablet is-2-desktop artist-thumb">
+                                <div class="roll-box">
+                                    <p class="artist-name"><?php echo str_replace(' ','<br>',$artist->name); ?></p>
+                                    <a href="<?php echo $work[0]['link']; ?>" class="button is-info roll-thumb-link" >view</a>
+                                </div>
+                                <figure class="artist-thumb-container is-200x200">
+                                    <img src="<?php echo str_replace('.jpg','',$work[0]['photo']).'-300x300.jpg'; ?>" alt="<?php echo $work[0]['name'].': '.$artist->name; ?>" >
+                                </figure>
+                            </div>
+                        <?php
+                        }
 
-                    ?>
+                        ?>
 
+                    </div>
                 </div>
             </div>
 

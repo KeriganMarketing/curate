@@ -58,7 +58,7 @@ class Portfolio {
             $defaults = array(
                 'title'      => 'Title',
                 'artist'     => 'Artist',
-                'featured'    => 'Featured',
+                'featured'   => 'Featured',
                 'work_photo' => 'Photo',
                 'date'       => 'Date'
             );
@@ -153,6 +153,8 @@ class Portfolio {
 
 	    $args = array_merge( $request, $requestArray );
 
+        //echo '<pre>',print_r($args),'</pre>';
+
 	    $results = get_posts( $args );
 
         $resultArray = array();
@@ -200,6 +202,63 @@ class Portfolio {
     public function getArtists(){
 
         return get_terms('artist');
+
+    }
+
+    public function addTaxonomyMeta(){
+
+        // SANITIZE DATA
+        function ___sanitize_artist_meta_text ( $value ) {
+            return sanitize_text_field ($value);
+        }
+
+        // GETTER (will be sanitized)
+        function ___get_artist_video_embed( $term_id ) {
+            $value = get_term_meta( $term_id, '__artist_video_embed', true );
+            $value = ___sanitize_artist_meta_text( $value );
+            return $value;
+        }
+
+        // ADD FIELD TO CATEGORY TERM PAGE
+        add_action( 'artist_add_form_fields', '___add_form_field_artist_video_embed' );
+        function ___add_form_field_artist_meta_text() { ?>
+            <?php wp_nonce_field( basename( __FILE__ ), 'artist_video_embed_nonce' ); ?>
+            <div class="form-field artist-meta-text-wrap">
+                <label for="artist-meta-video-embed"><?php _e( 'Video Embed Code', 'kmaslim' ); ?></label>
+                <textarea style="min-height:200px;" name="artist_video_embed" id="artist-video-embed" class="artist-video-embed-field"></textarea>
+            </div>
+        <?php }
+
+        // ADD FIELD TO CATEGORY EDIT PAGE
+        add_action( 'artist_edit_form_fields', '___edit_form_field_artist_video_embed' );
+        function ___edit_form_field_artist_video_embed( $term ) {
+            $value  = ___get_artist_video_embed( $term->term_id );
+            if ( ! $value )
+                $value = ""; ?>
+
+            <tr class="form-field artist-video-embed-wrap">
+                <th scope="row"><label for="artist-video-embed"><?php _e( 'Video Embed Code', 'text_domain' ); ?></label></th>
+                <td>
+                    <?php wp_nonce_field( basename( __FILE__ ), 'artist_video_embed_nonce' ); ?>
+                    <textarea style="min-height:200px;" name="artist_video_embed" id="artist-video-embed" class="artist-video-embed-field"><?php echo esc_attr( $value ); ?></textarea>
+                </td>
+            </tr>
+        <?php }
+
+        // SAVE TERM META (on term edit & create)
+        add_action( 'edit_artist',   '___save_artist_video_embed' );
+        add_action( 'create_artist', '___save_artist_video_embed' );
+        function ___save_artist_meta_text( $term_id ) {
+            // verify the nonce --- remove if you don't care
+            if ( ! isset( $_POST['artist_video_embed_nonce'] ) || ! wp_verify_nonce( $_POST['artist_video_embed_nonce'], basename( __FILE__ ) ) )
+                return;
+            $old_value  = ___get_artist_video_embed( $term_id );
+            $new_value = isset( $_POST['artist_video_embed'] ) ? ___sanitize_artist_meta_text ( $_POST['artist_video_embed'] ) : '';
+            if ( $old_value && '' === $new_value )
+                delete_term_meta( $term_id, '__artist_video_embed' );
+            else if ( $old_value !== $new_value )
+                update_term_meta( $term_id, '__artist_video_embed', $new_value );
+        }
 
     }
 
