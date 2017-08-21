@@ -44,6 +44,20 @@ class Portfolio {
             )
         );
 
+	    // replace checkboxes for the format taxonomy with radio buttons and a custom meta box
+	    function layout_term_radio_checklist( $args ) {
+		    if ( ! empty( $args['taxonomy'] ) && $args['taxonomy'] === 'artist' ) {
+			    if ( empty( $args['walker'] ) || is_a( $args['walker'], 'Walker' ) ) { // Don't override 3rd party walkers.
+				    if ( ! class_exists( 'Layout_Walker_Category_Radio_Checklist' ) ) {
+					    include(wp_normalize_path(get_template_directory().'/inc/Layout_Walker.php'));
+				    }
+				    $args['walker'] = new Layout_Walker_Category_Radio_Checklist;
+			    }
+		    }
+		    return $args;
+	    }
+	    add_filter( 'wp_terms_checklist_args', 'layout_term_radio_checklist' );
+
     }
 
 	/**
@@ -221,7 +235,7 @@ class Portfolio {
 
         // ADD FIELD TO CATEGORY TERM PAGE
         add_action( 'artist_add_form_fields', '___add_form_field_artist_video_embed' );
-        function ___add_form_field_artist_meta_text() { ?>
+        function ___add_form_field_artist_video_embed() { ?>
             <?php wp_nonce_field( basename( __FILE__ ), 'artist_video_embed_nonce' ); ?>
             <div class="form-field artist-meta-text-wrap">
                 <label for="artist-meta-video-embed"><?php _e( 'Video Embed Code', 'kmaslim' ); ?></label>

@@ -431,7 +431,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\curate\\wp-content\\themes\\kma-slim\\js\\components\\message.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\curate\\wp-content\\themes\\kma-slim\\js\\components\\message.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] message.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -465,7 +465,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\curate\\wp-content\\themes\\kma-slim\\js\\components\\modal.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\curate\\wp-content\\themes\\kma-slim\\js\\components\\modal.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] modal.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -499,7 +499,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\curate\\wp-content\\themes\\kma-slim\\js\\components\\portfolioslide.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\curate\\wp-content\\themes\\kma-slim\\js\\components\\portfolioslide.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] portfolioslide.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -533,7 +533,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\curate\\wp-content\\themes\\kma-slim\\js\\components\\portfolioslider.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\curate\\wp-content\\themes\\kma-slim\\js\\components\\portfolioslider.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] portfolioslider.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -567,7 +567,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\curate\\wp-content\\themes\\kma-slim\\js\\components\\tab.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\curate\\wp-content\\themes\\kma-slim\\js\\components\\tab.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] tab.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -601,7 +601,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\curate\\wp-content\\themes\\kma-slim\\js\\components\\tabs.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\curate\\wp-content\\themes\\kma-slim\\js\\components\\tabs.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] tabs.vue: functional components are not supported with templates, they should use render functions.")}
 

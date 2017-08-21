@@ -228,6 +228,10 @@ body {
   background: linear-gradient(to bottom, rgba(226,227,228,1) 0%,rgba(195,199,202,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e3e4', endColorstr='#c3c7ca',GradientType=0 ); /* IE6-9 */
 
+  .center-vertical {
+    margin:0
+  }
+
   h2 {
     font-size: 2em;
     text-align: center;
@@ -252,19 +256,13 @@ body {
     }
   }
 
-  .wall-art-right {
-    text-align: right;
-    margin-top:1.1rem;
-    float: right;
-    @media screen and (min-width: $desktop) {
-      float:none;
-    }
-  }
+  .wall-art-right,
   .wall-art-left {
-    float: left;
-    @media screen and (min-width: $desktop) {
-      float:none;
-    }
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    width: 49%;
+    vertical-align: middle;
   }
 }
 
@@ -273,6 +271,10 @@ body {
   padding: 2rem;
   @media screen and (min-width: $desktop){
     padding:4rem;
+  }
+
+  .columns {
+    justify-content: center;
   }
 
   h2 {
@@ -286,8 +288,15 @@ body {
   }
 
   .artist-thumb {
-    min-width: 200px;
-    background-size: cover;
+    display: inline-flex;
+    width: 49%;
+    margin:auto;
+    @media screen and (min-width: $tablet){
+      width: 200px;
+    }
+    @media screen and (min-width: $desktop){
+      width: 250px;
+    }
 
     .roll-box {
       display: none;
@@ -316,6 +325,13 @@ body {
       .artist-thumb-container {
         display: none;
       }
+    }
+  }
+
+  .artist-thumb.blank {
+    display: none;
+    @media screen and (min-width: $fullhd){
+      display: block;
     }
   }
 }

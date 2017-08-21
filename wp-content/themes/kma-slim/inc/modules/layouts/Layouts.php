@@ -82,7 +82,7 @@ class Layouts {
 			if ( ! empty( $args['taxonomy'] ) && $args['taxonomy'] === 'format' ) {
 				if ( empty( $args['walker'] ) || is_a( $args['walker'], 'Walker' ) ) { // Don't override 3rd party walkers.
 					if ( ! class_exists( 'Layout_Walker_Category_Radio_Checklist' ) ) {
-						include('Layout_Walker.php');
+						include( wp_normalize_path(get_template_directory().'/inc/Layout_Walker.php' ));
 					}
 					$args['walker'] = new Layout_Walker_Category_Radio_Checklist;
 				}

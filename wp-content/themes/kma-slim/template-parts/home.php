@@ -37,7 +37,7 @@ $subhead  = ( $post->page_information_subhead != '' ? $post->page_information_su
         </div>
         <div class="section-wrapper reveal">
 
-            <div id="about-us" class="about-us" >
+            <div id="about-us" class="about-us section" >
                 <div class="center-vertical columns is-multiline">
                     <div class="column is-11 is-one-third-desktop is-second-desktop is-centered">
                         <h2>A True Original</h2>
@@ -66,7 +66,7 @@ $subhead  = ( $post->page_information_subhead != '' ? $post->page_information_su
                         <?php
 
                         $artists = $portfolio->getArtists();
-
+                        $i = 1;
                         foreach($artists as $artist){
 
                             $work = $portfolio->getWork($artist->slug, array(
@@ -74,18 +74,26 @@ $subhead  = ( $post->page_information_subhead != '' ? $post->page_information_su
                             ) );
 
                             //echo '<pre>',print_r($work),'</pre>';
-
-                            ?>
-                            <div class="column is-half-mobile is-3-tablet is-2-desktop artist-thumb">
-                                <div class="roll-box">
-                                    <p class="artist-name"><?php echo str_replace(' ','<br>',$artist->name); ?></p>
-                                    <a href="<?php echo $work[0]['link']; ?>" class="button is-info roll-thumb-link" >view</a>
+                            if($i == 5){ ?>
+                                <div class="column artist-thumb blank">
+                                    <figure class="artist-thumb-container is-1by1"></figure>
                                 </div>
-                                <figure class="artist-thumb-container is-200x200">
-                                    <img src="<?php echo str_replace('.jpg','',$work[0]['photo']).'-300x300.jpg'; ?>" alt="<?php echo $work[0]['name'].': '.$artist->name; ?>" >
-                                </figure>
-                            </div>
-                        <?php
+                                <div class="column artist-thumb blank">
+                                    <figure class="artist-thumb-container is-1by1"></figure>
+                                </div>
+                            <?php } ?>
+                                <div class="column artist-thumb">
+                                    <div class="roll-box">
+                                        <p class="artist-name"><?php echo str_replace( ' ', '<br>', $artist->name ); ?></p>
+                                        <a href="<?php echo $work[0]['link']; ?>" class="button is-info roll-thumb-link">view</a>
+                                    </div>
+                                    <figure class="artist-thumb-container is-1by1">
+                                        <img src="<?php echo str_replace( '.jpg', '', $work[0]['photo'] ) . '-300x300.jpg'; ?>" alt="<?php echo $work[0]['name'] . ': ' . $artist->name; ?>">
+                                    </figure>
+                                </div>
+	                            <?php
+
+                            $i++;
                         }
 
                         ?>
