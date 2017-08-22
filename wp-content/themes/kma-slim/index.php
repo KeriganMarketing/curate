@@ -9,7 +9,7 @@ get_header();
 
     if ( have_posts() ) :
 
-		if (is_home() ) { //multipart template, archive or whatever
+		if (is_home()) { //multipart template, archive or whatever
 
 			get_template_part( 'template-parts/blog', get_post_format() );
 
@@ -23,6 +23,9 @@ get_header();
 					get_template_part( 'template-parts/content', $post->post_name );
 				}
 
+                echo '<pre>',print_r($post),'</pre>';
+
+
 			endwhile;
 
 			the_posts_navigation();
@@ -31,7 +34,11 @@ get_header();
 
     else :
 
-        get_template_part( 'template-parts/content', 'none' );
+	    if(is_tax()){
+            get_template_part( 'template-parts/taxonomy' );
+	    }else{
+            get_template_part( 'template-parts/content', 'none' );
+	    }
 
     endif;
 

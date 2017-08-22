@@ -5,8 +5,14 @@
  * @since 1.0
  * @version 1.2
  */
-$headline = ($post->page_information_headline != '' ? $post->page_information_headline : $post->post_title);
-$subhead = ($post->page_information_subhead != '' ? $post->page_information_subhead : '');
+
+$term = explode('/', $_SERVER['REQUEST_URI']);
+$artist = get_term_by('slug',$term[2],$term[1]);
+
+$headline = $artist->name;
+$subhead = '';
+
+//echo '<pre>',print_r($artist),'</pre>';
 ?>
 <div id="mid" >
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -15,11 +21,6 @@ $subhead = ($post->page_information_subhead != '' ? $post->page_information_subh
                 <div class="container">
                     <h1 class="title"><?php echo $headline; ?></h1>
                     <?php echo ($subhead!='' ? '<p class="subtitle">'.$subhead.'</p>' : null); ?>
-                    <?php if ( 'post' === get_post_type() ) : ?>
-                        <div class="entry-meta">
-                            <?php //kmaslim_posted_on(); ?>
-                        </div><!-- .entry-meta -->
-                    <?php endif; ?>
                 </div>
             </div>
         </section>

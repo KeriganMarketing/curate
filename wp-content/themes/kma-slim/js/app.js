@@ -36,32 +36,32 @@ var app = new Vue({
         toggleMenu(){
             this.isOpen = !this.isOpen;
         },
-        handleScroll() {
-
-            if(window.scrollY > this.$children[0].$children[this.$children["0"].$children.length-1].$el.offsetHeight + this.$children[0].$children[this.$children["0"].$children.length-1].$el.clientHeight){
-                this.showSignup = false;
-            }else{
-                this.showSignup = true;
-            }
-        }
+        // handleScroll() {
+        //
+        //     if(window.scrollY > this.$children[0].$children[this.$children["0"].$children.length-1].$el.offsetHeight + this.$children[0].$children[this.$children["0"].$children.length-1].$el.clientHeight){
+        //         this.showSignup = false;
+        //     }else{
+        //         this.showSignup = true;
+        //     }
+        // }
 
     },
 
     created: function () {
 
-        window.addEventListener('scroll', this.handleScroll);
+        // window.addEventListener('scroll', this.handleScroll);
 
     },
 
     mounted: function() {
 
-        console.log(this.$children[0].$children[this.$children["0"].$children.length-1].$el.offsetHeight + this.$children[0].$children[this.$children["0"].$children.length-1].$el.clientHeight);
+        // console.log(this.$children[0].$children[this.$children["0"].$children.length-1].$el.offsetHeight + this.$children[0].$children[this.$children["0"].$children.length-1].$el.clientHeight);
 
     },
 
     destroyed: function () {
 
-        window.removeEventListener('scroll', this.handleScroll);
+        // window.removeEventListener('scroll', this.handleScroll);
 
     }
 

@@ -179,30 +179,25 @@ var app = new Vue({
     methods: {
         toggleMenu: function toggleMenu() {
             this.isOpen = !this.isOpen;
-        },
-        handleScroll: function handleScroll() {
-
-            if (window.scrollY > this.$children[0].$children[this.$children["0"].$children.length - 1].$el.offsetHeight + this.$children[0].$children[this.$children["0"].$children.length - 1].$el.clientHeight) {
-                this.showSignup = false;
-            } else {
-                this.showSignup = true;
-            }
         }
     },
 
     created: function created() {
 
-        window.addEventListener('scroll', this.handleScroll);
+        // window.addEventListener('scroll', this.handleScroll);
+
     },
 
     mounted: function mounted() {
 
-        console.log(this.$children[0].$children[this.$children["0"].$children.length - 1].$el.offsetHeight + this.$children[0].$children[this.$children["0"].$children.length - 1].$el.clientHeight);
+        // console.log(this.$children[0].$children[this.$children["0"].$children.length-1].$el.offsetHeight + this.$children[0].$children[this.$children["0"].$children.length-1].$el.clientHeight);
+
     },
 
     destroyed: function destroyed() {
 
-        window.removeEventListener('scroll', this.handleScroll);
+        // window.removeEventListener('scroll', this.handleScroll);
+
     }
 
 });
@@ -320,21 +315,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            slides: [],
-            sliderHeight: 1080
+            slides: []
         };
     },
     created: function created() {
 
         this.slides = this.$children;
+        window.addEventListener('scroll', this.handleScroll);
     },
     mounted: function mounted() {
 
-        this.sliderHeight = this.$el.clientHeight;
+        //            console.log(this.$children[this.$children.length-1].$el.offsetHeight + this.$children[this.$children.length-1].$el.clientHeight);
+
     },
 
 
-    methods: {}
+    destroyed: function destroyed() {
+
+        window.removeEventListener('scroll', this.handleScroll);
+    },
+
+    methods: {
+        handleScroll: function handleScroll() {
+
+            if (window.scrollY > this.$children[this.$children.length - 1].$el.offsetHeight + this.$children[this.$children.length - 1].$el.clientHeight) {
+                this.$parent.showSignup = false;
+            } else {
+                this.$parent.showSignup = true;
+            }
+        }
+    }
 
 });
 
