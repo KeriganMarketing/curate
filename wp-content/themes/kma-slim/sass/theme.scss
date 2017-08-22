@@ -83,28 +83,6 @@ body {
   min-height: 65px;
 }
 
-
-//Titles & Headers
-.hero-body {
-  padding: 5rem 1.5rem 3rem;
-  @media screen and (min-width: $tablet) {
-    padding: 7rem 1.5rem 3rem;
-  }
-}
-
-
-//Mid-Section & Content
-#mid {
-  position: relative;
-  flex: 1 0 auto;
-  z-index: 2;
-}
-
-.full-bg {
-  background-size: cover;
-  background-attachment: fixed;
-}
-
 //HOME page specific
 
 .slider {
@@ -347,6 +325,24 @@ body {
 }
 
 //Other pages
+#mid {
+  position: relative;
+  flex: 1 0 auto;
+  z-index: 2;
+
+  //Titles & Headers
+  .hero-body {
+    padding: 5rem 1.5rem 3rem;
+    @media screen and (min-width: $tablet) {
+      padding: 9rem 1.5rem 3rem;
+    }
+  }
+
+
+
+}
+
+//Helpers
 .is-first-desktop {
   @media screen and (min-width: $desktop){
     order:1;
@@ -362,8 +358,6 @@ body {
     order:3;
   }
 }
-
-
 
 //Footer (move for render blocking?)
 #bot {

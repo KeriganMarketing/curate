@@ -9,10 +9,10 @@
 ?>
 <div id="mid" >
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-        <section class="hero is-light">
+        <section class="hero">
             <div class="hero-body">
                 <div class="container">
-                    <h1 class="title">404</h1>
+                    <h1 class="title is-1">404</h1>
                     <p class="subtitle">Page not found</p>
                 </div>
             </div>

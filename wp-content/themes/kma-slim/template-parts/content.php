@@ -10,10 +10,10 @@ $subhead = ($post->page_information_subhead != '' ? $post->page_information_subh
 ?>
 <div id="mid" >
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-        <section class="hero is-light">
+        <section class="hero">
             <div class="hero-body">
                 <div class="container">
-                    <h1 class="title"><?php echo $headline; ?></h1>
+                    <h1 class="title is-1"><?php echo $headline; ?></h1>
                     <?php echo ($subhead!='' ? '<p class="subtitle">'.$subhead.'</p>' : null); ?>
                     <?php if ( 'post' === get_post_type() ) : ?>
                         <div class="entry-meta">

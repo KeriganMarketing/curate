@@ -23,9 +23,6 @@ get_header();
 					get_template_part( 'template-parts/content', $post->post_name );
 				}
 
-                echo '<pre>',print_r($post),'</pre>';
-
-
 			endwhile;
 
 			the_posts_navigation();
@@ -35,7 +32,7 @@ get_header();
     else :
 
 	    if(is_tax()){
-            get_template_part( 'template-parts/taxonomy' );
+            get_template_part( 'template-parts/taxonomy', get_query_var( 'taxonomy' ) );
 	    }else{
             get_template_part( 'template-parts/content', 'none' );
 	    }
