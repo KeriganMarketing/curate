@@ -7,25 +7,25 @@
  */
 $headline = ($post->page_information_headline != '' ? $post->page_information_headline : $post->post_title);
 $subhead = ($post->page_information_subhead != '' ? $post->page_information_subhead : '');
+$portfolio = new Portfolio();
+
+$imgUrl = get_the_post_thumbnail_url($post, 'large');
 ?>
 <div id="mid" >
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-        <section class="hero">
-            <div class="hero-body">
-                <div class="container">
-                    <h1 class="title is-1"><?php echo $headline; ?></h1>
-                    <?php echo ($subhead!='' ? '<p class="subtitle">'.$subhead.'</p>' : null); ?>
-                    <?php if ( 'post' === get_post_type() ) : ?>
-                        <div class="entry-meta">
-                            <?php //kmaslim_posted_on(); ?>
-                        </div><!-- .entry-meta -->
-                    <?php endif; ?>
-                </div>
-            </div>
-        </section>
         <section id="content" class="content section">
             <div class="container">
                 <div class="entry-content">
+                    <?php if($imgUrl != ''){ ?>
+                        <figure class="media-left">
+                            <p class="image is-square">
+                                <img src="<?php echo $imgUrl; ?>">
+                            </p>
+                        </figure>
+                    <?php } ?>
+                    <h1 class="title is-1"><?php echo $headline; ?></h1>
+                    <?php echo ($subhead!='' ? '<p class="subtitle">'.$subhead.'</p>' : null); ?>
+
                     <?php
                     the_content( sprintf(
                     /* translators: %s: Name of current post. */
@@ -38,8 +38,14 @@ $subhead = ($post->page_information_subhead != '' ? $post->page_information_subh
                         'after'  => '</div>',
                     ) );
                     ?>
+                    <div class="clear"></div>
                 </div><!-- .entry-content -->
             </div>
         </section>
+        <div class="section-wrapper reveal">
+
+            <?php include(locate_template('template-parts/partials/featured-artists.php')); ?>
+
+        </div>
     </article><!-- #post-## -->
 </div>

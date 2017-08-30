@@ -25,7 +25,7 @@ $subhead = ($post->page_information_subhead != '' ? $post->page_information_subh
 
                     while ( have_posts() ) : the_post();
 
-                        get_template_part( 'template-parts/loop', get_post_format() );
+                        get_template_part( 'template-parts/partials/loop', get_post_format() );
 
                     endwhile;
 

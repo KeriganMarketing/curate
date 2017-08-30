@@ -20,7 +20,7 @@ class Slider {
      */
     public function createPostType() {
 
-        $slider = new Custom_Post_Type( 'Slide Image', array(
+        $slider = new CustomPostType( 'Slide Image', array(
             'supports'           => array( 'title', 'revisions' ),
             'menu_icon'          => 'dashicons-images-alt2',
             'rewrite'            => array( 'with_front' => false ),
@@ -30,9 +30,9 @@ class Slider {
             'publicly_queryable' => false,
         ) );
 
-        $slider->add_taxonomy( 'Slider' );
+        $slider->addTaxonomy( 'Slider' );
 
-        $slider->add_meta_box( 'Slide Details', array(
+        $slider->addMetaBox( 'Slide Details', array(
             'Photo File'         => 'image',
             'Headline'           => 'text',
             'Caption'            => 'text',
@@ -41,7 +41,7 @@ class Slider {
             'Open in New Window' => 'boolean',
         ) );
 
-        $slider->add_meta_box(
+        $slider->addMetaBox(
             'Photo Description',
             array(
                 'HTML' => 'wysiwyg',

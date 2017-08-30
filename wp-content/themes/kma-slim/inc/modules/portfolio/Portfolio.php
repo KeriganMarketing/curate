@@ -20,7 +20,7 @@ class Portfolio {
      */
     public function createPostType() {
 
-        $work = new Custom_Post_Type( 'Work', array(
+        $work = new CustomPostType( 'Work', array(
             'supports'           => array( 'title', 'revisions' ),
             'menu_icon'          => 'dashicons-images-alt2',
             'rewrite'            => array( 'with_front' => false ),
@@ -30,33 +30,20 @@ class Portfolio {
             'publicly_queryable' => false,
         ) );
 
-        $work->add_taxonomy( 'Artist' );
+        $work->addTaxonomy( 'Artist' );
+        $work->convertCheckToRadio( 'artist' );
 
-	    $work->add_meta_box( 'Work Details', array(
+	    $work->addMetaBox( 'Work Details', array(
 		    'Photo File'           => 'image',
 		    'Feature on Home page' => 'boolean',
 	    ) );
 
-        $work->add_meta_box(
+        $work->addMetaBox(
             'Long Description',
             array(
                 'HTML' => 'wysiwyg',
             )
         );
-
-	    // replace checkboxes for the format taxonomy with radio buttons and a custom meta box
-	    function layout_term_radio_checklist( $args ) {
-		    if ( ! empty( $args['taxonomy'] ) && $args['taxonomy'] === 'artist' ) {
-			    if ( empty( $args['walker'] ) || is_a( $args['walker'], 'Walker' ) ) { // Don't override 3rd party walkers.
-				    if ( ! class_exists( 'Layout_Walker_Category_Radio_Checklist' ) ) {
-					    include(wp_normalize_path(get_template_directory().'/inc/Layout_Walker.php'));
-				    }
-				    $args['walker'] = new Layout_Walker_Category_Radio_Checklist;
-			    }
-		    }
-		    return $args;
-	    }
-	    add_filter( 'wp_terms_checklist_args', 'layout_term_radio_checklist' );
 
     }
 
@@ -65,76 +52,69 @@ class Portfolio {
 	 */
 	public function createAdminColumns() {
 
-        //Create column labels in admin view
-        add_filter('manage_work_posts_columns', 'columns_head_work', 0);
-        function columns_head_work($defaults) {
+	    add_filter('manage_work_posts_columns',
+            function ($defaults) {
+                $defaults = array(
+                    'title'      => 'Title',
+                    'artist'     => 'Artist',
+                    'featured'   => 'Featured',
+                    'work_photo' => 'Photo',
+                    'date'       => 'Date'
+                );
 
-            $defaults = array(
-                'title'      => 'Title',
-                'artist'     => 'Artist',
-                'featured'   => 'Featured',
-                'work_photo' => 'Photo',
-                'date'       => 'Date'
-            );
+                return $defaults;
+            }, 0);
 
-            return $defaults;
-        }
-
-        //Creates data used in each column
-        add_action('manage_work_posts_custom_column', 'columns_content_work', 0, 2);
-        function columns_content_work($column_name, $post_ID) {
-            switch ( $column_name ) {
-                case 'lead_type':
-                    $term = wp_get_object_terms( $post_ID, 'type' );
-                    echo (isset($term[0]->name) ? $term[0]->name : null );
+        add_action('manage_work_posts_custom_column', function ($column_name, $post_ID) {
+            switch ($column_name) {
+                case 'artist':
+                    $term = wp_get_object_terms($post_ID, 'artist');
+                    echo(isset($term[0]->name) ? $term[0]->name : null);
                     break;
 
                 case 'work_photo':
-                    $photo = get_post_meta( $post_ID, 'work_details_photo_file', TRUE );
-                    echo (isset($photo) ? '<img src ="'.$photo.'" class="img-fluid" style="width:400px; max-width:100%;" >' : null );
+                    $photo = get_post_meta($post_ID, 'work_details_photo_file', true);
+                    echo(isset($photo) ? '<img src ="' . $photo . '" class="img-fluid" style="width:400px; max-width:100%;" >' : null);
                     break;
 
                 case 'featured':
-                    $featured = get_post_meta( $post_ID, 'work_details_feature_on_home_page', true );
-                    echo ( $featured == 'on' ? 'TRUE' : 'FALSE' );
+                    $featured = get_post_meta($post_ID, 'work_details_feature_on_home_page', true);
+                    echo($featured == 'on' ? 'TRUE' : 'FALSE');
                     break;
             }
-        }
+        }, 0, 2);
 
-        //Adds a dropdown in the admin view to filter by artist (taxonomy)
-        add_action( 'restrict_manage_posts', 'admin_posts_filter_restrict_manage_posts' );
-        function admin_posts_filter_restrict_manage_posts(){
+        add_action('restrict_manage_posts', function () {
             $type = 'post';
             if (isset($_GET['post_type'])) {
                 $type = $_GET['post_type'];
             }
 
-            if ('work' == $type){
+            if ('work' == $type) {
 
-                $values = get_terms( array(
-                    'taxonomy' => 'artist',
+                $values = get_terms(array(
+                    'taxonomy'   => 'artist',
                     'hide_empty' => false,
-                ) );
+                ));
 
-                ?>
-                <select name="artist">
-                    <option value="">All Artists</option>
-                    <?php
-                    $current_v = isset($_GET['artist'])? $_GET['artist']:'';
-                    foreach ($values as $label => $value) {
-                        printf
-                        (
-                            '<option value="%s"%s>%s</option>',
-                            $value->slug,
-                            $value->slug == $current_v ? ' selected="selected"':'',
-                            $value->name
-                        );
-                    }
-                    ?>
-                </select>
-                <?php
+                echo '<select name="artist">
+                    <option value="">All Artists</option>';
+
+                $current_v = isset($_GET['artist']) ? $_GET['artist'] : '';
+                foreach ($values as $label => $value) {
+                    printf
+                    (
+                        '<option value="%s"%s>%s</option>',
+                        $value->slug,
+                        $value->slug == $current_v ? ' selected="selected"' : '',
+                        $value->name
+                    );
+                }
+
+                echo '</select>';
+
             }
-        }
+        });
 
 	}
 
@@ -213,9 +193,12 @@ class Portfolio {
 
     }
 
-    public function getArtists(){
+    public function getArtists( $limit = 0 ){
 
-        return get_terms('artist');
+        return get_terms(array(
+            'taxonomy' => 'artist',
+            'number'   => $limit
+        ));
 
     }
 

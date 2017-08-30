@@ -7,31 +7,19 @@
  */
 $headline = ( $post->page_information_headline != '' ? $post->page_information_headline : $post->post_title );
 $subhead  = ( $post->page_information_subhead != '' ? $post->page_information_subhead : '' );
+$portfolio = new Portfolio();
 ?>
 <div id="mid">
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
         <div class="section-wrapper reveal">
 
-            <portfolioslider>
-				<?php
-				$portfolio = new Portfolio();
-				echo $portfolio->getWorkSlider(null, array(
-					'meta_query' => array(
-						array(
-							'key'     => 'work_details_feature_on_home_page',
-							'value'   => 'on',
-							'compare' => '='
-						)
-					)
-                ) );
-				?>
-            </portfolioslider>
+            <?php include(locate_template('template-parts/partials/featured-work-slider.php')); ?>
 
         </div>
         <div class="section-wrapper reveal">
 
             <div :class="['sticky-enewsletter', { stuck: showSignup }]">
-                <?php get_template_part( 'template-parts/enewsletter-signup' ); ?>
+                <?php include(locate_template('template-parts/partials/stay-connected.php')); ?>
             </div>
 
         </div>
@@ -40,9 +28,9 @@ $subhead  = ( $post->page_information_subhead != '' ? $post->page_information_su
             <div id="about-us" class="about-us section" >
                 <div class="center-vertical columns is-multiline">
                     <div class="column is-11 is-one-third-desktop is-second-desktop is-centered">
-                        <h2>A True Original</h2>
+                        <h2><?php echo $headline ?></h2>
                         <div class="content-justified">
-                            <p>Like the impressive mix of nationally recognized and emerging artists featured on its walls, Curate30a Gallery is a true original located in the heart of Rosemary Beach, between Panama City and Destin, Florida. Curate30a is a collaboration with Vinings Gallery opened in Atlanta, in 1999, by owner Gary Handler, one of the country's leading art consultants and artist representatives. Gary has mastered the art of blending together a powerful palette of talented, nationally recognized artists in his seaside gallery, fast becoming the art destination of the gulf coast.</p>
+                            <?php the_content() ?>
                         </div>
                         <p class="is-centered"><a class="button is-info" href="/about-curate">about Curate</a></p>
                     </div>
@@ -58,49 +46,7 @@ $subhead  = ( $post->page_information_subhead != '' ? $post->page_information_su
         </div>
         <div class="section-wrapper reveal">
 
-            <div id="featured-artists" class="featured-artists">
-                <div class="container">
-                    <h2>Featured Artists</h2>
-                    <div class="columns is-multiline">
-
-                        <?php
-
-                        $artists = $portfolio->getArtists();
-                        $i = 1;
-                        foreach($artists as $artist){
-
-                            $work = $portfolio->getWork($artist->slug, array(
-                                'posts_per_page' => 1,
-                            ) );
-
-                            //echo '<pre>',print_r($work),'</pre>';
-                            if($i == 5){ ?>
-                                <div class="column artist-thumb blank">
-                                    <figure class="artist-thumb-container is-1by1"></figure>
-                                </div>
-                                <div class="column artist-thumb blank">
-                                    <figure class="artist-thumb-container is-1by1"></figure>
-                                </div>
-                            <?php } ?>
-                                <div class="column artist-thumb">
-                                    <div class="roll-box">
-                                        <p class="artist-name"><?php echo str_replace( ' ', '<br>', $artist->name ); ?></p>
-                                        <a href="<?php echo $work[0]['link']; ?>" class="button is-info roll-thumb-link">view</a>
-                                    </div>
-                                    <figure class="artist-thumb-container is-1by1">
-                                        <img src="<?php echo str_replace( '.jpg', '', $work[0]['photo'] ) . '-300x300.jpg'; ?>" alt="<?php echo $work[0]['name'] . ': ' . $artist->name; ?>">
-                                    </figure>
-                                </div>
-	                            <?php
-
-                            $i++;
-                        }
-
-                        ?>
-
-                    </div>
-                </div>
-            </div>
+            <?php include(locate_template('template-parts/partials/featured-artists.php')); ?>
 
         </div>
     </article><!-- #post-## -->

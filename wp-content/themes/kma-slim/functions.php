@@ -6,11 +6,27 @@
  * @version 1.2
  */
 
-require ( 'vendor/autoload.php' );
-require ( 'inc/bulma_navwalker.php' );
-require ( 'inc/bulma_pagination.php' );
-require ( 'inc/cpt.php' );
-require ( 'inc/loadmodules.php' );
+require('vendor/autoload.php');
+require('inc/bulma_navwalker.php');
+require('inc/bulma_pagination.php');
+require('inc/CustomPostType/CustomPostType.php');
+include('inc/modules/social/sociallinks.php');
+include('inc/modules/layouts/Layouts.php');
+include('inc/modules/portfolio/Portfolio.php');
+
+$socialLinks = new SocialSettingsPage();
+if(is_admin()) {
+    $socialLinks->createPage();
+}
+
+$portfolio = new Portfolio();
+$portfolio->createPostType();
+$portfolio->createAdminColumns();
+$portfolio->addTaxonomyMeta();
+
+$layouts = new Layouts();
+$layouts->createPostType();
+$layouts->createDefaultFormats();
 
 if ( ! function_exists( 'kmaslim_setup' ) ) :
 
@@ -53,6 +69,3 @@ function kmaslim_scripts() {
 	wp_enqueue_style( 'style', get_stylesheet_uri() );
 }
 add_action( 'wp_enqueue_scripts', 'kmaslim_scripts' );
-
-//Remove WordPress's content filtering so we can make our own tags AND use them.
-remove_filter( 'the_content', 'wpautop' );

@@ -7,6 +7,7 @@ import tabs from './components/tabs.vue';
 import tab from './components/tab.vue';
 import portfolioslider from './components/portfolioslider.vue';
 import portfolioslide from './components/portfolioslide.vue';
+import GoogleMap from './components/GoogleMap.vue';
 
 Vue.use(vueSmoothScroll)
 
@@ -20,7 +21,8 @@ var app = new Vue({
         tabs,
         tab,
         portfolioslider,
-        portfolioslide
+        portfolioslide,
+        GoogleMap
     },
 
     data: {
@@ -36,14 +38,6 @@ var app = new Vue({
         toggleMenu(){
             this.isOpen = !this.isOpen;
         },
-        // handleScroll() {
-        //
-        //     if(window.scrollY > this.$children[0].$children[this.$children["0"].$children.length-1].$el.offsetHeight + this.$children[0].$children[this.$children["0"].$children.length-1].$el.clientHeight){
-        //         this.showSignup = false;
-        //     }else{
-        //         this.showSignup = true;
-        //     }
-        // }
 
     },
 

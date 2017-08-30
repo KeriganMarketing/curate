@@ -7,34 +7,44 @@
  */
 $headline = ($post->page_information_headline != '' ? $post->page_information_headline : $post->post_title);
 $subhead = ($post->page_information_subhead != '' ? $post->page_information_subhead : '');
+$portfolio = new Portfolio();
 ?>
 <div id="mid" >
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-        <section class="hero">
-            <div class="hero-body">
-                <div class="container">
-                    <h1 class="title is-1"><?php echo $headline; ?></h1>
-                    <?php echo ($subhead!='' ? '<p class="subtitle">'.$subhead.'</p>' : null); ?>
-                    <?php if ( 'post' === get_post_type() ) : ?>
-                        <div class="entry-meta">
-                            <?php //kmaslim_posted_on(); ?>
-                        </div><!-- .entry-meta -->
-                    <?php endif; ?>
-                </div>
-                sdkjvblsdkjbfg
-
-            </div>
-        </section>
         <section id="content" class="content section">
             <div class="container">
-                <div class="entry-content">
-                    <?php
-                    the_content( sprintf(
-                    /* translators: %s: Name of current post. */
-                        wp_kses( __( 'Continue reading %s <span class="meta-nav">&rarr;</span>', 'kmaevent' ), array( 'span' => array( 'class' => array() ) ) ),
-                        the_title( '<span class="screen-reader-text">"', '"</span>', false )
-                    ) );
-                    ?>
+                <div class="entry-content all-artists">
+                    <h1 class="title is-1"><?php echo $headline; ?></h1>
+                    <?php echo ($subhead!='' ? '<p class="subtitle">'.$subhead.'</p>' : null); ?>
+                    <div class="columns is-multiline">
+
+                        <?php
+
+                        $artists = $portfolio->getArtists();
+                        $i = 1;
+                        foreach($artists as $artist){
+
+                            $work = $portfolio->getWork($artist->slug, array(
+                                'posts_per_page' => 1,
+                            ) );
+                             ?>
+                            <div class="column artist-thumb">
+                                <div class="roll-box">
+                                    <p class="artist-name serif"><?php echo str_replace( ' ', '<br>', $artist->name ); ?></p>
+                                    <a href="<?php echo $work[0]['link']; ?>" class="button is-info roll-thumb-link">view</a>
+                                </div>
+                                <figure class="artist-thumb-container">
+                                    <img src="<?php echo str_replace( '.jpg', '', $work[0]['photo'] ) . '-300x300.jpg'; ?>" alt="<?php echo $work[0]['name'] . ': ' . $artist->name; ?>">
+                                </figure>
+                            </div>
+                            <?php
+
+                            $i++;
+                        }
+
+                        ?>
+
+                    </div>
                 </div><!-- .entry-content -->
             </div>
         </section>
