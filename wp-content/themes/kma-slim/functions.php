@@ -28,6 +28,22 @@ $layouts = new Layouts();
 $layouts->createPostType();
 $layouts->createDefaultFormats();
 
+if(is_admin()) {
+
+    $post_id = ( isset ( $_GET['post'] ) ? $_GET['post'] : ( isset ( $_POST['post_ID'] ) ? $_POST['post_ID'] : null ) );
+
+    if ( ($post_id == get_option( 'page_on_front' ) ? true : false) ) {
+        $frontpage = new CustomPostType('Page');
+        $frontpage->addMetaBox('Contact Info', array(
+            'phone'   => 'text',
+            'email'   => 'text',
+            'address' => 'textarea',
+            'hours'   => 'textarea'
+        ));
+    }
+
+};
+
 if ( ! function_exists( 'kmaslim_setup' ) ) :
 
 function kmaslim_setup() {

@@ -432,6 +432,39 @@ body {
   z-index: 1;
   background-color: #e9eef2;
 
+  .social {
+    svg {
+      max-width: 45px;
+      margin: .5rem .9rem;
+    }
+  }
+
+  .contact-location {
+    padding:0 1rem 0;
+
+    h3 {
+      font-weight: bold;
+      font-size: 1.2em;
+      color: #FFF;
+      margin: 0 0 1rem;
+      text-align: left;
+    }
+    p {
+      font-weight: normal;
+      text-align: left;
+      font-size: 1.2em;
+      color:#FFF;
+      margin-bottom: 2rem;
+    }
+    a {
+      color:#FFF;
+    }
+  }
+
+  .column {
+    padding: 2rem;
+  }
+
   .white-section {
     padding-top:30px;
     background-color: #e9eef2;

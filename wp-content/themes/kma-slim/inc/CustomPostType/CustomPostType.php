@@ -296,17 +296,19 @@ class CustomPostType
         }
     }
 
-    public function convertCheckToRadio( $tax ){
+    public function convertCheckToRadio($tax)
+    {
 
-        add_filter( 'wp_terms_checklist_args', function( $args ) use ( $tax ) {
-            if ( ! empty( $args['taxonomy'] ) && $args['taxonomy'] === $tax ) {
-                if ( empty( $args['walker'] ) || is_a( $args['walker'], 'Walker' ) ) { // Don't override 3rd party walkers.
+        add_filter('wp_terms_checklist_args', function ($args) use ($tax) {
+            if ( ! empty($args['taxonomy']) && $args['taxonomy'] === $tax) {
+                if (empty($args['walker']) || is_a($args['walker'], 'Walker')) { // Don't override 3rd party walkers.
 
-                    include(wp_normalize_path(get_template_directory().'/inc/Layout_Walker.php'));
+                    include(wp_normalize_path(get_template_directory() . '/inc/Layout_Walker.php'));
                     $args['walker'] = new Layout_Walker_Category_Radio_Checklist;
 
                 }
             }
+
             return $args;
         });
 

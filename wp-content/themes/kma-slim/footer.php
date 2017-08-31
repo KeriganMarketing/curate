@@ -5,6 +5,8 @@
  * @since 1.0
  * @version 1.2
  */
+$contactInfo = get_post( get_option( 'page_on_front' ), OBJECT);
+
 ?>
 <footer id="bot" >
     <div class="section-wrapper white-section">
@@ -30,20 +32,35 @@
     </div>
     <div class="section-wrapper gray-section">
 
-        <div class="social-icons has-text-centered">
-
+        <div class="has-text-centered">
+            <div class="social">
+                <?php
+                $social = new SocialSettingsPage();
+                $socialLinks = $social->getSocialLinks('svg','circle');
+                if(is_array($socialLinks)) {
+                    foreach ( $socialLinks as $socialId => $socialLink ) {
+                        echo '<a class="' . $socialId . '" href="' . $socialLink[0] . '" target="_blank" >' . $socialLink[1] . '</a>';
+                    }
+                }
+                ?></div>
         </div>
 
-        <div class="contact-location">
-            <div class="container">
-                <div class="is-one-third-desktop">
-                    <?php //TODO: make fields editable ?>
-                </div>
-                <div class="is-one-third-desktop">
-                    <?php //TODO: make fields editable ?>
-                </div>
-                <div class="is-one-third-desktop">
-                    <?php //TODO: make fields editable ?>
+        <div class="container">
+            <div class="contact-location">
+                <div class="columns is-centered">
+                    <div class="column is-narrow is-12-mobile">
+                        <h3 class="serif">contact:</h3>
+                        <p><a href="tel:<?php echo $contactInfo->contact_info_phone; ?>" ><?php echo $contactInfo->contact_info_phone; ?></a><br>
+                            <a href="mailto:<?php echo $contactInfo->contact_info_email; ?>" ><?php echo $contactInfo->contact_info_email; ?></a></p>
+                    </div>
+                    <div class="column is-narrow is-12-mobile">
+                        <h3 class="serif">address:</h3>
+                        <p><?php echo nl2br($contactInfo->contact_info_address); ?></p>
+                    </div>
+                    <div class="column is-narrow is-12-mobile">
+                        <h3 class="serif">hours:</h3>
+                        <p><?php echo nl2br($contactInfo->contact_info_hours); ?></p>
+                    </div>
                 </div>
             </div>
         </div>
