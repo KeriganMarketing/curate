@@ -9,18 +9,11 @@
 ?>
 <div id="mid" >
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-        <section class="hero">
-            <div class="hero-body">
-                <div class="container">
-                    <h1 class="title is-1">404</h1>
-                    <p class="subtitle">Page not found</p>
-                </div>
-            </div>
-        </section>
         <section id="content" class="content section">
             <div class="container">
-                <div class="entry-content">
-                    <p>The page you requested does not exist or is no longer available.</p>
+                <div class="entry-content one-column is-centered">
+                    <h1 class="title is-1">404</h1>
+                    <p class="subtitle">Page not found</p>
                 </div><!-- .entry-content -->
             </div>
         </section>

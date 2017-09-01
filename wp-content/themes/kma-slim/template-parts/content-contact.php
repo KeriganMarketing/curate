@@ -15,7 +15,7 @@ $imgUrl = get_the_post_thumbnail_url($post, 'large');
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
         <section id="content" class="content section">
             <div class="container">
-                <div class="entry-content">
+                <div class="entry-content one-column">
                     <?php if($imgUrl != ''){ ?>
                         <figure class="media-left">
                             <p class="image is-square">

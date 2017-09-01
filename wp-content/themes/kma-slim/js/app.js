@@ -7,6 +7,8 @@ import tabs from './components/tabs.vue';
 import tab from './components/tab.vue';
 import portfolioslider from './components/portfolioslider.vue';
 import portfolioslide from './components/portfolioslide.vue';
+import slider from './components/slider.vue';
+import slide from './components/slide.vue';
 import GoogleMap from './components/GoogleMap.vue';
 
 Vue.use(vueSmoothScroll)
@@ -22,12 +24,14 @@ var app = new Vue({
         tab,
         portfolioslider,
         portfolioslide,
+        slider,
+        slide,
         GoogleMap
     },
 
     data: {
         isOpen: false,
-        modalOpen: false,
+        modalOpen: '',
         siteby: 'Site by KMA.',
         copyright: 'Curate.',
         showSignup: true

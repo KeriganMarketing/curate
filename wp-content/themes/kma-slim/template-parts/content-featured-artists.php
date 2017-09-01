@@ -13,7 +13,7 @@ $portfolio = new Portfolio();
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
         <section id="content" class="content section">
             <div class="container">
-                <div class="entry-content all-artists">
+                <div class="entry-content all-artists one-column">
                     <h1 class="title is-1"><?php echo $headline; ?></h1>
                     <?php echo ($subhead!='' ? '<p class="subtitle">'.$subhead.'</p>' : null); ?>
                     <div class="columns is-multiline">

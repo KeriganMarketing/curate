@@ -1,11 +1,35 @@
 <template>
-    <div class="modal is-active">
+    <div class="modal is-active" v-if="this.$parent.modalOpen != ''">
         <div class="modal-background"></div>
-        <div class="modal-content">
-            <div class="box">
-                <slot></slot>
-            </div>
+        <div class="modal-content large">
+            <slot></slot>
         </div>
-        <button class="modal-close is-large" @click="$emit('close')"></button>
+        <button class="modal-close is-large" @click="toggleModal"></button>
     </div>
 </template>
+
+<script>
+    export default {
+        data() {
+            return {
+                showModal: false
+            }
+        },
+        methods: {
+            toggleModal(){
+                this.showModal = !this.showModal;
+                if(this.$parent.modalOpen !== ''){
+                    this.$parent.modalOpen = ''
+                }
+            }
+        },
+        mounted() {
+            console.log('Component mounted.');
+
+            this.$parent.$on('toggleModal', function (modal,keyframe) {
+                this.modalOpen = modal;
+            });
+
+        }
+    }
+</script>
