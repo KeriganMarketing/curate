@@ -94,7 +94,14 @@ body {
       padding: .3rem 0 0;
     }
 
+
+
     a.navbar-item {
+
+      img {
+        height: 40px;
+      }
+
       @media screen and (max-width: $tablet){
         padding: .5rem 0;
 

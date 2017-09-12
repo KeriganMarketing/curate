@@ -21,6 +21,9 @@
                     'posts_per_page' => 1,
                 ) );
 
+                $photoInfo = pathinfo($work[0]['photo']);
+                $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'];
+
                 //echo '<pre>',print_r($work),'</pre>';
                 if($i == 5){ ?>
                     <div class="column artist-thumb blank">
@@ -36,7 +39,7 @@
                         <a href="<?php echo $work[0]['link']; ?>" class="button is-info roll-thumb-link">view</a>
                     </div>
                     <figure class="artist-thumb-container is-1by1">
-                        <img src="<?php echo str_replace( '.jpg', '', $work[0]['photo'] ) . '-300x300.jpg'; ?>" alt="<?php echo $work[0]['name'] . ': ' . $artist->name; ?>">
+                        <img src="<?php echo $newPhoto; ?>" alt="<?php echo $work[0]['name'] . ': ' . $artist->name; ?>">
                     </figure>
                 </div>
                 <?php
