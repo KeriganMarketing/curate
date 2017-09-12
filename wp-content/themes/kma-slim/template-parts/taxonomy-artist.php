@@ -50,7 +50,7 @@ $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoI
                         <div class="column is-4-tablet is-5-desktop artist-right">
                             <div class="columns is-multiline">
                             <?php foreach($work as $num => $piece){
-                                $photoInfo = pathinfo($featuredWork[0]['photo']);
+                                $photoInfo = pathinfo($piece['photo']);
                                 $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'];
                                 ?>
                                 <div class="column is-6-mobile is-12-tablet is-6-desktop artist-thumb">
