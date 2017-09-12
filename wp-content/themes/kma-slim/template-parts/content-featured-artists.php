@@ -27,6 +27,10 @@ $portfolio = new Portfolio();
                             $work = $portfolio->getWork($artist->slug, array(
                                 'posts_per_page' => 1,
                             ) );
+
+                            $photoInfo = pathinfo($work[0]['photo']);
+                            $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'];
+
                              ?>
                             <div class="column artist-thumb">
                                 <div class="roll-box">
@@ -34,7 +38,7 @@ $portfolio = new Portfolio();
                                     <a href="<?php echo $work[0]['link']; ?>" class="button is-info roll-thumb-link">view</a>
                                 </div>
                                 <figure class="artist-thumb-container">
-                                    <img src="<?php echo str_replace( '.jpg', '', $work[0]['photo'] ) . '-300x300.jpg'; ?>" alt="<?php echo $work[0]['name'] . ': ' . $artist->name; ?>">
+                                    <img src="<?php echo $newPhoto; ?>" alt="<?php echo $work[0]['name'] . ': ' . $artist->name; ?>">
                                 </figure>
                             </div>
                             <?php
