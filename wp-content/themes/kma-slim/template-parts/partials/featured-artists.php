@@ -15,7 +15,7 @@
 
             $artists = $portfolio::getArtists(8);
             $i = 1;
-            foreach($artists as $artist){
+            foreach($artists as $num => $artist){
 
                 $work = $portfolio->getWork($artist->slug, array(
                     'posts_per_page' => 1,
@@ -35,7 +35,7 @@
                         <figure class="artist-thumb-container is-1by1"></figure>
                     </div>
                 <?php } ?>
-                <div class="column artist-thumb">
+                <div class="column artist-thumb <?php echo $num; ?>">
                     <div class="roll-box">
                         <p class="artist-name serif"><?php echo str_replace( ' ', '<br>', $artist->name ); ?></p>
                         <a href="<?php echo $work[0]['link']; ?>" class="button is-info roll-thumb-link">view</a>
