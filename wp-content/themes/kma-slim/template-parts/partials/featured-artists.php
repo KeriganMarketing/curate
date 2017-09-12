@@ -13,7 +13,7 @@
 
             <?php
 
-            $artists = $portfolio->getArtists(8);
+            $artists = $portfolio::getArtists(8);
             $i = 1;
             foreach($artists as $artist){
 
@@ -24,7 +24,7 @@
                 $photoInfo = pathinfo($work[0]['photo']);
                 $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'];
 
-                echo $newPhoto;
+                //echo $newPhoto;
 
                 //echo '<pre>',print_r($work),'</pre>';
                 if($i == 5){ ?>
