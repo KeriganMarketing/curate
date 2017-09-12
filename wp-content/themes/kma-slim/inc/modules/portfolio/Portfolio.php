@@ -195,12 +195,18 @@ class Portfolio {
 
     public function getArtists( $limit = 0 ){
 
-        return get_terms(array(
+        $artists = get_terms(array(
             'taxonomy'   => 'artist',
             'orderby'    => 'menu_order',
             'number'     => $limit,
             'hide_empty' => false,
         ));
+
+//        var_dump($artists);
+
+        return $artists;
+
+
 
     }
 

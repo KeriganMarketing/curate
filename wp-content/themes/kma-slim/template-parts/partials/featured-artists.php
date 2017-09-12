@@ -13,7 +13,7 @@
 
             <?php
 
-            $artists = $portfolio->getArtists(8);
+            $artists = $portfolio->getArtists();
             $i = 1;
             foreach($artists as $artist){
 
