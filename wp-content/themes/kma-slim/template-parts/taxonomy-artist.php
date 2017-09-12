@@ -49,11 +49,14 @@ $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoI
                         </div>
                         <div class="column is-4-tablet is-5-desktop artist-right">
                             <div class="columns is-multiline">
-                            <?php foreach($work as $num => $piece){ ?>
+                            <?php foreach($work as $num => $piece){
+                                $photoInfo = pathinfo($featuredWork[0]['photo']);
+                                $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'];
+                                ?>
                                 <div class="column is-6-mobile is-12-tablet is-6-desktop artist-thumb">
                                     <figure class="artist-thumb-container is-1by1">
                                         <a @click="$emit('toggleModal', 'workViewer', <?php echo $num; ?>)" >
-                                        <img src="<?php echo str_replace( '.jpg', '', $piece['photo'] ) . '-300x300.jpg'; ?>" alt="<?php echo $piece['name'] . ': ' . $artist->name; ?>">
+                                        <img src="<?php echo $newPhoto; ?>" alt="<?php echo $piece['name'] . ': ' . $artist->name; ?>">
                                         </a>
                                     </figure>
                                 </div>
