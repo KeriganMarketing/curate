@@ -198,6 +198,7 @@ class Portfolio {
         $artists = get_terms([
             'taxonomy'   => 'artist',
             'orderby'    => 'term_order',
+            'order'      => 'ASC',
             'number'     => $limit,
             'hide_empty' => false,
         ]);
