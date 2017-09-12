@@ -17,6 +17,9 @@ $featuredWork = $portfolio->getWork($artist->slug, array(
 ) );
 $work = $portfolio->getWork($artist->slug);
 
+$photoInfo = pathinfo($featuredWork[0]['photo']);
+$newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'];
+
 //echo '<pre>',print_r($artist),'</pre>';
 ?>
 <div id="mid" >
@@ -31,7 +34,7 @@ $work = $portfolio->getWork($artist->slug);
                                     <div class="column is-2-mobile is-4-desktop">
                                         <figure class="artist-profile" >
                                             <p class="image is-150x150">
-                                                <img src="<?php echo str_replace( '.jpg', '', $featuredWork[0]['photo'] ) . '-300x300.jpg'; ?>" alt="<?php echo $featuredWork[0]['name'] . ': ' . $artist->name; ?>">
+                                                <img src="<?php echo $newPhoto; ?>" alt="<?php echo $featuredWork[0]['name'] . ': ' . $artist->name; ?>">
                                             </p>
                                         </figure>
                                     </div>
