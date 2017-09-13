@@ -81,7 +81,7 @@ $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoI
                 echo '<slide '.( $i==0 ? ':active="true"' : '' ).'>
                 <div class="content is-centered">
                     <img src="'.$slide['photo'].'" >
-                    <h3 class="serif">'.$piece['name'].'</h3>
+                    <h3 class="serif">'.$slide['name'].'</h3>
                     <p>'.$artist->name.'</p>
                     </div>
                 </slide>';
