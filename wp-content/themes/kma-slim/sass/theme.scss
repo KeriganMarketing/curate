@@ -394,8 +394,7 @@ body {
   @media screen and (min-width: $desktop) {
     .artist-thumb {
       .roll-box {
-        display: block;
-        visibility: hidden;
+        display: none;
         background-color: #dadfe3;
         text-align: center;
         width: 100%;
@@ -406,8 +405,12 @@ body {
 
     .artist-thumb:hover {
 
+      figure {
+        display: none;
+      }
+
       .roll-box {
-        visibility: visible;
+        display: block;
 
         .artist-name {
           padding: 3.5rem 1rem 1.25rem;
