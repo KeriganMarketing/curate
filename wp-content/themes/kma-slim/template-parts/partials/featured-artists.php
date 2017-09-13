@@ -29,10 +29,10 @@
                 //echo '<pre>',print_r($work),'</pre>';
                 if($i == 5){ ?>
                     <div class="column artist-thumb blank">
-                        <figure class="artist-thumb-container is-1by1"></figure>
+                        <figure class="artist-thumb-container image is-1by1"></figure>
                     </div>
                     <div class="column artist-thumb blank">
-                        <figure class="artist-thumb-container is-1by1"></figure>
+                        <figure class="artist-thumb-container image is-1by1"></figure>
                     </div>
                 <?php } ?>
                 <div class="column artist-thumb <?php echo $num; ?>">
@@ -41,7 +41,9 @@
                         <a href="<?php echo $work[0]['link']; ?>" class="button is-info roll-thumb-link">view</a>
                     </div>
                     <figure class="artist-thumb-container is-1by1">
+                        <a href="<?php echo $work[0]['link']; ?>">
                         <img src="<?php echo $newPhoto; ?>" alt="<?php echo $work[0]['name'] . ': ' . $artist->name; ?>">
+                        </a>
                     </figure>
                 </div>
                 <?php
