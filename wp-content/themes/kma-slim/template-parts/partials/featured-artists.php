@@ -49,8 +49,6 @@
                 $i++;
             }
 
-            print_r($artists);
-
             ?>
 
         </div>

@@ -197,17 +197,15 @@ class Portfolio {
 
         $artists = get_terms([
             'taxonomy'   => 'artist',
-            'orderby'    => 'term_order',
-            'order'      => 'DESC',
-            'number'     => $limit,
+//            'orderby'    => 'term_order', Applied by SCP Order plugin
+//            'number'     => $limit, This doesn't work with SCP Order plugin
             'hide_empty' => false,
         ]);
 
-//        var_dump($artists);
+        //chop to limit manually since SCP Order is ganked.
+        $artists = array_slice($artists, 0, $limit);
 
         return $artists;
-
-
 
     }
 
