@@ -8,7 +8,7 @@
 ?>
 <div id="featured-artists" class="featured-artists">
     <div class="container">
-        <h2>Featured Artists</h2>
+        <h2>featured artists</h2>
         <div class="columns is-multiline">
 
             <?php
