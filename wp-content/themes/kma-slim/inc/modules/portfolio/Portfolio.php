@@ -203,7 +203,9 @@ class Portfolio {
         ]);
 
         //chop to limit manually since SCP Order is ganked.
-        $artists = array_slice($artists, 0, $limit);
+        if ($limit != 0) {
+            $artists = array_slice($artists, 0, $limit);
+        }
 
         return $artists;
 
