@@ -298,6 +298,13 @@ body {
   background: linear-gradient(to bottom, rgba(226, 227, 228, 1) 0%, rgba(195, 199, 202, 1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e2e3e4', endColorstr='#c3c7ca', GradientType=0); /* IE6-9 */
 
+  @media screen and (min-width: $desktop){
+    padding: 8rem 0;
+  }
+  @media screen and (min-width: $fullhd){
+    padding: 13rem 0;
+  }
+
   .center-vertical {
     margin: 0;
     justify-content: space-between;
@@ -308,13 +315,17 @@ body {
     text-align: center;
     padding: 1rem 0;
     @media screen and (min-width: $desktop) {
-      padding: 2.5rem 0;
+      padding: 2.5rem 0 3rem;
+    }
+    @media screen and (min-width: $fullhd) {
+      padding: 2.5rem 0 4rem;
     }
   }
 
   p {
     padding: 0 1rem;
     font-size: 1.25em;
+    font-weight:400;
     @media screen and (min-width: $desktop) {
       padding: 0;
     }
@@ -324,6 +335,9 @@ body {
     margin-top: 1rem;
     @media screen and (min-width: $desktop) {
       margin-top: 2.5rem;
+    }
+    @media screen and (min-width: $fullhd) {
+      margin-top: 5rem;
     }
   }
 
@@ -364,7 +378,10 @@ body {
     text-align: center;
     padding: 1rem 0;
     @media screen and (min-width: $desktop) {
-      padding: 2.5rem 0;
+      padding: 4rem 0 3rem;
+    }
+    @media screen and (min-width: $fullhd) {
+      padding: 8rem 0 3rem;
     }
   }
 
