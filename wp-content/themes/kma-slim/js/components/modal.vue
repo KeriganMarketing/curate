@@ -24,7 +24,7 @@
             }
         },
         mounted() {
-            console.log('Component mounted.');
+            //console.log('Component mounted.');
 
             this.$parent.$on('toggleModal', function (modal,keyframe) {
                 this.modalOpen = modal;

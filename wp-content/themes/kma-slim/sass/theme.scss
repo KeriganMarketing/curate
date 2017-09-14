@@ -172,11 +172,12 @@ body {
 
     .slide {
       background-size: cover;
+      background-position: center;
       display: block;
       position: relative;
       z-index: 0;
-      height: 0px;
-      padding-top: 46%;
+      height: 92vh;
+      //padding-top: 46%;
       box-shadow: 0 0 30px rgba(0, 0, 0, .8);
       @media screen and (min-width: $tablet) {
         background-attachment: fixed;
@@ -185,16 +186,16 @@ body {
         box-shadow: 0 0 200px rgba(0, 0, 0, .8);
       }
       @media screen and (min-aspect-ratio: 4/3) {
-        padding-top: 63.5%;
+        //padding-top: 63.5%;
       }
       @media screen and (min-aspect-ratio: 16/9) {
-        padding-top: 47.8%;
+        //padding-top: 47.8%;
       }
       @media screen and (min-aspect-ratio: 16/8) {
-        padding-top: 40%;
+        //padding-top: 40%;
       }
       @media screen and (min-aspect-ratio: 16/7) {
-        padding-top: 33%;
+        //padding-top: 33%;
       }
 
       .slide-contents {

@@ -27,45 +27,45 @@
 
         created(){
 
-            this.slides = this.$children
-            setInterval(() => { if(this.paused == false){ this.nextSlide() } }, 6000)
+            this.slides = this.$children;
+            setInterval(() => { if(this.paused === false){ this.nextSlide() } }, 6000);
 
-        },
-
-        mounted(){
-            this.$parent.$parent.$on('toggleModal', function (modal,keyframe) {
-                this.activeSlide = keyframe;
+            this.$root.$on('toggleModal', function (modal,keyframe) {
+                this.slides[this.activeSlide]._data.isActive = false;
+                this.activeSlide = number;
+                this.slides[this.activeSlide]._data.isActive = true;
             });
+
         },
 
         methods: {
 
             nextSlide(){
-                this.slides[this.activeSlide]._data.isActive = false
-                if(this.activeSlide == this.slides.length-1){
-                    this.activeSlide = -1
+                this.slides[this.activeSlide]._data.isActive = false;
+                if(this.activeSlide === this.slides.length-1){
+                    this.activeSlide = -1;
                 }
-                this.activeSlide++
+                this.activeSlide++;
                 this.slides[this.activeSlide]._data.isActive = true
             },
 
             prevSlide(){
-                this.slides[this.activeSlide]._data.isActive = false
-                this.activeSlide--
-                if(this.activeSlide == -1){
-                    this.activeSlide = this.slides.length-1
+                this.slides[this.activeSlide]._data.isActive = false;
+                this.activeSlide--;
+                if(this.activeSlide === -1){
+                    this.activeSlide = this.slides.length-1;
                 }
-                this.slides[this.activeSlide]._data.isActive = true
+                this.slides[this.activeSlide]._data.isActive = true;
             },
 
             clickNext(){
-                this.nextSlide()
-                this.togglePause()
+                this.nextSlide();
+                this.togglePause();
             },
 
             clickPrev(){
-                this.prevSlide()
-                this.togglePause()
+                this.prevSlide();
+                this.togglePause();
             },
 
             togglePause(){

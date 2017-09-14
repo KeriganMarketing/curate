@@ -444,7 +444,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     mounted: function mounted() {
-        console.log('Component mounted.');
+        //console.log('Component mounted.');
 
         this.$parent.$on('toggleModal', function (modal, keyframe) {
             this.modalOpen = modal;
@@ -626,14 +626,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         this.slides = this.$children;
         setInterval(function () {
-            if (_this.paused == false) {
+            if (_this.paused === false) {
                 _this.nextSlide();
             }
         }, 6000);
-    },
-    mounted: function mounted() {
-        this.$parent.$parent.$on('toggleModal', function (modal, keyframe) {
-            this.activeSlide = keyframe;
+
+        this.$root.$on('toggleModal', function (modal, keyframe) {
+            this.slides[this.activeSlide]._data.isActive = false;
+            this.activeSlide = number;
+            this.slides[this.activeSlide]._data.isActive = true;
         });
     },
 
@@ -641,7 +642,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         nextSlide: function nextSlide() {
             this.slides[this.activeSlide]._data.isActive = false;
-            if (this.activeSlide == this.slides.length - 1) {
+            if (this.activeSlide === this.slides.length - 1) {
                 this.activeSlide = -1;
             }
             this.activeSlide++;
@@ -650,7 +651,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         prevSlide: function prevSlide() {
             this.slides[this.activeSlide]._data.isActive = false;
             this.activeSlide--;
-            if (this.activeSlide == -1) {
+            if (this.activeSlide === -1) {
                 this.activeSlide = this.slides.length - 1;
             }
             this.slides[this.activeSlide]._data.isActive = true;
