@@ -176,17 +176,22 @@ body {
       display: block;
       position: relative;
       z-index: 0;
-      height: 92vh;
-      //padding-top: 46%;
+      height: 23vh;
       box-shadow: 0 0 30px rgba(0, 0, 0, .8);
       @media screen and (min-width: $tablet) {
         background-attachment: fixed;
+        height: 40vh;
       }
       @media screen and (min-width: $desktop) {
         box-shadow: 0 0 200px rgba(0, 0, 0, .8);
+        height: 88vh;
+      }
+      @media screen and (min-width: $fullhd) {
+        box-shadow: 0 0 200px rgba(0, 0, 0, .8);
+        height: 92vh;
       }
       @media screen and (min-aspect-ratio: 4/3) {
-        //padding-top: 63.5%;
+        //height: 23vh;
       }
       @media screen and (min-aspect-ratio: 16/9) {
         //padding-top: 47.8%;
