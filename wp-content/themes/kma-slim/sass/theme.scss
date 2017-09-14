@@ -256,12 +256,22 @@ body {
 }
 
 .enewsletter-signup {
-  padding: 2.2rem 2rem;
+  padding: 1rem;
+  height: inherit;
+  display: flex;
+  align-items: center;
   background-color: #8a8a8a;
   font-size: 1.1em;
   color: #FFF;
   position: relative;
   z-index: 10;
+
+  @media screen and (min-width: $tablet) {
+    height: 100px;
+  }
+  @media screen and (min-width: $desktop) {
+    height: 12vh;
+  }
 
   form.form.columns {
     align-items: center;
