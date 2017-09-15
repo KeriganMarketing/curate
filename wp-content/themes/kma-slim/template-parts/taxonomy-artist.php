@@ -31,7 +31,7 @@ $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoI
                         <div class="column is-8-tablet is-7-desktop artist-left">
                             <div class="content">
                                 <div class="columns">
-                                    <div class="column is-2-mobile is-4-desktop">
+                                    <div class="column is-12-mobile is-4-desktop">
                                         <figure class="artist-profile" >
                                             <p class="image is-150x150">
                                                 <img src="<?php echo $newPhoto; ?>" alt="<?php echo $featuredWork[0]['name'] . ': ' . $artist->name; ?>">
@@ -53,10 +53,10 @@ $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoI
                                 $photoInfo = pathinfo($piece['photo']);
                                 $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'];
                                 ?>
-                                <div class="column is-6-mobile is-12-tablet is-6-desktop artist-thumb">
+                                <div class="column is-6-mobile is-12-tablet is-6-desktop artist-thumb <?php echo $num; ?>">
                                     <figure class="artist-thumb-container is-1by1">
                                         <a @click="$emit('toggleModal', 'workViewer', <?php echo $num; ?>)" >
-                                        <img src="<?php echo $newPhoto; ?>" alt="<?php echo $piece['name'] . ': ' . $artist->name; ?>">
+                                            <img src="<?php echo $newPhoto; ?>" alt="<?php echo $piece[0]['name'] . ': ' . $artist->name; ?>">
                                         </a>
                                     </figure>
                                 </div>
@@ -71,7 +71,7 @@ $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoI
     </article><!-- #post-## -->
 </div>
 <modal>
-    <figure class="work-viewer" >
+    <div class="work-viewer" >
         <slider>
             <?php
 
@@ -79,10 +79,14 @@ $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoI
             foreach($work as $slide){
 
                 echo '<slide '.( $i==0 ? ':active="true"' : '' ).'>
-                <div class="content is-centered">
-                    <img src="'.$slide['photo'].'" >
-                    <h3 class="serif">'.$slide['name'].'</h3>
-                    <p>'.$artist->name.'</p>
+                    <div class="content is-centered">
+                        <div class="image-container">
+                            <img src="'.$slide['photo'].'" >
+                        </div>
+                        <div class="caption-container">
+                            <h3 class="serif">'.$slide['name'].'</h3>
+                            <p>'.$artist->name.'</p>
+                        </div>
                     </div>
                 </slide>';
                 $i++;
@@ -90,5 +94,5 @@ $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoI
 
             ?>
         </slider>
-    </figure>
+    </div>
 </modal>

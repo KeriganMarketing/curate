@@ -557,8 +557,8 @@ body {
     }
 
     .artist-left .content {
-      padding: 0 2rem;
       @media screen and (min-width: $desktop) {
+        padding: 0 2rem;
         border-right: 1px solid #222;
       }
 
@@ -569,7 +569,9 @@ body {
     }
 
     .artist-right {
-      padding: 0 2rem;
+      @media screen and (min-width: $desktop) {
+        padding: 0 2rem;
+      }
     }
   }
 
@@ -668,6 +670,39 @@ body {
       }
     }
 
+    .image-container {
+      height: 88vh;
+      overflow: scroll;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+    }
+    .caption-container {
+      height: 12vh;
+    }
+    .modal-content {
+      margin: 0;
+    }
+    .icon.is-large {
+      height: 3rem;
+      width: 3rem;
+      padding: .75rem;
+    }
+
+  }
+}
+
+.modal-content.large {
+  max-height: 100vh;
+
+  .work-viewer {
+    justify-content: space-between;
+    width: 100%;
+
+    .icon.is-large .fa {
+      font-size: 50px;
+      color: #FFF;
+    }
   }
 }
 
@@ -707,7 +742,11 @@ body {
   }
 
   .column {
-    padding: 2rem;
+    padding: 0 2rem;
+
+    @media screen and (min-width: $desktop) {
+      padding: 2rem;
+    }
   }
 
   .white-section {
