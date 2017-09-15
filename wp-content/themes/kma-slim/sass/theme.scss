@@ -572,6 +572,12 @@ body {
       @media screen and (min-width: $desktop) {
         padding: 0 2rem;
       }
+
+      .artist-thumb {
+        display: inline-flex;
+        width: 49%;
+        float: left;
+      }
     }
   }
 
@@ -676,6 +682,10 @@ body {
       align-items: center;
       display: flex;
       justify-content: center;
+
+      @media screen and (min-width: $desktop) {
+        overflow: hidden;
+      }
     }
     .caption-container {
       height: 12vh;
