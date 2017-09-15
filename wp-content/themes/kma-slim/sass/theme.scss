@@ -364,6 +364,10 @@ body {
     @media screen and (min-width: $fullhd) {
       width:33%;
     }
+
+    img {
+      max-width: 95%;
+    }
   }
 
   .wall-art-right {
@@ -463,7 +467,7 @@ body {
 .artist-thumb {
   .artist-thumb-container {
     img {
-      width: 400px;
+      width: 500px;
       max-width: 100%;
     }
     a {
