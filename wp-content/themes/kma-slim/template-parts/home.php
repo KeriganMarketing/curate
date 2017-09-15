@@ -27,17 +27,17 @@ $portfolio = new Portfolio();
 
             <div id="about-us" class="about-us section" >
                 <div class="center-vertical columns is-multiline">
-                    <div class="column is-11 is-one-third-desktop is-second-desktop is-centered">
+                    <div class="column is-12-mobile is-12-tablet is-6-desktop is-4-fullhd is-second-desktop is-centered">
                         <h2><?php echo $headline ?></h2>
                         <div class="content-justified">
                             <?php the_content() ?>
                         </div>
                         <p class="is-centered"><a class="button is-info" href="/about-curate">about Curate</a></p>
                     </div>
-                    <div class="column is-6-mobile is-one-third-desktop is-first-desktop wall-art-left">
+                    <div class="column is-6-mobile is-3-tablet is-3-desktop is-4-fullhd is-first-desktop wall-art-left">
                         <img src="<?php echo get_template_directory_uri().'/img/left-side-wall-art.png'; ?>" >
                     </div>
-                    <div class="column is-6-mobile is-one-third-desktop is-third-desktop wall-art-right">
+                    <div class="column is-6-mobile is-3-tablet is-3-desktop is-4-fullhd is-third-desktop wall-art-right">
                         <img src="<?php echo get_template_directory_uri().'/img/right-side-wall-art.png'; ?>" >
                     </div>
                 </div>

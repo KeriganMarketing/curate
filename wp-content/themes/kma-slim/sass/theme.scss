@@ -314,6 +314,7 @@ body {
   .center-vertical {
     margin: 0;
     justify-content: space-between;
+
   }
 
   h2 {
@@ -332,6 +333,9 @@ body {
     padding: 0 1rem;
     font-size: 1.25em;
     font-weight:400;
+    @media screen and (min-width: $tablet){
+      padding: 0 3rem;
+    }
     @media screen and (min-width: $desktop) {
       padding: 0;
     }
@@ -354,9 +358,7 @@ body {
     padding: 0;
     width: 49%;
     vertical-align: middle;
-    @media screen and (min-width: $desktop) {
-      width: 33%;
-    }
+
   }
 
   .wall-art-right {
