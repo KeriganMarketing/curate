@@ -358,7 +358,12 @@ body {
     padding: 0;
     width: 49%;
     vertical-align: middle;
-
+    @media screen and (min-width: $desktop) {
+      width:25%;
+    }
+    @media screen and (min-width: $fullhd) {
+      width:33%;
+    }
   }
 
   .wall-art-right {
