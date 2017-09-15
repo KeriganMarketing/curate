@@ -1,6 +1,6 @@
 <template>
     <div class="modal is-active" v-if="this.$parent.modalOpen != ''">
-        <div class="modal-background"></div>
+        <div class="modal-background" @click="toggleModal"></div>
         <div class="modal-content large">
             <slot></slot>
         </div>

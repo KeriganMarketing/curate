@@ -28,7 +28,7 @@
         created(){
 
             this.slides = this.$children;
-            setInterval(() => { if(this.paused === false){ this.nextSlide() } }, 6000);
+//            setInterval(() => { if(this.paused === false){ this.nextSlide() } }, 6000);
 
             this.$root.$on('toggleModal', function (modal,keyframe) {
                 this.slides[this.activeSlide]._data.isActive = false;

@@ -183,7 +183,6 @@ var app = new Vue({
     data: {
         isOpen: false,
         modalOpen: '',
-        siteby: 'Site by KMA.',
         copyright: 'Curate.',
         showSignup: true
     },
@@ -622,14 +621,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
     created: function created() {
-        var _this = this;
 
         this.slides = this.$children;
-        setInterval(function () {
-            if (_this.paused === false) {
-                _this.nextSlide();
-            }
-        }, 6000);
+        //            setInterval(() => { if(this.paused === false){ this.nextSlide() } }, 6000);
 
         this.$root.$on('toggleModal', function (modal, keyframe) {
             this.slides[this.activeSlide]._data.isActive = false;
@@ -1315,7 +1309,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return (this.$parent.modalOpen != '') ? _c('div', {
     staticClass: "modal is-active"
   }, [_c('div', {
-    staticClass: "modal-background"
+    staticClass: "modal-background",
+    on: {
+      "click": _vm.toggleModal
+    }
   }), _vm._v(" "), _c('div', {
     staticClass: "modal-content large"
   }, [_vm._t("default")], 2), _vm._v(" "), _c('button', {

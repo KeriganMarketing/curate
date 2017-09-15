@@ -32,7 +32,6 @@ var app = new Vue({
     data: {
         isOpen: false,
         modalOpen: '',
-        siteby: 'Site by KMA.',
         copyright: 'Curate.',
         showSignup: true
     },

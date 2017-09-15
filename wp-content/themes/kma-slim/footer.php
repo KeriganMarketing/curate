@@ -66,7 +66,7 @@ $contactInfo = get_post( get_option( 'page_on_front' ), OBJECT);
         </div>
 
         <div class="signoff">
-            <p id="copyright">&copy; <?php echo date('Y'); ?> {{ copyright }} <span id="siteby" >{{ siteby }}</span></p>
+            <p id="copyright">&copy; <?php echo date('Y'); ?> {{ copyright }} <span id="siteby" >Site by <a href="https://keriganmarketing.com" target="_blank" >KMA</a>.</span></p>
         </div>
     </div>
 </footer>
