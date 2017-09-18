@@ -20,41 +20,56 @@ class Portfolio {
      */
     public function createPostType() {
 
-        $work = new CustomPostType( 'Work', array(
-            'supports'           => array( 'title', 'revisions' ),
-            'menu_icon'          => 'dashicons-images-alt2',
-            'rewrite'            => array( 'with_front' => false ),
-            'has_archive'        => false,
-            'menu_position'      => null,
-            'public'             => false,
-            'publicly_queryable' => false,
-        ) );
+        $this->createWork();
+        $this->createFeaturedWork();
 
-        $work->addTaxonomy( 'Artist' );
-        $work->convertCheckToRadio( 'artist' );
+    }
 
-	    $work->addMetaBox( 'Work Details', array(
-		    'Photo File'           => 'image',
-		    'Feature on Home page' => 'boolean',
-	    ) );
-
-	    $featured = new CustomPostType( 'Featured Work', array(
-		    'supports'           => array( 'title', 'revisions' ),
+    private function createWork(){
+	    $work = new CustomPostType( 'Work', [
+		    'supports'           => [ 'title', 'revisions' ],
 		    'menu_icon'          => 'dashicons-images-alt2',
-		    'rewrite'            => array( 'with_front' => false ),
+		    'rewrite'            => [ 'with_front' => false ],
 		    'has_archive'        => false,
 		    'menu_position'      => null,
 		    'public'             => false,
 		    'publicly_queryable' => false,
-	    ) );
+	    ] );
+
+	    $work->addTaxonomy( 'Artist' );
+	    $work->convertCheckToRadio( 'artist' );
+
+	    $work->addMetaBox( 'Work Details', [
+		    'Photo File'           => 'image',
+		    'Feature on Home page' => 'boolean',
+	    ] );
+
+	    $work->addMetaBox( 'Long Description', [
+		    'html'                 => 'wysiwyg',
+	    ] );
+
+    }
+
+    private function createFeaturedWork(){
+	    $featured = new CustomPostType( 'Featured Work', [
+		    'supports'           => [ 'title', 'revisions' ],
+		    'menu_icon'          => 'dashicons-images-alt2',
+		    'rewrite'            => [ 'with_front' => false ],
+		    'has_archive'        => false,
+		    'menu_position'      => null,
+		    'public'             => false,
+		    'publicly_queryable' => false,
+	    ] );
 
 	    $featured->addTaxonomy( 'Artist' );
-//	    $featured->convertCheckToRadio( 'artist' );
 
-	    $featured->addMetaBox( 'Work Details', array(
+	    $featured->addMetaBox( 'Work Details', [
 		    'Photo File'           => 'image',
-	    ) );
+	    ] );
 
+	    $featured->addMetaBox( 'Long Description', [
+		    'html'                 => 'wysiwyg',
+	    ] );
     }
 
 	/**
@@ -64,13 +79,13 @@ class Portfolio {
 
 	    add_filter('manage_work_posts_columns',
             function ($defaults) {
-                $defaults = array(
+                $defaults = [
                     'title'      => 'Title',
                     'artist'     => 'Artist',
                     'featured'   => 'Featured',
                     'work_photo' => 'Photo',
                     'date'       => 'Date'
-                );
+                ];
 
                 return $defaults;
             }, 0);
@@ -102,10 +117,10 @@ class Portfolio {
 
             if ('work' == $type) {
 
-                $values = get_terms(array(
+                $values = get_terms([
                     'taxonomy'   => 'artist',
                     'hide_empty' => false,
-                ));
+                ]);
 
                 echo '<select name="artist">
                     <option value="">All Artists</option>';
@@ -132,26 +147,26 @@ class Portfolio {
      * @param author ( post type category )
      * @return HTML
      */
-    public function getWork( $taxonomy = '', $requestArray = array() ){
+    public function getWork( $taxonomy = '', $requestArray = [] ){
 
-	    $request = array(
+	    $request = [
 		    'posts_per_page' => - 1,
 		    'offset'         => 0,
 		    'order'          => 'ASC',
 		    'orderby'        => 'menu_order',
 		    'post_type'      => 'work',
 		    'post_status'    => 'publish',
-	    );
+	    ];
 
 	    if ( $taxonomy != '' ) {
-		    $categoryarray        = array(
-			    array(
+		    $categoryarray = [
+			   [
 				    'taxonomy'         => 'artist',
 				    'field'            => 'slug',
 				    'terms'            => $taxonomy,
 				    'include_children' => false,
-			    ),
-		    );
+			    ],
+		    ];
 		    $request['tax_query'] = $categoryarray;
 	    }
 
@@ -161,12 +176,12 @@ class Portfolio {
 
 	    $results = get_posts( $args );
 
-        $resultArray = array();
+        $resultArray = [];
         foreach ( $results as $item ){
 
         	$taxonomies = get_the_terms($item, artist);
 
-	        array_push( $resultArray, array(
+	        array_push( $resultArray, [
 		        'id'          => ( isset( $item->ID ) ? $item->ID : null ),
 		        'name'        => ( isset( $item->post_title ) ? $item->post_title : null ),
 		        'slug'        => ( isset( $item->post_name ) ? $item->post_name : null ),
@@ -174,7 +189,7 @@ class Portfolio {
 		        'author'      => $taxonomies[0]->name,
 		        'featured'    => ( isset( $item->work_details_feature_on_home_page ) ? $item->work_details_feature_on_home_page : null ),
 		        'link'        => get_term_link( $taxonomies[0] ),
-	        ) );
+	        ] );
 
         }
 

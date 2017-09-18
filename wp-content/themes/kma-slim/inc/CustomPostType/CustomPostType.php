@@ -214,15 +214,16 @@ class CustomPostType
     {
         $fieldIdName  = $this->uglify($data['id']) . '_' . $this->uglify($label);
         $templateFile = $this->dir . '/templates/' . $type . '.php';
+        $fieldValue = (isset($meta[$fieldIdName][0]) ? $meta[$fieldIdName][0] : null);
         if (file_exists($templateFile)) {
             $field = file_get_contents($templateFile);
 
             if ($type != 'wysiwyg') {
                 $field = str_replace('{field-name}', $fieldIdName, $field);
                 $field = str_replace('{field-label}', $label, $field);
-                $field = str_replace('{field-value}', $meta[$fieldIdName][0], $field);
+                $field = str_replace('{field-value}', $fieldValue, $field);
             } else {
-                $editor = wp_editor($meta[$fieldIdName][0], $fieldIdName,
+                $editor = wp_editor($fieldValue, $fieldIdName,
                     array(
                         'quicktags'     => array('buttons' => 'em,strong,link'),
                         'textarea_name' => 'custom_meta[' . $fieldIdName . ']',
@@ -234,13 +235,17 @@ class CustomPostType
             }
 
             if ($type == 'boolean') {
-                $checked = ($meta[$fieldIdName][0] == 'on' ? 'checked' : '');
+                $checked = ($fieldValue == 'on' ? 'checked' : '');
                 $field   = str_replace('{field-checked}', $checked, $field);
             }
 
             if ($type == 'date') {
-                wp_enqueue_style('flatpickr-style', 'https://unpkg.com/flatpickr/dist/flatpickr.min.css');
-                wp_enqueue_script('flatpickr-script', 'https://unpkg.com/flatpickr', array('jquery'));
+
+	            add_action( 'wp_enqueue_scripts', function(){
+		            wp_enqueue_style('flatpickr-style', 'https://unpkg.com/flatpickr/dist/flatpickr.min.css');
+		            wp_enqueue_script('flatpickr-script', 'https://unpkg.com/flatpickr', array('jquery'));
+	            } );
+
             }
 
             echo $field;
@@ -325,7 +330,9 @@ class CustomPostType
                     return;
                 }
 
-                if ( ! wp_verify_nonce($_POST['custom_post_type'], plugin_basename(__FILE__))) {
+                $nonce = (isset($_POST['custom_post_type']) ? $_POST['custom_post_type'] : null);
+
+                if ( ! wp_verify_nonce($nonce, plugin_basename(__FILE__))) {
                     return;
                 }
 
