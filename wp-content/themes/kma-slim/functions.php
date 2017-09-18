@@ -74,6 +74,8 @@ function kmaslim_setup() {
 	<?php }
 	add_action( 'wp_head', 'kmaslim_inline' );
 
+	add_image_size( 'small-thumbnail', 170, 170, true );
+
 }
 endif;
 add_action( 'after_setup_theme', 'kmaslim_setup' );
