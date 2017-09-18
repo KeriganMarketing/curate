@@ -8,3 +8,4 @@ tags
 php.ini
 *error_log
 */cache/
+wp-content/themes/uploads/
