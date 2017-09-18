@@ -241,10 +241,8 @@ class CustomPostType
 
             if ($type == 'date') {
 
-	            add_action( 'wp_enqueue_scripts', function(){
-		            wp_enqueue_style('flatpickr-style', 'https://unpkg.com/flatpickr/dist/flatpickr.min.css');
-		            wp_enqueue_script('flatpickr-script', 'https://unpkg.com/flatpickr', array('jquery'));
-	            } );
+	            wp_enqueue_style('flatpickr-style', 'https://unpkg.com/flatpickr/dist/flatpickr.min.css');
+	            wp_enqueue_script('flatpickr-script', 'https://unpkg.com/flatpickr', array('jquery'));
 
             }
 
