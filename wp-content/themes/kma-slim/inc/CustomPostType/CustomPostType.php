@@ -3,8 +3,6 @@
  * CustomPostType Class
  */
 
-//TODO: namespace KMA\Helpers;
-
 class CustomPostType
 {
 

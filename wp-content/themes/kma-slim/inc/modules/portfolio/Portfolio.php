@@ -65,6 +65,7 @@ class Portfolio {
 
 	    $featured->addMetaBox( 'Work Details', [
 		    'Photo File'           => 'image',
+		    'Feature on Home page' => 'boolean',
 	    ] );
 
 	    $featured->addMetaBox( 'Long Description', [
