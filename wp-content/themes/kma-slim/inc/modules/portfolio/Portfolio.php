@@ -104,7 +104,7 @@ class Portfolio {
                 case 'work_photo':
                     $photo = get_post_meta($post_ID, 'work_details_photo_file', true);
 	                $photoInfo = pathinfo($photo);
-	                $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'];
+	                $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-170x170.'.$photoInfo['extension'];
                     echo(isset($photo) ? '<img src ="' . $newPhoto . '" class="img-fluid" style="width:200px; max-width:100%;" >' : null);
                     break;
 
