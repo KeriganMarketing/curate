@@ -26,6 +26,13 @@ $portfolio = new Portfolio();
 
                             $work = $portfolio->getWork($artist->slug, array(
                                 'posts_per_page' => 1,
+                                'meta_query'     => [
+	                                [
+		                                'key'     => 'work_details_feature_on_home_page',
+		                                'value'   => 'on',
+		                                'compare' => '='
+	                                ]
+                                ]
                             ) );
 
                             $photoInfo = pathinfo($work[0]['photo']);

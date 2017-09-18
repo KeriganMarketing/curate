@@ -17,16 +17,20 @@
             $i = 1;
             foreach($artists as $num => $artist){
 
-                $work = $portfolio->getWork($artist->slug, array(
-                    'posts_per_page' => 1,
-                ) );
+	            $work = $portfolio->getWork( $artist->slug, array(
+		            'posts_per_page' => 1,
+		            'meta_query'     => [
+			            [
+				            'key'     => 'work_details_feature_on_home_page',
+				            'value'   => 'on',
+				            'compare' => '='
+			            ]
+		            ]
+	            ) );
 
                 $photoInfo = pathinfo($work[0]['photo']);
                 $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'];
 
-                //echo $newPhoto;
-
-                //echo '<pre>',print_r($work),'</pre>';
                 if($i == 5){ ?>
                     <div class="column artist-thumb blank">
                         <figure class="artist-thumb-container image is-1by1"></figure>

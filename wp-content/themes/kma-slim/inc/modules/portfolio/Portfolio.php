@@ -38,12 +38,22 @@ class Portfolio {
 		    'Feature on Home page' => 'boolean',
 	    ) );
 
-        $work->addMetaBox(
-            'Long Description',
-            array(
-                'HTML' => 'wysiwyg',
-            )
-        );
+	    $featured = new CustomPostType( 'Featured Work', array(
+		    'supports'           => array( 'title', 'revisions' ),
+		    'menu_icon'          => 'dashicons-images-alt2',
+		    'rewrite'            => array( 'with_front' => false ),
+		    'has_archive'        => false,
+		    'menu_position'      => null,
+		    'public'             => false,
+		    'publicly_queryable' => false,
+	    ) );
+
+	    $featured->addTaxonomy( 'Artist' );
+//	    $featured->convertCheckToRadio( 'artist' );
+
+	    $featured->addMetaBox( 'Work Details', array(
+		    'Photo File'           => 'image',
+	    ) );
 
     }
 
@@ -163,7 +173,6 @@ class Portfolio {
 		        'photo'       => ( isset( $item->work_details_photo_file ) ? $item->work_details_photo_file : null ),
 		        'author'      => $taxonomies[0]->name,
 		        'featured'    => ( isset( $item->work_details_feature_on_home_page ) ? $item->work_details_feature_on_home_page : null ),
-		        'description' => ( isset( $item->long_description_html ) ? $item->long_description_html : null ),
 		        'link'        => get_term_link( $taxonomies[0] ),
 	        ) );
 
