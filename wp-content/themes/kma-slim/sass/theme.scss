@@ -448,6 +448,9 @@ body {
       display: none;
       transition: background-color linear .5s;
       background-color: transparent;
+      .artist-name {
+        font-weight:700 !important;
+      }
     }
 
   }
