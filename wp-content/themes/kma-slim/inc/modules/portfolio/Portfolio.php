@@ -61,7 +61,10 @@ class Portfolio {
 		    'publicly_queryable' => false,
 	    ] );
 
-	    $featured->addTaxonomy( 'Artist' );
+	    add_action('init', function(){
+		    register_taxonomy_for_object_type('artist', 'featured_work');
+	    });
+
 
 	    $featured->addMetaBox( 'Work Details', [
 		    'Photo File'           => 'image',
@@ -100,7 +103,9 @@ class Portfolio {
 
                 case 'work_photo':
                     $photo = get_post_meta($post_ID, 'work_details_photo_file', true);
-                    echo(isset($photo) ? '<img src ="' . $photo . '" class="img-fluid" style="width:400px; max-width:100%;" >' : null);
+	                $photoInfo = pathinfo($photo);
+	                $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'];
+                    echo(isset($photo) ? '<img src ="' . $newPhoto . '" class="img-fluid" style="width:200px; max-width:100%;" >' : null);
                     break;
 
                 case 'featured':

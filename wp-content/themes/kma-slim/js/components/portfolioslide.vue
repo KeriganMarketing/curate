@@ -6,7 +6,7 @@
                 <p class="artist-title invisible">{{ title }}</p>
                 <a :href=" link " class="button is-info">view</a>
             </div>
-            <a v-if="islast === false" class="clickdown icon center" :href=" href " v-smooth-scroll ><span class="btn-text">scroll</span><i class="fa fa-angle-down" aria-hidden="true"></i></a>
+            <a v-if="islast === false" class="clickdown icon center" :href=" href " v-smooth-scroll ><span class="btn-text">scroll</span><span class="arrow"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21.74 12.58"><path class="cls-1" d="M21.37.34l-10.5,11.5L.37.34"/></svg></span></a>
         </div>
     </div>
 </template>

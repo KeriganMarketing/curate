@@ -1286,12 +1286,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('span', {
     staticClass: "btn-text"
-  }, [_vm._v("scroll")]), _c('i', {
-    staticClass: "fa fa-angle-down",
+  }, [_vm._v("scroll")]), _c('span', {
+    staticClass: "arrow"
+  }, [_c('svg', {
     attrs: {
-      "aria-hidden": "true"
+      "xmlns": "http://www.w3.org/2000/svg",
+      "viewBox": "0 0 21.74 12.58"
     }
-  })]) : _vm._e()])])
+  }, [_c('path', {
+    staticClass: "cls-1",
+    attrs: {
+      "d": "M21.37.34l-10.5,11.5L.37.34"
+    }
+  })])])]) : _vm._e()])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

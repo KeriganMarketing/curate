@@ -217,15 +217,15 @@ body {
         a.clickdown.icon.center {
           position: absolute;
           display: none;
-          height: 60px;
-          width: 60px;
+          height: 76px;
+          width: 76px;
           border: 1px solid #FFF;
           border-radius: 50%;
           text-align: center;
           vertical-align: middle;
           z-index: 30;
           left: 50%;
-          margin-left: -30px;
+          margin-left: -38px;
           bottom: 60px;
           color: #FFF;
           -webkit-backface-visibility: hidden;
@@ -237,12 +237,24 @@ body {
 
           .btn-text {
             display: block;
-            padding-top: 8px;
+            padding-top: 22px;
+            font-weight: 400;
+            line-height: 1.1em;
+            font-size: 1.1em;
           }
 
-          i.fa.fa-angle-down {
-            font-size: 2.2em;
-            line-height: .5em;
+          .arrow {
+            display: block;
+            width: 23px;
+            margin: auto;
+
+            svg path {
+              fill: none;
+              stroke: #fff;
+              stroke-miterlimit: 10;
+              fill-rule: evenodd;
+            }
+
           }
         }
       }
@@ -271,6 +283,21 @@ body {
   color: #FFF;
   position: relative;
   z-index: 10;
+
+  .form-instructions {
+    @media screen and (min-width: $desktop) {
+      text-align: right;
+    }
+    strong.serif {
+      font-weight: 700 !important;
+      display: block;
+      @media screen and (min-width: $fullhd) {
+        display: inline;
+      }
+    }
+  }
+
+
 
   @media screen and (min-width: $tablet) {
     height: 100px;
@@ -554,6 +581,22 @@ body {
 
     .embed-responsive-16by9::before {
       padding-top: 56.25%;
+    }
+
+    ol.faq-list li {
+      padding-bottom: .5rem;
+      padding-left: .5rem;
+
+      a {
+        text-decoration: underline;
+        color: #04313B;
+      }
+    }
+
+    a.to-top {
+      font-size: .8em;
+      color: #04313B;
+      text-decoration: underline;
     }
 
     .artist-left .content {
