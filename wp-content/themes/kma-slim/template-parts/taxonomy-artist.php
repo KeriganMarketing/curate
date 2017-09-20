@@ -12,12 +12,23 @@ $headline = $artist->name;
 $subhead = '';
 
 $portfolio = new Portfolio();
-$featuredWork = $portfolio->getWork($artist->slug, array(
+$featuredWork = $portfolio->getWork( $artist->slug, [
     'posts_per_page' => 1,
-) );
+] );
 $work = $portfolio->getWork($artist->slug);
 
-$photoInfo = pathinfo($featuredWork[0]['photo']);
+$profilePhoto = $portfolio->getWork( $artist->slug, [
+	'posts_per_page' => 1,
+	'meta_query'     => [
+		[
+			'key'     => 'work_details_feature_on_home_page',
+			'value'   => 'on',
+			'compare' => '='
+		]
+	]
+] );
+
+$photoInfo = pathinfo($profilePhoto[0]['photo']);
 $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'];
 
 //echo '<pre>',print_r($artist),'</pre>';
