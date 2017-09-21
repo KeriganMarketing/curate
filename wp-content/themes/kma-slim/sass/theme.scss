@@ -456,7 +456,7 @@ body {
   }
 
   .artist-thumb.no-roll {
-    display: block;
+    display: inline-block;
 
     .caption-box {
       display: flex;
@@ -504,14 +504,16 @@ body {
           font-weight: bold;
         }
       }
-    }
-    .artist-thumb.no-roll:hover {
 
-      figure {
-        display: block;
+      .artist-thumb.no-roll:hover {
+
+        figure {
+          display: inline-block;
+        }
+
       }
-
     }
+
   }
 
   .artist-thumb.blank {
