@@ -455,6 +455,27 @@ body {
 
   }
 
+  .artist-thumb.no-roll {
+    display: block;
+
+    .caption-box {
+      display: flex;
+      justify-content: space-between;
+      background-color: #dadfe3;
+
+      .artist-name {
+        font-weight:700 !important;
+        padding:.5rem .5rem .5rem .75rem;
+        margin:0;
+      }
+
+      .button.roll-thumb-link {
+        height: auto;
+      }
+    }
+
+  }
+
   @media screen and (min-width: $desktop) {
     .artist-thumb {
       .roll-box {
@@ -483,6 +504,13 @@ body {
           font-weight: bold;
         }
       }
+    }
+    .artist-thumb.no-roll:hover {
+
+      figure {
+        display: block;
+      }
+
     }
   }
 

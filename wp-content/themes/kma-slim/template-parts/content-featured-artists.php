@@ -39,16 +39,16 @@ $portfolio = new Portfolio();
                             $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'];
 
                              ?>
-                            <div class="column artist-thumb <?php echo $num; ?>">
-                                <div class="roll-box">
-                                    <p class="artist-name serif"><?php echo str_replace( ' ', '<br>', $artist->name ); ?></p>
-                                    <a href="<?php echo $work[0]['link']; ?>" class="button is-info roll-thumb-link">view</a>
-                                </div>
+                            <div class="column artist-thumb no-roll <?php echo $num; ?>">
                                 <figure class="artist-thumb-container is-1by1">
                                     <a href="<?php echo $work[0]['link']; ?>">
                                         <img src="<?php echo $newPhoto; ?>" alt="<?php echo $work[0]['name'] . ': ' . $artist->name; ?>">
                                     </a>
                                 </figure>
+                                <div class="caption-box">
+                                    <p class="artist-name serif"><?php echo $artist->name; ?></p>
+                                    <a href="<?php echo $work[0]['link']; ?>" class="button is-info roll-thumb-link">view</a>
+                                </div>
                             </div>
                             <?php
 
