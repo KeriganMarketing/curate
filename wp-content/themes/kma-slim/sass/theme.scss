@@ -467,14 +467,12 @@ body {
         font-weight:700 !important;
         padding:.5rem .5rem .5rem .75rem;
         margin:0;
+        text-align: center;
       }
 
       .button.roll-thumb-link {
         height: auto;
         display: none;
-        @media screen and (min-width: $tablet) {
-          display: inline-flex;
-        }
       }
     }
 
@@ -508,16 +506,14 @@ body {
           font-weight: bold;
         }
       }
-
-      .artist-thumb.no-roll:hover {
-
-        figure {
-          display: inline-block;
-        }
-
-      }
     }
+    .artist-thumb.no-roll:hover {
 
+      figure {
+        display: flex !important;
+      }
+
+    }
   }
 
   .artist-thumb.blank {
