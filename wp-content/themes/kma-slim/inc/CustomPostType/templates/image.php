@@ -12,6 +12,7 @@
         </td>
     </tr>
 </table>
+
 <script>
     jQuery(document).ready(function($){
 

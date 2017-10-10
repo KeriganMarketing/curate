@@ -42,6 +42,8 @@ class Portfolio {
 	    $work->addMetaBox( 'Work Details', [
 		    'Photo File'           => 'image',
 		    'Feature on Home page' => 'boolean',
+            'Size'                 => 'text',
+            'Price'                => 'text'
 	    ] );
 
 	    $work->addMetaBox( 'Long Description', [
@@ -185,12 +187,14 @@ class Portfolio {
         $resultArray = [];
         foreach ( $results as $item ){
 
-        	$taxonomies = get_the_terms($item, artist);
+        	$taxonomies = get_the_terms($item, 'artist');
 
 	        array_push( $resultArray, [
 		        'id'          => ( isset( $item->ID ) ? $item->ID : null ),
 		        'name'        => ( isset( $item->post_title ) ? $item->post_title : null ),
 		        'slug'        => ( isset( $item->post_name ) ? $item->post_name : null ),
+                'size'        => ( isset( $item->work_details_size ) ? $item->work_details_size : null ),
+                'price'       => ( isset( $item->work_details_price ) ? $item->work_details_price : null ),
 		        'photo'       => ( isset( $item->work_details_photo_file ) ? $item->work_details_photo_file : null ),
 		        'author'      => $taxonomies[0]->name,
 		        'featured'    => ( isset( $item->work_details_feature_on_home_page ) ? $item->work_details_feature_on_home_page : null ),
