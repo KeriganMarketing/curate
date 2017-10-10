@@ -213,6 +213,7 @@ class CustomPostType
         $fieldIdName  = $this->uglify($data['id']) . '_' . $this->uglify($label);
         $templateFile = $this->dir . '/templates/' . $type . '.php';
         $fieldValue = (isset($meta[$fieldIdName][0]) ? $meta[$fieldIdName][0] : null);
+
         if (file_exists($templateFile)) {
             $field = file_get_contents($templateFile);
 
@@ -259,7 +260,7 @@ class CustomPostType
                     function ($post, $data) {
                         global $post;
 
-                        wp_nonce_field(plugin_basename(__FILE__), 'custom_post_type');
+                        //wp_nonce_field(plugin_basename(__FILE__), 'custom_post_type');
                         $customFields = $data['args'][0];
                         $meta         = get_post_custom($post->ID);
 
@@ -321,16 +322,21 @@ class CustomPostType
 
         add_action('save_post',
             function () use ($postTypeName) {
+
+//                print_r($_POST);
+
                 // Deny the WordPress autosave function
                 if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
                     return;
                 }
 
-                $nonce = (isset($_POST['custom_post_type']) ? $_POST['custom_post_type'] : null);
+//                $nonce = (isset($_POST['custom_post_type']) ? $_POST['custom_post_type'] : null);
+//
+//                if ( ! wp_verify_nonce($nonce, plugin_basename(__FILE__))) {
+//                    return;
+//                }
 
-                if ( ! wp_verify_nonce($nonce, plugin_basename(__FILE__))) {
-                    return;
-                }
+
 
                 global $post;
 

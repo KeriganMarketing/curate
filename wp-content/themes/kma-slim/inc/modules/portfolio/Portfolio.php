@@ -43,7 +43,7 @@ class Portfolio {
 		    'Photo File'           => 'image',
 		    'Feature on Home page' => 'boolean',
             'Size'                 => 'text',
-            'Price'                => 'text'
+            'Price'                => 'text',
 	    ] );
 
 	    $work->addMetaBox( 'Long Description', [
@@ -71,6 +71,8 @@ class Portfolio {
 	    $featured->addMetaBox( 'Work Details', [
 		    'Photo File'           => 'image',
 		    'Feature on Home page' => 'boolean',
+            'Size'                 => 'text',
+            'Price'                => 'text',
 	    ] );
 
 	    $featured->addMetaBox( 'Long Description', [
