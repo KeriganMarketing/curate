@@ -42,6 +42,7 @@ class Portfolio {
 	    $work->addMetaBox( 'Work Details', [
 		    'Photo File'           => 'image',
 		    'Feature on Home page' => 'boolean',
+            'Medium'               => 'text',
             'Size'                 => 'text',
             'Price'                => 'text',
 	    ] );
@@ -71,6 +72,7 @@ class Portfolio {
 	    $featured->addMetaBox( 'Work Details', [
 		    'Photo File'           => 'image',
 		    'Feature on Home page' => 'boolean',
+            'Medium'               => 'text',
             'Size'                 => 'text',
             'Price'                => 'text',
 	    ] );
@@ -195,6 +197,7 @@ class Portfolio {
 		        'id'          => ( isset( $item->ID ) ? $item->ID : null ),
 		        'name'        => ( isset( $item->post_title ) ? $item->post_title : null ),
 		        'slug'        => ( isset( $item->post_name ) ? $item->post_name : null ),
+                'medium'      => ( isset( $item->work_details_medium ) ? $item->work_details_medium : null ),
                 'size'        => ( isset( $item->work_details_size ) ? $item->work_details_size : null ),
                 'price'       => ( isset( $item->work_details_price ) ? $item->work_details_price : null ),
 		        'photo'       => ( isset( $item->work_details_photo_file ) ? $item->work_details_photo_file : null ),

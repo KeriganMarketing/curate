@@ -96,7 +96,10 @@ $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoI
                         </div>
                         <div class="caption-container">
                             <h3 class="serif">'.$slide['name'].'</h3>
-                            <p>'.$artist->name.' | '.$slide['size'].' | $'.number_format($slide['price']).'</p>
+                            <p>'.$artist->name.
+                            ( $slide['medium']!='' ? ' | '.$slide['medium'] : '') .
+                            ( $slide['size']!='' ? ' | '.$slide['size'] : '') .
+                            ' | $'.number_format($slide['price']).'</p>
                             <p><a class="button is-secondary" href="mailto:curate30a@gmail.com?subject=Please send information regarding '.$slide['name'].' by '.$artist->name.'" >request information</a></p>
                         </div>
                     </div>
