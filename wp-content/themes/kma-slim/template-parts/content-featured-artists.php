@@ -15,7 +15,8 @@ $portfolio = new Portfolio();
             <div class="container">
                 <div class="entry-content all-artists one-column">
                     <h1 class="title is-1"><?php echo $headline; ?></h1>
-                    <?php echo ($subhead!='' ? '<p class="subtitle">'.$subhead.'</p>' : null); ?>
+                    <?php echo ($subhead!='' ? '<p class="subtitle">'.$subhead.'</p>' : null);
+                    the_content();?>
                     <div class="columns is-multiline">
 
                         <?php
