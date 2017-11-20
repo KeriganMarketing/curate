@@ -223,12 +223,12 @@ class CustomPostType
                 $field = str_replace('{field-value}', $fieldValue, $field);
             } else {
                 $editor = wp_editor($fieldValue, $fieldIdName,
-                    array(
-                        'quicktags'     => array('buttons' => 'em,strong,link'),
+                    [
+                        'quicktags'     => ['buttons' => 'em,strong,link'],
                         'textarea_name' => 'custom_meta[' . $fieldIdName . ']',
                         'quicktags'     => true,
                         'tinymce'       => true
-                    )
+                    ]
                 );
                 $field  = str_replace('{wysiwyg-editor}', $editor, $field);
             }
@@ -303,9 +303,9 @@ class CustomPostType
 
         add_filter('wp_terms_checklist_args', function ($args) use ($tax) {
             if ( ! empty($args['taxonomy']) && $args['taxonomy'] === $tax) {
-                if (empty($args['walker']) || is_a($args['walker'], 'Walker')) { // Don't override 3rd party walkers.
+                if (empty($args['walker']) || is_a($args['walker'], $tax . 'Walker')) { // Don't override 3rd party walkers.
 
-                    include(wp_normalize_path(get_template_directory() . '/inc/Layout_Walker.php'));
+                    require_once(wp_normalize_path(get_template_directory() . '/inc/Layout_Walker.php'));
                     $args['walker'] = new Layout_Walker_Category_Radio_Checklist;
 
                 }
@@ -314,6 +314,19 @@ class CustomPostType
             return $args;
         });
 
+    }
+
+    public function createTaxonomyMeta($taxonomy, $args = [])
+    {
+        $defaultArgs = [
+            'label' => 'field',
+            'type' => 'text'
+        ];
+
+        $args = array_merge($defaultArgs, $args);
+
+        $taxField = new TaxonomyMeta($taxonomy);
+        $taxField->createTaxonomyField($args['label'], $args['type']);
     }
 
     public function save()
