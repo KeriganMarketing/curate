@@ -10,6 +10,7 @@ require('vendor/autoload.php');
 require('inc/bulma_navwalker.php');
 require('inc/bulma_pagination.php');
 require('inc/CustomPostType/CustomPostType.php');
+require('inc/CustomPostType/TaxonomyMeta.php');
 include('inc/modules/social/sociallinks.php');
 include('inc/modules/layouts/Layouts.php');
 include('inc/modules/portfolio/Portfolio.php');

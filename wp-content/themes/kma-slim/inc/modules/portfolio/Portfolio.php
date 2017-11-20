@@ -38,6 +38,10 @@ class Portfolio {
 
 	    $work->addTaxonomy( 'Artist' );
 	    $work->convertCheckToRadio( 'artist' );
+        $work->createTaxonomyMeta( 'artist', [ 'label' => 'Artist Photo', 'type' => 'image' ] );
+
+        $work->addTaxonomy( 'Work Type' );
+        $work->convertCheckToRadio( 'work_type' );
 
 	    $work->addMetaBox( 'Work Details', [
 		    'Photo File'           => 'image',
@@ -90,6 +94,7 @@ class Portfolio {
 	    add_filter('manage_work_posts_columns',
             function ($defaults) {
                 $defaults = [
+                    'cb'         => '',
                     'title'      => 'Title',
                     'artist'     => 'Artist',
                     'featured'   => 'Featured',
@@ -247,6 +252,48 @@ class Portfolio {
         }
 
         return $artists;
+
+    }
+
+    public function getWorkTypes($artist){
+
+        $artistTypes = [];
+
+        $types = get_terms([
+            'taxonomy'   => 'work_type',
+            'hide_empty' => true,
+        ]);
+
+        $i = 0;
+
+        foreach($types as $type){
+
+            $work = $this->getWork($artist->slug, [
+                'posts_per_page' => 1,
+                'tax_query' => [
+                    'relation' => 'AND',
+                    [
+                        'taxonomy' => 'work_type',
+                        'field'    => 'slug',
+                        'terms' => $type->slug,
+                        'include_children' => false
+                    ],
+                    [
+                        'taxonomy' => 'artist',
+                        'field'    => 'slug',
+                        'terms' => $artist->slug,
+                        'include_children' => false
+                    ]
+                ]
+            ] );
+
+            $artistTypes[$i]['taxonomy'] = $type;
+            $artistTypes[$i]['work'] = count($work) > 0 ? $work[0] : [];
+
+            $i++;
+        }
+
+        return $artistTypes;
 
     }
 
