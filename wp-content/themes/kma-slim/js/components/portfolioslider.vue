@@ -18,7 +18,6 @@
         },
 
         created(){
-
             this.slides = this.$children;
             window.addEventListener('scroll', this.handleScroll);
         },

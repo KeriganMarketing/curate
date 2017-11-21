@@ -18,7 +18,7 @@ $portfolio = new Portfolio();
 $profilePhoto = get_term_meta( $artist->term_id, 'artist_artist_photo', true );
 if($profilePhoto != ''){
     $photoInfo = pathinfo($profilePhoto);
-    $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'];
+    $artistPhoto  = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'];
 }else{
     $profilePhoto = $portfolio->getWork( $artist->slug, [
         'posts_per_page' => 1,
@@ -29,11 +29,15 @@ if($profilePhoto != ''){
                 'compare' => '='
             ]
         ]
-    ] );
+    ] )[0];
+
+    $photoInfo = pathinfo($profilePhoto['photo']);
+    $artistPhoto  = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'];
 }
 
+
 $workTypes = $portfolio->getWorkTypes($artist);
-//echo '<pre>',print_r($workTypes),'</pre>';
+//echo '<pre>',print_r($profilePhoto),'</pre>';
 
 ?>
 <div id="mid" >
@@ -49,7 +53,7 @@ $workTypes = $portfolio->getWorkTypes($artist);
                                     <div class="column is-12-mobile is-4-desktop">
                                         <figure class="artist-profile" >
                                             <p class="image is-150x150">
-                                                <img src="<?php echo $newPhoto; ?>" alt="<?php echo $featuredWork[0]['name'] . ': ' . $artist->name; ?>">
+                                                <img src="<?php echo $artistPhoto; ?>" alt="<?php echo $artist->name; ?>">
                                             </p>
                                         </figure>
                                     </div>
@@ -69,8 +73,6 @@ $workTypes = $portfolio->getWorkTypes($artist);
                                 if(isset($type['work']['photo'])) {
                                     $photoInfo = pathinfo($type['work']['photo']);
                                     $newPhoto  = $photoInfo['dirname'] . '/' . $photoInfo['filename'] . '-300x300.' . $photoInfo['extension'];
-                                }
-
                                 ?>
                                 <div class="column is-6-mobile is-12-tablet <?php echo $num; ?>">
                                     <figure class="artist-thumb-container is-1by1">
@@ -82,7 +84,10 @@ $workTypes = $portfolio->getWorkTypes($artist);
                                         <p class="artist-name serif"><?php echo $type['taxonomy']->name; ?></p>
                                     </div>
                                 </div>
-                            <?php } ?>
+                            <?php
+                                }
+                            }
+                            ?>
                             </div>
                         </div>
                     </div>
@@ -141,7 +146,7 @@ $workTypes = $portfolio->getWorkTypes($artist);
                                 ?>
                                 <div class="column is-3 artist-thumb no-roll <?php echo $num; ?>">
                                     <figure class="artist-thumb-container is-1by1">
-                                        <a @click="$emit('toggleModal', 'workViewer', <?php echo $num; ?>)" >
+                                        <a @click="$emit('toggleModal', 'workViewer',<?php echo $num; ?>)" >
                                             <img src="<?php echo $newPhoto; ?>" alt="<?php echo $piece['name'] . ': ' . $artist->name; ?>">
                                         </a>
                                     </figure>

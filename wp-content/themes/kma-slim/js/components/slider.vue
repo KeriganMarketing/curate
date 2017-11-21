@@ -4,7 +4,7 @@
             <i class="fa fa-angle-left is-large" aria-hidden="true"></i>
         </div>
 
-        <div class="work" @mouseover="togglePause" @mouseleave="togglePause">
+        <div class="work" >
             <slot></slot>
         </div>
 
@@ -25,17 +25,9 @@
             };
         },
 
-        created(){
-
+        mounted() {
             this.slides = this.$children;
-//            setInterval(() => { if(this.paused === false){ this.nextSlide() } }, 6000);
-
-            this.$root.$on('toggleModal', function (modal,keyframe) {
-                this.slides[this.activeSlide]._data.isActive = false;
-                this.activeSlide = number;
-                this.slides[this.activeSlide]._data.isActive = true;
-            });
-
+            this.toSlide(this.$root.activeSlide);
         },
 
         methods: {
@@ -60,17 +52,16 @@
 
             clickNext(){
                 this.nextSlide();
-                this.togglePause();
             },
 
             clickPrev(){
                 this.prevSlide();
-                this.togglePause();
             },
 
-            togglePause(){
-                this.paused = !this.paused;
-//                console.log('paused: ' + this.paused);
+            toSlide( keyframe ){
+                this.slides[this.activeSlide]._data.isActive = false;
+                this.activeSlide = keyframe;
+                this.slides[this.activeSlide]._data.isActive = true;
             }
 
         }

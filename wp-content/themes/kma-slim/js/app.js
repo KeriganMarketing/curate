@@ -33,7 +33,8 @@ var app = new Vue({
         isOpen: false,
         modalOpen: '',
         copyright: 'Curate.',
-        showSignup: true
+        showSignup: true,
+        activeSlide: 0
     },
 
     methods: {
@@ -41,6 +42,10 @@ var app = new Vue({
         toggleMenu(){
             this.isOpen = !this.isOpen;
         },
+
+        sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
 
     },
 

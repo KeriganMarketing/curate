@@ -18,18 +18,22 @@
         methods: {
             toggleModal(){
                 this.showModal = !this.showModal;
-                if(this.$parent.modalOpen !== ''){
-                    this.$parent.modalOpen = ''
+                if(this.$root.modalOpen !== ''){
+                    this.$root.modalOpen = ''
                 }
             }
+
         },
         mounted() {
-            //console.log('Component mounted.');
+            console.log('Component mounted.');
+        },
+        created(){
+            console.log('Component created.');
 
-            this.$parent.$on('toggleModal', function (modal,keyframe) {
+            this.$root.$on('toggleModal', function (modal, keyframe) {
                 this.modalOpen = modal;
+                this.activeSlide = keyframe;
             });
-
         }
     }
 </script>
