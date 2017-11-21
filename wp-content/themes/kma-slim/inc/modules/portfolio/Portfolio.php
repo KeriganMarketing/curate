@@ -99,6 +99,7 @@ class Portfolio {
                     'artist'     => 'Artist',
                     'featured'   => 'Featured',
                     'work_photo' => 'Photo',
+                    'work_type'  => 'Type',
                     'date'       => 'Date'
                 ];
 
@@ -109,6 +110,11 @@ class Portfolio {
             switch ($column_name) {
                 case 'artist':
                     $term = wp_get_object_terms($post_ID, 'artist');
+                    echo(isset($term[0]->name) ? $term[0]->name : null);
+                    break;
+
+                case 'work_type':
+                    $term = wp_get_object_terms($post_ID, 'work_type');
                     echo(isset($term[0]->name) ? $term[0]->name : null);
                     break;
 
@@ -149,6 +155,27 @@ class Portfolio {
                         '<option value="%s"%s>%s</option>',
                         $value->slug,
                         $value->slug == $current_v ? ' selected="selected"' : '',
+                        $value->name
+                    );
+                }
+
+                echo '</select>';
+
+                $types = get_terms([
+                    'taxonomy'   => 'work_type',
+                    'hide_empty' => false,
+                ]);
+
+                echo '<select name="work_type">
+                    <option value="">All Types</option>';
+
+                $current_v2 = isset($_GET['work_type']) ? $_GET['work_type'] : '';
+                foreach ($types as $label => $value) {
+                    printf
+                    (
+                        '<option value="%s"%s>%s</option>',
+                        $value->slug,
+                        $value->slug == $current_v2 ? ' selected="selected"' : '',
                         $value->name
                     );
                 }
