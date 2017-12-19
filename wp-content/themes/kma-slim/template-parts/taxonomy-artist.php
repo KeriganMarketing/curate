@@ -137,7 +137,7 @@ $workTypes = $portfolio->getWorkTypes($artist);
                                             <p>'.$artist->name.
                                                  ( $piece['medium']!='' ? ' | '.$piece['medium'] : '') .
                                                  ( $piece['size']!='' ? ' | '.$piece['size'] : '') .
-                                                 ( $piece['price']!='' && is_numeric ($piece['price']) ? ' | $'.number_format($piece['price']) : '') .
+                                                 //( $piece['price']!='' && is_numeric ($piece['price']) ? ' | $'.number_format($piece['price']) : '') .
                                                  '</p>
                                             <p><a class="button is-secondary" href="mailto:curate30a@gmail.com?subject=Please send information regarding '.$piece['name'].' by '.$artist->name.'" >request information</a></p>
                                         </div>
@@ -148,6 +148,7 @@ $workTypes = $portfolio->getWorkTypes($artist);
                                     <figure class="artist-thumb-container is-1by1">
                                         <a @click="$emit('toggleModal', 'workViewer',<?php echo $num; ?>)" >
                                             <img src="<?php echo $newPhoto; ?>" alt="<?php echo $piece['name'] . ': ' . $artist->name; ?>">
+                                            <span class="piece-name"><?php echo $piece['name']; ?></span>
                                         </a>
                                     </figure>
                                 </div>
