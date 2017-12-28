@@ -37,7 +37,12 @@ $portfolio = new Portfolio();
                             ) );
 
                             $photoInfo = pathinfo($work[0]['photo']);
-                            $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'];
+
+                            if(!file_exists($photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'])){
+                                $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'];
+                            }else{
+                                $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-170x170.'.$photoInfo['extension'];
+                            }
 
                              ?>
                             <div class="column artist-thumb no-roll <?php echo $num; ?>">

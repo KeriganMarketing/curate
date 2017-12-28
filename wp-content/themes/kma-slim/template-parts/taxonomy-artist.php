@@ -18,7 +18,11 @@ $portfolio = new Portfolio();
 $profilePhoto = get_term_meta( $artist->term_id, 'artist_artist_photo', true );
 if($profilePhoto != ''){
     $photoInfo = pathinfo($profilePhoto);
-    $artistPhoto  = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'];
+    if(!file_exists($photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'])){
+        $artistPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'];
+    }else{
+        $artistPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-170x170.'.$photoInfo['extension'];
+    }
 }else{
     $profilePhoto = $portfolio->getWork( $artist->slug, [
         'posts_per_page' => 1,
@@ -72,7 +76,11 @@ $workTypes = $portfolio->getWorkTypes($artist);
 
                                 if(isset($type['work']['photo'])) {
                                     $photoInfo = pathinfo($type['work']['photo']);
-                                    $newPhoto  = $photoInfo['dirname'] . '/' . $photoInfo['filename'] . '-300x300.' . $photoInfo['extension'];
+                                    if(!file_exists($photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'])){
+                                        $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'];
+                                    }else{
+                                        $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-170x170.'.$photoInfo['extension'];
+                                    }
                                 ?>
                                 <div class="column is-6-mobile is-12-tablet <?php echo $num; ?>">
                                     <figure class="artist-thumb-container is-1by1">
@@ -124,8 +132,11 @@ $workTypes = $portfolio->getWorkTypes($artist);
                             $i = 0;
                             foreach($work as $num => $piece){
                                 $photoInfo = pathinfo($piece['photo']);
-                                $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-170x170.'.$photoInfo['extension'];
-                                //$newPhoto = $piece['photo'];
+                                if(!file_exists($photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'])){
+                                    $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'];
+                                }else{
+                                    $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-170x170.'.$photoInfo['extension'];
+                                }
 
                                 $modalContent .= '<slide '.( $i==0 ? ':active="true"' : '' ).'>
                                     <div class="content is-centered">
