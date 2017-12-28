@@ -772,12 +772,12 @@ body {
 
     .image-container {
       height: calc(100vh - 160px);
-      width: 80vh;
       display: flex;
       align-items: center;
       justify-content: center;
 
       @media screen and (min-width: $desktop) {
+        width: 80vh;
         overflow: hidden;
         overflow: scroll;
       }
