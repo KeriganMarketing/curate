@@ -18,7 +18,7 @@ $portfolio = new Portfolio();
 $profilePhoto = get_term_meta( $artist->term_id, 'artist_artist_photo', true );
 if($profilePhoto != ''){
     $photoInfo = pathinfo($profilePhoto);
-    if(!file_exists($photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'])){
+    if(file_exists($photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'])){
         $artistPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'];
     }else{
         $artistPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-170x170.'.$photoInfo['extension'];
@@ -76,7 +76,7 @@ $workTypes = $portfolio->getWorkTypes($artist);
 
                                 if(isset($type['work']['photo'])) {
                                     $photoInfo = pathinfo($type['work']['photo']);
-                                    if(!file_exists($photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'])){
+                                    if(file_exists($photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'])){
                                         $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'];
                                     }else{
                                         $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-170x170.'.$photoInfo['extension'];
@@ -132,7 +132,7 @@ $workTypes = $portfolio->getWorkTypes($artist);
                             $i = 0;
                             foreach($work as $num => $piece){
                                 $photoInfo = pathinfo($piece['photo']);
-                                if(!file_exists($photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'])){
+                                if(file_exists($photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'])){
                                     $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'];
                                 }else{
                                     $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-170x170.'.$photoInfo['extension'];
