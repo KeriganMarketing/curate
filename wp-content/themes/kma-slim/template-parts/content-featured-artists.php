@@ -6,8 +6,6 @@
  * @version 1.2
  */
 
-clearstatcache();
-
 $headline = ($post->page_information_headline != '' ? $post->page_information_headline : $post->post_title);
 $subhead = ($post->page_information_subhead != '' ? $post->page_information_subhead : '');
 $portfolio = new Portfolio();

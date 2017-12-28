@@ -5,7 +5,6 @@
  * @since 1.0
  * @version 1.2
  */
-clearstatcache();
 
 $artist = get_term_by( 'slug', get_query_var( 'term' ), 'artist' );
 $type = isset($_GET['type']) ? $_GET['type'] : null;
