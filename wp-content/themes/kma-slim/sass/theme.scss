@@ -773,11 +773,11 @@ body {
     }
 
     .image-container {
-      height: 80vh;
+      height: calc(100vh - 160px);
       width: 80vh;
       overflow: scroll;
-      align-items: center;
       display: flex;
+      align-items: center;
       justify-content: center;
 
       @media screen and (min-width: $desktop) {
@@ -785,8 +785,11 @@ body {
       }
     }
     .caption-container {
-      height: 20vh;
+      height: 160px;
       padding: .5rem;
+      justify-content: center;
+      display: flex;
+      flex-direction: column;
     }
     .modal-content {
       margin: 0;
