@@ -539,16 +539,16 @@ body {
       display: block;
       position: relative;
       z-index: auto;
-      margin-top: -40px;
+      //margin-top: -40px;
       height:40px;
       left:0;
       right:0;
       bottom:0;
       padding:1.15rem .5rem;
-      background-color: rgba(20,20,20,.4);
-      color:#FFF;
+      background-color: #dadfe3;
+      color:#4a4a4a;
       text-align: center;
-      visibility: hidden;
+      //visibility: hidden;
     }
     a:hover .piece-name {
       visibility: visible;
@@ -778,8 +778,7 @@ body {
 
       @media screen and (min-width: $desktop) {
         width: 80vh;
-        overflow: hidden;
-        overflow: scroll;
+        overflow: visible;
       }
     }
     .caption-container {
