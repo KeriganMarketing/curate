@@ -769,22 +769,11 @@ body {
           max-height: 100%;
         }
 
-        @media screen and (min-width: $widescreen) {
-          min-width: 750px;
-          max-height: 100%;
-        }
-
-        @media screen and (min-width: $fullhd) {
-          max-width: 100%;
-          min-width: inherit;
-          width: auto;
-          max-height: 785px;
-        }
       }
     }
 
     .image-container {
-      height: 86vh;
+      height: 80vh;
       width: 80vh;
       overflow: scroll;
       align-items: center;
@@ -796,7 +785,7 @@ body {
       }
     }
     .caption-container {
-      height: 14vh;
+      height: 20vh;
     }
     .modal-content {
       margin: 0;
