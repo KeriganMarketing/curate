@@ -17,13 +17,13 @@ $portfolio = new Portfolio();
                     <h1 class="title is-1"><?php echo $headline; ?></h1>
                     <?php echo ($subhead!='' ? '<p class="subtitle">'.$subhead.'</p>' : null);
                     the_content();?>
-                    <div class="columns is-multiline">
+                    <div class="columns is-multiline is-centered">
 
                         <?php
 
                         $artists = $portfolio->getArtists();
                         $i = 1;
-                        foreach($artists as $artist){
+                        foreach($artists as $num => $artist){
 
                             $work = $portfolio->getWork($artist->slug, array(
                                 'posts_per_page' => 1,
@@ -40,7 +40,7 @@ $portfolio = new Portfolio();
                             $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'];
 
                              ?>
-                            <div class="column artist-thumb no-roll <?php echo $num; ?>">
+                            <div class="column is-3 artist-thumb no-roll <?php echo $num; ?>">
                                 <figure class="artist-thumb-container is-1by1">
                                     <a href="<?php echo $work[0]['link']; ?>">
                                         <img src="<?php echo $newPhoto; ?>" alt="<?php echo $work[0]['name'] . ': ' . $artist->name; ?>">
