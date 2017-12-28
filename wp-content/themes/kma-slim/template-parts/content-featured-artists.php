@@ -40,7 +40,7 @@ $portfolio = new Portfolio();
                             $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'];
 
                              ?>
-                            <div class="column is-3 artist-thumb no-roll <?php echo $num; ?>">
+                            <div class="column artist-thumb no-roll <?php echo $num; ?>">
                                 <figure class="artist-thumb-container is-1by1">
                                     <a href="<?php echo $work[0]['link']; ?>">
                                         <img src="<?php echo $newPhoto; ?>" alt="<?php echo $work[0]['name'] . ': ' . $artist->name; ?>">
