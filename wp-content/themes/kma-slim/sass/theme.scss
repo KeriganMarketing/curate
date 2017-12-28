@@ -773,13 +773,13 @@ body {
     .image-container {
       height: calc(100vh - 160px);
       width: 80vh;
-      overflow: scroll;
       display: flex;
       align-items: center;
       justify-content: center;
 
       @media screen and (min-width: $desktop) {
         overflow: hidden;
+        overflow: scroll;
       }
     }
     .caption-container {
