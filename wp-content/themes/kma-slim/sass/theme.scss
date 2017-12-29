@@ -539,16 +539,16 @@ body {
       display: block;
       position: relative;
       z-index: auto;
-      //margin-top: -40px;
-      height:40px;
-      left:0;
-      right:0;
-      bottom:0;
-      padding:1.15rem .5rem;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 1rem .25rem;
       background-color: #dadfe3;
-      color:#4a4a4a;
+      color: #4a4a4a;
       text-align: center;
-      //visibility: hidden;
+      word-wrap: normal;
+      min-height: 40px;
+      line-height: 1rem;
     }
     a:hover .piece-name {
       visibility: visible;
