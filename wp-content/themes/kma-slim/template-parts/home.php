@@ -28,7 +28,7 @@ $portfolio = new Portfolio();
             <div id="about-us" class="about-us section" >
                 <div class="center-vertical columns is-multiline">
                     <div class="column is-12-mobile is-12-tablet is-6-desktop is-4-fullhd is-second-desktop is-centered">
-                        <h2><?php echo $headline ?></h2>
+                        <h1><?php echo $headline ?></h1>
                         <div class="content-justified">
                             <?php the_content() ?>
                         </div>
