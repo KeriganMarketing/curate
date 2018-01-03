@@ -4,7 +4,7 @@
  * Plugin Name: JCH Optimize
  * Plugin URI: http://www.jch-optimize.net/
  * Description: This plugin aggregates and minifies CSS and Javascript files for optimized page download
- * Version: 2.1.0
+ * Version: 2.2.1
  * Author: Samuel Marshall
  * License: GNU/GPLv3
  * Text Domain: jch-optimize
@@ -42,7 +42,7 @@ define('JCH_PLUGIN_DIR', plugin_dir_path(__FILE__));
 
 if (!defined('JCH_VERSION'))
 {
-        define('JCH_VERSION', '2.1.0');
+        define('JCH_VERSION', '2.2.1');
 }
 
 require_once(JCH_PLUGIN_DIR . 'jchoptimize/loader.php');
@@ -86,6 +86,9 @@ else
                 add_action('init', 'jch_buffer_start', 0);
                 add_action('template_redirect', 'jch_buffer_start', 0);
                 add_action('shutdown', 'jch_buffer_end', -1);
+
+		//Disable NextGen Resource Manager; incompatible with plugin
+		//add_filter( 'run_ngg_resource_manager', '__return_false' );
         }
 }
 
@@ -197,6 +200,7 @@ function jch_optimize_activate()
 PHPCODE;
 
         $wp_filesystem->put_contents($file, $code, FS_CHMOD_FILE);
+	JchOptimizeAdmin::leverageBrowserCaching();
 }
 
 register_activation_hook(__FILE__, 'jch_optimize_activate');
@@ -206,6 +210,7 @@ function jch_optimize_uninstall()
         delete_option('jch_options');
 
         JchPlatformCache::deleteCache();
+	JchOptimizeAdmin::cleanHtaccess();
 }
 
 register_uninstall_hook(__FILE__, 'jch_optimize_uninstall');

@@ -1,8 +1,8 @@
 === JCH Optimize ===
 Contributors: codealfa
 Tags: improve performance, optimize download speed, minify, aggregate, pagespeed, gtmetrix, webpagetest, yslow, minification, css, javascript, html, lazy load, seo, search engine optimization, website optimization, download speed, speed up website, optimize css delivery, render blocking, css sprite, gzip, combine css, combine javascript, cdn, content delivery network, website performance, website speed, fast download, web performance, website analysis, speed up download, minimize http requests, reduce bandwidth, caching, cache, speed up wordpress
-Tested up to: 4.7.4
-Stable tag: 2.1.0
+Tested up to: 4.8.3
+Stable tag: 2.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -55,6 +55,15 @@ The combined files are accessed by the browser via a jscss.php file in the `/wp-
 Simply deactivate or uninstall the plugin to reverse any changes it has made. The plugin doesn't modify any existing file or code but merely manipulates the HTML before it is sent to the brower. Any apparent persistent change after the plugin is deactivated is due to caching so ensure to flush all your WordPress, third party or browser cache.
 
 == Changelog ==
+
+= 2.2.1 =
+* Fixed bug with exclude settings not being saved
+
+= 2.2.0 =
+* Expired cache flushed daily
+* Codes added to .htaccess file to gzip compress files
+* Major improvement to Optimize Image feature handling more images much more efficiently (PRO VERSION)
+* Various bug fixes and improvement
 
 = 2.1.0 =
 * Ability to exclude files while maintaining original execution order for all Automatic Settings added.

@@ -155,7 +155,7 @@ class JchOptimizeParser extends JchOptimizeBase
                         }, $aExcludeScript);
 
                         $aCBArgs['excludes']['js']         = array_merge($aExcludeJs, $aExJsComp,
-                                                                         array('.com/maps/api/js', '.com/jsapi', '.com/uds', 'typekit.net','cdn.ampproject.org', 'googleadservices.com/pagead/conversion.js'),
+                                                                         array('.com/maps/api/js', '.com/jsapi', '.com/uds', 'typekit.net','cdn.ampproject.org', 'googleadservices.com/pagead/conversion'),
 
 
 
@@ -323,11 +323,6 @@ class JchOptimizeParser extends JchOptimizeBase
 
                 switch (true)
                 {
-			case (($sUrl != '') && $this->isDuplicated($sUrl)):
-                        //case (($sUrl != '') && !empty($aRemovals[$sType]) && JchOptimizeHelper::findExcludes($aRemovals[$sType], $sUrl)):
-
-                                return '';
-
 			//These cases are being excluded without preserving execution order
                         case ($sUrl != '' && !JchOptimizeUrl::isHttpScheme($sUrl)):
 			case (!empty($sUrl) && !empty($aExcludes_ieo['js']) && JchOptimizeHelper::findExcludes($aExcludes_ieo['js'], $sUrl)):
@@ -355,6 +350,10 @@ class JchOptimizeParser extends JchOptimizeBase
 
                                 return $aMatches[0];
 
+			case (($sUrl != '') && $this->isDuplicated($sUrl)):
+
+                                return '';
+				
                         default:
                                 $return = '';
 
@@ -523,7 +522,7 @@ class JchOptimizeParser extends JchOptimizeBase
          * 
          * @return string
          */
-        protected static function ifRegex()
+        public static function ifRegex()
         {
                 return '<!--(?>-?[^-]*+)*?-->';
         }
@@ -571,7 +570,7 @@ URLREGEX;
 		$u = $this->sAttributeValueRegex;
 
 		$aRegex[0] = "(?:<script\b(?!(?>\s*+$a)*?\s*+type\s*+=\s*+(?![\"']?(?:text|application)/javascript[\"' ]))";
-		$aRegex[1] = "(?>\s*+(?!src)$a)*\s*+(?:src\s*+=\s*+[\"']?($u))?[^<>]*+>((?><?[^<]*+)*?)</script\s*+>)";
+		$aRegex[1] = "(?>\s*+(?!src)$a)*\s*+(?:src\s*+=\s*+[\"']?($u))?[^<>]*+>((?><?[^<]*+)*?)</\s*+script\s*+>)";
 
                 return $aRegex;
         }
@@ -589,7 +588,7 @@ URLREGEX;
 
 		$aRegex[0] = "(?:<link\b(?!(?>\s*+$a)*?\s*+(?:itemprop|disabled|type\s*+=\s*+(?![\"']?text/css[\"' ])|rel\s*+=\s*+(?![\"']?stylesheet[\"' ])))";
 		$aRegex[1] = "(?>\s*+$a)*?\s*+href\s*+=\s*+[\"']?($u)[^<>]*+>)";
-                $aRegex[3] = "|(?:<style\b(?:(?!(?:type\s*+=\s*+(?![\"']?text/css[\"' ]))|(?:scoped|amp))[^>])*>((?><?[^<]+)*?)</style\s*+>)";
+                $aRegex[3] = "|(?:<style\b(?:(?!(?:\stype\s*+=\s*+(?![\"']?text/css[\"' ]))|(?:scoped|amp))[^>])*>((?><?[^<]+)*?)</\s*+style\s*+>)";
 
                 return $aRegex;
         }

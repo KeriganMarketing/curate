@@ -63,7 +63,7 @@ class JchOptimizeCron
                         JchOptimizeLogger::log($ex->getMessage(), $this->params);
                 }
                 
-                JCH_DEBUG ? JchPlatformProfiler::stop('GetAdminObject', TRUE) : null;
+                JCH_DEBUG ? JchPlatformProfiler::stop('GetAdminObject', true) : null;
         }
         
         /**
@@ -73,9 +73,10 @@ class JchOptimizeCron
         {
                 JCH_DEBUG ? JchPlatformProfiler::start('GarbageCron') : null;
                 
-                $url = JchPlatformPaths::ajaxUrl('garbagecron');
-                JchOptimizeHelper::postAsync($url, $this->params, array('async' => '1'));
+               // $url = JchPlatformPaths::ajaxUrl('garbagecron');
+               // JchOptimizeHelper::postAsync($url, $this->params, array('async' => '1'));
+		JchPlatformCache::gc();
 
-                JCH_DEBUG ? JchPlatformProfiler::stop('GarbageCron', TRUE) : null;
+                JCH_DEBUG ? JchPlatformProfiler::stop('GarbageCron', true) : null;
         }
 }

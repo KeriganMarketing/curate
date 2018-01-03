@@ -87,7 +87,8 @@ class JchOptimizeBase
         {
 		$s = $headonly ? '<head' : '^';
 		
-                return "#$s(?><?[^<]*+(?:<script\b(?><?[^<]*+)*?</script\b)?)*?(?:</head\s*+>|(?=<body\b))#si";
+		return "#$s(?><?[^<]*+(?:<script\b(?><?[^<]*+)*?</\s*script\b|" . $this->ifRegex() 
+			. ")?)*?(?:</\s*head\s*+>|(?=<body\b))#si";
         }
         
         /**
@@ -134,7 +135,8 @@ class JchOptimizeBase
          */
         public function getBodyRegex()
         {
-                return '#^(?><?[^<]*+(?:<script\b[^>]*+>(?><?[^<]*+)*?</script\s*+>)?)*?(?:</head\s*+>|(?=<body\b))\K.*$#si';
+		return '#^(?><?[^<]*+(?:<script\b[^>]*+>(?><?[^<]*+)*?</\s*script\s*+>|' . $this->ifRegex() 
+		. ')?)*?(?:</\s*head\s*+>|(?=<body\b))\K.*$#si';
         }
 
 }

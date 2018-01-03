@@ -106,6 +106,8 @@ div.icon.enabled[class*="settings"] a i#toggle.on:before{
         list-style-type: none;
         padding: 10px;
         margin: 10px;
+	overflow-y: auto;
+	height:300px;
 }
 
 #optimize-log li{
@@ -113,6 +115,11 @@ div.icon.enabled[class*="settings"] a i#toggle.on:before{
 }
 
 
+#optimize-status{
+	padding: 7px;
+	font-size: 12px;
+	font-style: italic;
+}
 
 
 .collapsible h3 span{

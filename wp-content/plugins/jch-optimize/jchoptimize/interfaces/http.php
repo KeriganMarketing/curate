@@ -24,11 +24,6 @@ interface JchInterfaceHttp
 {
         /**
          * 
-         */
-        public static function getHttpAdapter();
-        
-        /**
-         * 
          * @param type $sPath
          * @param type $aPost
          */

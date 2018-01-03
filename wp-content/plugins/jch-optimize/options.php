@@ -93,7 +93,7 @@ function jch_options_page()
                                 <div class="tab-pane active" id="description">
                                         <div id="extension-container" style="text-align:left;">
                                                 <h1>JCH Optimize Plugin</h1>
-                                                <h3>(Version 2.1.0)</h3>
+                                                <h3>(Version 2.2.1)</h3>
                                                 <?php
                                                 $subscribe_message = sprintf( wp_kses( __( 'This is the free version of JCH Optimize for WordPress. For access to advanced features, please <a href="%s" target="_blank">purchase the Pro Version!</a>', 'jch-optimize' ), array(  'a' => array( 'href' => array(), 'target' => array() ) ) ), esc_url( $subscribe_url ) );
                                                 
@@ -868,8 +868,7 @@ function jch_options_pro_replaceImports_string()
 
 function jch_options_pro_phpAndExternal_string()
 {
-        $description = __('Javascript and css files with <span class="notranslate">\'.php\'</span> file extensions, and files from external domains will be included in the combined file. This option requires that either <span class="notranslate">cURL</span> is installed on your server or your php option <span class="notranslate">\'allow_url_fopen\'</span> is enabled.',
-                          'jch-optimize');
+        $description = __('Javascript and css files with <span class="notranslate">\'.php\'</span> file extensions, and files from external domains will be included in the combined file. This option requires that <span class="notranslate">cURL</span> is installed on your server.', 'jch-optimize');
 
         
           echo jch_gen_proonly_field($description);
@@ -972,7 +971,7 @@ function jch_get_cache_info()
                         $no_files = '0';
                 }
 
-                $attribute = '<div><br><div><em>' . sprintf(__('Number of files: <span class="notranslate">%d</span>'), $no_files) . '</em></div>'
+                $attribute = '<div><br><div><em>' . sprintf(__('Number of files: <span class="notranslate">%s</span>'), $no_files) . '</em></div>'
                         . '<div><em>' . sprintf(__('Size: <span class="notranslate">%s</span>'), $size) . '</em></div></div>'
                         . '</div>';
         }
@@ -1798,7 +1797,6 @@ function jch_get_field_value($sType, $sExcludeParams, $sGroup = '')
         return $oJchAdmin->prepareFieldOptions($sType, $sExcludeParams, $sGroup);
 }
 
-__('Only available in Pro Version!', 'jch-optimize');
 
 
   function jch_gen_proonly_field($description = '')

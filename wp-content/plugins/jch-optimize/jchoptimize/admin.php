@@ -102,7 +102,7 @@ class JchOptimizeAdmin
 
                         if ($sCss == '' && !empty($aLinks['css'][0]))
                         {
-                                $oCombiner  = new JchOptimizeCombiner($params, $this->bBackend);
+                                $oCombiner  = new JchOptimizeCombiner($params, $oParser);
                                 $oCssParser = new JchOptimizeCssParser($params, $this->bBackend);
 
                                 $oCombiner->combineFiles($aLinks['css'][0], 'css', $oCssParser);
@@ -130,7 +130,7 @@ class JchOptimizeAdmin
          * @param type $sField
          * @return type
          */
-        public function prepareFieldOptions($sType, $sExcludeParams, $sGroup = '')
+        public function prepareFieldOptions($sType, $sExcludeParams, $sGroup = '', $bIncludeExcludes=true)
         {
                 if ($sType == 'lazyload')
                 {
@@ -148,16 +148,24 @@ class JchOptimizeAdmin
                         $aFieldOptions = $this->getOptions($sType, $sGroup . 's');
                 }
 
-                $aOptions  = array();
-                $oParams   = $this->params;
-                $aExcludes = JchOptimizeHelper::getArray($oParams->get($sExcludeParams, array()));
+		$aOptions  = array();
+		$oParams   = $this->params;
+		$aExcludes = JchOptimizeHelper::getArray($oParams->get($sExcludeParams, array()));
 
-                foreach ($aExcludes as $sExclude)
-                {
-                        $aOptions[$sExclude] = $this->{'prepare' . ucfirst($sGroup) . 'Values'}($sExclude);
-                }
+		foreach ($aExcludes as $sExclude)
+		{
+			$aOptions[$sExclude] = $this->{'prepare' . ucfirst($sGroup) . 'Values'}($sExclude);
+		}
 
-                return array_unique(array_merge($aFieldOptions, $aOptions));
+		//Should we include saved exclude parameters?
+		if($bIncludeExcludes)
+		{
+			return array_merge($aFieldOptions, $aOptions);
+		}
+		else
+		{
+			return array_diff($aFieldOptions, $aOptions);
+		}
         }
 
         /**
@@ -551,10 +559,10 @@ JFIELD;
                 $aButtons[1]['link']    = JchPlatformPaths::adminController('browsercaching');
                 $aButtons[1]['icon']    = 'fa-globe';
                 $aButtons[1]['color']   = '#51A351';
-                $aButtons[1]['text']    = JchPlatformUtility::translate('Leverage browser caching');
+                $aButtons[1]['text']    = JchPlatformUtility::translate('Optimize .htaccess');
                 $aButtons[1]['script']  = '';
                 $aButtons[1]['class']   = 'enabled';
-                $aButtons[1]['tooltip'] = JchPlatformUtility::translate('Use this button to add codes to your htaccess file to leverage browser caching.');
+                $aButtons[1]['tooltip'] = JchPlatformUtility::translate('Use this button to add codes to your htaccess file to enable leverage browser caching and gzip compression.');
 
                 $aButtons[3]['link']    = JchPlatformPaths::adminController('filepermissions');
                 $aButtons[3]['icon']    = 'fa-file-text';
@@ -587,68 +595,99 @@ JFIELD;
                 {
                         $contents = file_get_contents($htaccess);
 
-                        if (!preg_match('#ExpiresByType#', $contents))
+                        if (!preg_match('@\n?## BEGIN EXPIRES CACHING - JCH OPTIMIZE ##.*?## END EXPIRES CACHING - JCH OPTIMIZE ##@s', $contents))
                         {
-                                $sExpires = <<<JCHEXPIRES
+				$sExpires = PHP_EOL;
+				$sExpires .= '## BEGIN EXPIRES CACHING - JCH OPTIMIZE ##' . PHP_EOL;
+				$sExpires .= '<IfModule mod_expires.c>' . PHP_EOL;
+				$sExpires .= '  ExpiresActive on' . PHP_EOL;
+				$sExpires .= '' . PHP_EOL;
+				$sExpires .= '# Perhaps better to whitelist expires rules? Perhaps.' . PHP_EOL;
+				$sExpires .= '  ExpiresDefault "access plus 1 month"' . PHP_EOL;
+				$sExpires .= '' . PHP_EOL;
+				$sExpires .= '# cache.appcache needs re-requests in FF 3.6 (thanks Remy ~Introducing HTML5)' . PHP_EOL;
+				$sExpires .= '  ExpiresByType text/cache-manifest "access plus 0 seconds"' . PHP_EOL;
+				$sExpires .= '' . PHP_EOL;
+				$sExpires .= '# Your document html' . PHP_EOL;
+				$sExpires .= '  ExpiresByType text/html "access plus 0 seconds"' . PHP_EOL;
+				$sExpires .= '' . PHP_EOL;
+				$sExpires .= '# Data' . PHP_EOL;
+				$sExpires .= '  ExpiresByType text/xml "access plus 0 seconds"' . PHP_EOL;
+				$sExpires .= '  ExpiresByType application/xml "access plus 0 seconds"' . PHP_EOL;
+				$sExpires .= '  ExpiresByType application/json "access plus 0 seconds"' . PHP_EOL;
+				$sExpires .= '' . PHP_EOL;
+				$sExpires .= '# Feed' . PHP_EOL;
+				$sExpires .= '  ExpiresByType application/rss+xml "access plus 1 hour"' . PHP_EOL;
+				$sExpires .= '  ExpiresByType application/atom+xml "access plus 1 hour"' . PHP_EOL;
+				$sExpires .= '' . PHP_EOL;
+				$sExpires .= '# Favicon (cannot be renamed)' . PHP_EOL;
+				$sExpires .= '  ExpiresByType image/x-icon "access plus 1 week"' . PHP_EOL;
+				$sExpires .= '' . PHP_EOL;
+				$sExpires .= '# Media: images, video, audio' . PHP_EOL;
+				$sExpires .= '  ExpiresByType image/gif "access plus 1 month"' . PHP_EOL;
+				$sExpires .= '  ExpiresByType image/png "access plus 1 month"' . PHP_EOL;
+				$sExpires .= '  ExpiresByType image/jpg "access plus 1 month"' . PHP_EOL;
+				$sExpires .= '  ExpiresByType image/jpeg "access plus 1 month"' . PHP_EOL;
+				$sExpires .= '  ExpiresByType video/ogg "access plus 1 month"' . PHP_EOL;
+				$sExpires .= '  ExpiresByType audio/ogg "access plus 1 month"' . PHP_EOL;
+				$sExpires .= '  ExpiresByType video/mp4 "access plus 1 month"' . PHP_EOL;
+				$sExpires .= '  ExpiresByType video/webm "access plus 1 month"' . PHP_EOL;
+				$sExpires .= '' . PHP_EOL;
+				$sExpires .= '# HTC files (css3pie)' . PHP_EOL;
+				$sExpires .= '  ExpiresByType text/x-component "access plus 1 month"' . PHP_EOL;
+				$sExpires .= '' . PHP_EOL;
+				$sExpires .= '# Webfonts' . PHP_EOL;
+				$sExpires .= '  ExpiresByType application/font-ttf "access plus 1 month"' . PHP_EOL;
+				$sExpires .= '  ExpiresByType font/opentype "access plus 1 month"' . PHP_EOL;
+				$sExpires .= '  ExpiresByType application/font-woff "access plus 1 month"' . PHP_EOL;
+				$sExpires .= '  ExpiresByType application/font-woff2 "access plus 1 month"' . PHP_EOL;
+				$sExpires .= '  ExpiresByType image/svg+xml "access plus 1 month"' . PHP_EOL;
+				$sExpires .= '  ExpiresByType application/vnd.ms-fontobject "access plus 1 month"' . PHP_EOL;
+				$sExpires .= '' . PHP_EOL;
+				$sExpires .= '# CSS and JavaScript' . PHP_EOL;
+				$sExpires .= '  ExpiresByType text/css "access plus 1 year"' . PHP_EOL;
+				$sExpires .= '  ExpiresByType text/javascript "access plus 1 year"' . PHP_EOL;
+				$sExpires .= '  ExpiresByType application/javascript "access plus 1 year"' . PHP_EOL;
+				$sExpires .= '' . PHP_EOL;
+				$sExpires .= '  <IfModule mod_headers.c>' . PHP_EOL;
+				$sExpires .= '    Header append Cache-Control "public"' . PHP_EOL;
+				$sExpires .= '  </IfModule>' . PHP_EOL;
+				$sExpires .= '' . PHP_EOL;
+				$sExpires .= '</IfModule>' . PHP_EOL;
+				$sExpires .= '' . PHP_EOL;
+				$sExpires .= '<IfModule mod_deflate.c>' . PHP_EOL;
+				$sExpires .= 'AddOutputFilterByType DEFLATE text/html' . PHP_EOL;
+				$sExpires .= 'AddOutputFilterByType DEFLATE text/css' . PHP_EOL;
+				$sExpires .= 'AddOutputFilterByType DEFLATE text/javascript' . PHP_EOL;
+				$sExpires .= 'AddOutputFilterByType DEFLATE text/xml' . PHP_EOL;
+				$sExpires .= 'AddOutputFilterByType DEFLATE text/plain' . PHP_EOL;
+				$sExpires .= 'AddOutputFilterByType DEFLATE image/x-icon' . PHP_EOL;
+				$sExpires .= 'AddOutputFilterByType DEFLATE image/svg+xml' . PHP_EOL;
+				$sExpires .= 'AddOutputFilterByType DEFLATE application/rss+xml' . PHP_EOL;
+				$sExpires .= 'AddOutputFilterByType DEFLATE application/javascript' . PHP_EOL;
+				$sExpires .= 'AddOutputFilterByType DEFLATE application/x-javascript' . PHP_EOL;
+				$sExpires .= 'AddOutputFilterByType DEFLATE application/xml' . PHP_EOL;
+				$sExpires .= 'AddOutputFilterByType DEFLATE application/xhtml+xml' . PHP_EOL;
+				$sExpires .= 'AddOutputFilterByType DEFLATE application/font' . PHP_EOL;
+				$sExpires .= 'AddOutputFilterByType DEFLATE application/font-truetype' . PHP_EOL;
+				$sExpires .= 'AddOutputFilterByType DEFLATE application/font-ttf' . PHP_EOL;
+				$sExpires .= 'AddOutputFilterByType DEFLATE application/font-otf' . PHP_EOL;
+				$sExpires .= 'AddOutputFilterByType DEFLATE application/font-opentype' . PHP_EOL;
+				$sExpires .= 'AddOutputFilterByType DEFLATE application/font-woff' . PHP_EOL;
+				$sExpires .= 'AddOutputFilterByType DEFLATE application/font-woff2' . PHP_EOL;
+				$sExpires .= 'AddOutputFilterByType DEFLATE application/vnd.ms-fontobject' . PHP_EOL;
+				$sExpires .= 'AddOutputFilterByType DEFLATE font/ttf' . PHP_EOL;
+				$sExpires .= 'AddOutputFilterByType DEFLATE font/otf' . PHP_EOL;
+				$sExpires .= 'AddOutputFilterByType DEFLATE font/opentype' . PHP_EOL;
+				$sExpires .= 'AddOutputFilterByType DEFLATE font/woff' . PHP_EOL;
+				$sExpires .= 'AddOutputFilterByType DEFLATE font/woff2' . PHP_EOL;
+				$sExpires .= '# For Olders Browsers Which Can\'t Handle Compression' . PHP_EOL;
+				$sExpires .= 'BrowserMatch ^Mozilla/4 gzip-only-text/html' . PHP_EOL;
+				$sExpires .= 'BrowserMatch ^Mozilla/4\.0[678] no-gzip' . PHP_EOL;
+				$sExpires .= 'BrowserMatch \bMSIE !no-gzip !gzip-only-text/html' . PHP_EOL;
+				$sExpires .= '</IfModule>' . PHP_EOL;
+				$sExpires .= '## END EXPIRES CACHING - JCH OPTIMIZE ##' . PHP_EOL;
 
-
-## BEGIN EXPIRES CACHING - JCH OPTIMIZE ##
-<IfModule mod_expires.c>
-  ExpiresActive on
-
-# Perhaps better to whitelist expires rules? Perhaps.
-  ExpiresDefault "access plus 1 month"
-
-# cache.appcache needs re-requests in FF 3.6 (thanks Remy ~Introducing HTML5)
-  ExpiresByType text/cache-manifest "access plus 0 seconds"
-
-# Your document html
-  ExpiresByType text/html "access plus 0 seconds"
-
-# Data
-  ExpiresByType text/xml "access plus 0 seconds"
-  ExpiresByType application/xml "access plus 0 seconds"
-  ExpiresByType application/json "access plus 0 seconds"
-
-# Feed
-  ExpiresByType application/rss+xml "access plus 1 hour"
-  ExpiresByType application/atom+xml "access plus 1 hour"
-
-# Favicon (cannot be renamed)
-  ExpiresByType image/x-icon "access plus 1 week"
-
-# Media: images, video, audio
-  ExpiresByType image/gif "access plus 1 month"
-  ExpiresByType image/png "access plus 1 month"
-  ExpiresByType image/jpg "access plus 1 month"
-  ExpiresByType image/jpeg "access plus 1 month"
-  ExpiresByType video/ogg "access plus 1 month"
-  ExpiresByType audio/ogg "access plus 1 month"
-  ExpiresByType video/mp4 "access plus 1 month"
-  ExpiresByType video/webm "access plus 1 month"
-
-# HTC files (css3pie)
-  ExpiresByType text/x-component "access plus 1 month"
-
-# Webfonts
-  ExpiresByType application/x-font-ttf "access plus 1 month"
-  ExpiresByType font/opentype "access plus 1 month"
-  ExpiresByType application/x-font-woff "access plus 1 month"
-  ExpiresByType image/svg+xml "access plus 1 month"
-  ExpiresByType application/vnd.ms-fontobject "access plus 1 month"
-
-# CSS and JavaScript
-  ExpiresByType text/css "access plus 1 year"
-  ExpiresByType text/javascript "access plus 1 year"
-  ExpiresByType application/javascript "access plus 1 year"
-
-  <IfModule mod_headers.c>
-    Header append Cache-Control "public"
-  </IfModule>
-
-</IfModule>
-## END EXPIRES CACHING - JCH OPTIMIZE ##
-JCHEXPIRES;
                                 return file_put_contents($htaccess, $sExpires, FILE_APPEND);
                         }
                         else
@@ -662,4 +701,21 @@ JCHEXPIRES;
                 }
         }
 
+	public static function cleanHtaccess()
+	{
+                $htaccess = JchPlatformPaths::rootPath() . '.htaccess';
+
+                if (file_exists($htaccess))
+                {
+                        $contents = file_get_contents($htaccess);
+                        $regex    = '@\n?## BEGIN EXPIRES CACHING - JCH OPTIMIZE ##.*?## END EXPIRES CACHING - JCH OPTIMIZE ##@s';
+
+                        $clean_contents = preg_replace($regex, '', $contents, -1, $count);
+
+			if($count > 0)
+			{
+				file_put_contents($htaccess, $clean_contents);
+			}
+                }
+	}
 }

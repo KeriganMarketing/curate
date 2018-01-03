@@ -75,7 +75,7 @@ class JchOptimize
 
                 JCH_DEBUG ? JchPlatformProfiler::attachProfiler($sOptimizedHtml, $oParser->bAmpPage) : null;
 
-                if (version_compare(PHP_VERSION, '7', '>='))
+                if (version_compare(PHP_VERSION, '7.0.0', '>='))
                 {
                         ini_set('pcre.jit', $this->jit);
                 }
@@ -119,7 +119,7 @@ class JchOptimize
                 ini_set('pcre.backtrack_limit', 1000000);
                 ini_set('pcre.recursion_limit', 100000);
 
-                if (version_compare(PHP_VERSION, '7', '>='))
+                if (version_compare(PHP_VERSION, '7.0.0', '>='))
                 {
                         $this->jit = ini_get('pcre.jit');
                         ini_set('pcre.jit', 0);

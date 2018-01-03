@@ -9,8 +9,15 @@
 class JchPlatformHttp implements JchInterfaceHttp
 {
 
-        protected static $instance;
+        protected $transport = '';
 
+	public function __construct($transports)
+	{
+		if(count($transports) == 1 && $transports[0] =='curl')
+		{
+			$this->transport = 'Requests_Transport_cURL';
+		}
+	}
         /**
          * 
          * @staticvar null $available
@@ -79,6 +86,12 @@ class JchPlatformHttp implements JchInterfaceHttp
         {
                 $args = array('timeout' => 10);
 
+		if ($this->transport === 'Requests_Transport_cURL' 
+			&& isset($aHeaders['Content-Type']) && $aHeaders['Content-Type'] == 'multipart/form-data')
+		{
+			return JchOptimize\ImageOptimizer::curlRequest($sPath, $aPost);
+		}
+
                 if (isset($aHeaders))
                 {
                         $args['headers'] = $aHeaders;
@@ -107,19 +120,4 @@ class JchPlatformHttp implements JchInterfaceHttp
 
                 return $return;
         }
-
-        /**
-         * 
-         * @return type
-         */
-        public static function getHttpAdapter()
-        {
-                if (!self::$instance)
-                {
-                        self::$instance = new JchPlatformHttp();
-                }
-
-                return self::$instance;
-        }
-
 }

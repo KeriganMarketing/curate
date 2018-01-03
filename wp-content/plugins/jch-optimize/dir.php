@@ -1,4 +1,4 @@
 <?php
            
-$DIR = 'D:\dev\curate/';
+$DIR = '/home/curate30a/public_html/';
            

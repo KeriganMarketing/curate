@@ -385,12 +385,22 @@ class JchOptimizeCssParser extends JchOptimizeCssParserBase
                                 {
                                         $sImageUrl = JchOptimizeUrl::toAbsolute($sImageUrl, $sCssFileUrl);
                                 }
+				else
+				{
+					return $aMatches[0];
+				}
                         }
+
+			$sImageUrl = preg_match('#(?<!\\\\)[\s\'"(),]#', $sImageUrl) ? '"' . $sImageUrl . '"' : $sImageUrl;
+
+			return $sImageUrl;
+
                 }
+		else
+		{
+			return $aMatches[0];
+		}
 
-                $sImageUrl = preg_match('#(?<!\\\\)[\s\'"(),]#', $sImageUrl) ? '"' . $sImageUrl . '"' : $sImageUrl;
-
-                return $sImageUrl;
         }
 
         /**

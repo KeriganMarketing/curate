@@ -31,9 +31,9 @@ class JchOptimizeHelperBase
         /**
          * 
          */
-        public static function cookieLessDomain($params, $path, $orig_path)
+        public static function cookieLessDomain($params, $path, $orig_path, $domains_only=false)
         {
-                return $orig_path;
+                return $domains_only ? array() : $orig_path;
         }
 
 }
