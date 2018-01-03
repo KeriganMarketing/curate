@@ -37,12 +37,14 @@ $portfolio = new Portfolio();
                                 ]
                             ) );
 
-                            $photoInfo = pathinfo($work[0]['photo']);
+                            $wpID = attachment_url_to_postid($work[0]['photo']);
+                            $bigPhoto = wp_get_attachment_image_src($wpID,'thumbnail');
+                            $smallPhoto = wp_get_attachment_image_src($wpID,'small-thumbnail');
 
-                            if(file_exists($photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'])){
-                                $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'];
+                            if($bigPhoto && $bigPhoto[1] == '300' && $bigPhoto[2] == '300'){
+                                $newPhoto = $bigPhoto[0];
                             }else{
-                                $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-170x170.'.$photoInfo['extension'];
+                                $newPhoto = $smallPhoto[0];
                             }
 
                              ?>

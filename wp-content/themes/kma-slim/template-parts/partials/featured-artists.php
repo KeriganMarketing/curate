@@ -28,8 +28,15 @@
 		            ]
 	            ) );
 
-                $photoInfo = pathinfo($work[0]['photo']);
-                $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'];
+                $wpID = attachment_url_to_postid($work[0]['photo']);
+                $bigPhoto = wp_get_attachment_image_src($wpID,'thumbnail');
+                $smallPhoto = wp_get_attachment_image_src($wpID,'small-thumbnail');
+
+                if($bigPhoto && $bigPhoto[1] == '300' && $bigPhoto[2] == '300'){
+                    $newPhoto = $bigPhoto[0];
+                }else{
+                    $newPhoto = $smallPhoto[0];
+                }
 
                 if($i == 5){ ?>
                     <div class="column artist-thumb blank">

@@ -31,8 +31,16 @@ if($profilePhoto != ''){
         ]
     ] )[0];
 
-    $photoInfo = pathinfo($profilePhoto['photo']);
-    $artistPhoto  = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'];
+    $wpID = attachment_url_to_postid($profilePhoto['photo']);
+    $bigPhoto = wp_get_attachment_image_src($wpID,'thumbnail');
+    $smallPhoto = wp_get_attachment_image_src($wpID,'small-thumbnail');
+
+    if($bigPhoto && $bigPhoto[1] == '300' && $bigPhoto[2] == '300'){
+        $artistPhoto = $bigPhoto[0];
+    }else{
+        $artistPhoto = $smallPhoto[0];
+    }
+
 }
 
 
@@ -71,8 +79,15 @@ $workTypes = $portfolio->getWorkTypes($artist);
                             <?php foreach($workTypes as $num => $type){
 
                                 if(isset($type['work']['photo'])) {
-                                    $photoInfo = pathinfo($type['work']['photo']);
-                                    $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'];
+                                    $wpID = attachment_url_to_postid($type['work']['photo']);
+                                    $bigPhoto = wp_get_attachment_image_src($wpID,'thumbnail');
+                                    $smallPhoto = wp_get_attachment_image_src($wpID,'small-thumbnail');
+
+                                    if($bigPhoto && $bigPhoto[1] == '300' && $bigPhoto[2] == '300'){
+                                        $newPhoto = $bigPhoto[0];
+                                    }else{
+                                        $newPhoto = $smallPhoto[0];
+                                    }
                                 ?>
                                 <div class="column is-6-mobile is-12-tablet <?php echo $num; ?>">
                                     <figure class="artist-thumb-container is-1by1">
@@ -125,16 +140,14 @@ $workTypes = $portfolio->getWorkTypes($artist);
                             clearstatcache();
                             foreach($work as $num => $piece){
                                 $photoInfo = pathinfo($piece['photo']);
-                                $bigPhoto = str_replace(
-                                    'http://curate30a.com',
-                                    '',$photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension']);
-                                $smallPhoto = str_replace(
-                                    'http://curate30a.com',
-                                    '',$photoInfo['dirname'].'/'.$photoInfo['filename'].'-170x170.'.$photoInfo['extension']);
-                                if(stream_resolve_include_path($bigPhoto) !== false){
-                                    $newPhoto = $bigPhoto;
+                                $wpID = attachment_url_to_postid($piece['photo']);
+                                $bigPhoto = wp_get_attachment_image_src($wpID,'thumbnail');
+                                $smallPhoto = wp_get_attachment_image_src($wpID,'small-thumbnail');
+
+                                if($bigPhoto && $bigPhoto[1] == '300' && $bigPhoto[2] == '300'){
+                                    $newPhoto = $bigPhoto[0];
                                 }else{
-                                    $newPhoto = $smallPhoto;
+                                    $newPhoto = $smallPhoto[0];
                                 }
 
                                 $modalContent .= '<slide '.( $i==0 ? ':active="true"' : '' ).'>
