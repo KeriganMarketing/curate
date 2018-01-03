@@ -122,6 +122,7 @@ $workTypes = $portfolio->getWorkTypes($artist);
                             );
 
                             $i = 0;
+                            clearstatcache();
                             foreach($work as $num => $piece){
                                 $photoInfo = pathinfo($piece['photo']);
                                 if(!file_exists($photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'])){
