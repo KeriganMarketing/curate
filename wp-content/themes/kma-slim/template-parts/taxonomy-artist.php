@@ -126,10 +126,10 @@ $workTypes = $portfolio->getWorkTypes($artist);
                             foreach($work as $num => $piece){
                                 $photoInfo = pathinfo($piece['photo']);
                                 $bigPhoto = str_replace(
-                                    'https://curate30a.com',
+                                    'http://curate30a.com',
                                     '',$photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension']);
                                 $smallPhoto = str_replace(
-                                    'https://curate30a.com',
+                                    'http://curate30a.com',
                                     '',$photoInfo['dirname'].'/'.$photoInfo['filename'].'-170x170.'.$photoInfo['extension']);
                                 if(stream_resolve_include_path($bigPhoto) !== false){
                                     $newPhoto = $bigPhoto;
