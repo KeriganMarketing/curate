@@ -125,10 +125,11 @@ $workTypes = $portfolio->getWorkTypes($artist);
                             foreach($work as $num => $piece){
                                 $photoInfo = pathinfo($piece['photo']);
                                 if(!file_exists($photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'])){
-                                    $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-170x170.'.$photoInfo['extension'];
+                                    $size = '170x170';
                                 }else{
-                                    $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'];
+                                    $size = '300x300';
                                 }
+                                $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-'.$size.'.'.$photoInfo['extension'];
 
                                 $modalContent .= '<slide '.( $i==0 ? ':active="true"' : '' ).'>
                                     <div class="content is-centered">
@@ -147,11 +148,11 @@ $workTypes = $portfolio->getWorkTypes($artist);
                                     </div>
                                 </slide>';
                                 ?>
-                                <div class="column is-3 artist-thumb no-roll <?php echo $num; ?>">
+                                <div class="column is-3 artist-thumb no-roll <?= $num; ?>">
                                     <figure class="artist-thumb-container is-1by1">
-                                        <a @click="$emit('toggleModal', 'workViewer',<?php echo $num; ?>)" >
-                                            <img src="<?php echo $newPhoto; ?>" alt="<?php echo $piece['name'] . ': ' . $artist->name; ?>">
-                                            <span class="piece-name"><?php echo $piece['name']; ?></span>
+                                        <a @click="$emit('toggleModal', 'workViewer',<?= $num; ?>)" >
+                                            <img src="<?= $newPhoto; ?>" alt="<?= $piece['name'] . ': ' . $artist->name; ?>">
+                                            <span class="piece-name"><?= $piece['name']; ?></span>
                                         </a>
                                     </figure>
                                 </div>
