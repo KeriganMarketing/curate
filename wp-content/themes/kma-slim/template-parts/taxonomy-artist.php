@@ -125,12 +125,17 @@ $workTypes = $portfolio->getWorkTypes($artist);
                             clearstatcache();
                             foreach($work as $num => $piece){
                                 $photoInfo = pathinfo($piece['photo']);
-                                if(!file_exists($photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension'])){
-                                    $size = '170x170';
+                                $bigPhoto = str_replace(
+                                    'https://curate30a.com',
+                                    '',$photoInfo['dirname'].'/'.$photoInfo['filename'].'-300x300.'.$photoInfo['extension']);
+                                $smallPhoto = str_replace(
+                                    'https://curate30a.com',
+                                    '',$photoInfo['dirname'].'/'.$photoInfo['filename'].'-170x170.'.$photoInfo['extension']);
+                                if(stream_resolve_include_path($bigPhoto) !== false){
+                                    $newPhoto = $bigPhoto;
                                 }else{
-                                    $size = '300x300';
+                                    $newPhoto = $smallPhoto;
                                 }
-                                $newPhoto = $photoInfo['dirname'].'/'.$photoInfo['filename'].'-'.$size.'.'.$photoInfo['extension'];
 
                                 $modalContent .= '<slide '.( $i==0 ? ':active="true"' : '' ).'>
                                     <div class="content is-centered">
