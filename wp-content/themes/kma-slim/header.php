@@ -19,6 +19,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="http://gmpg.org/xfn/11">
 	<?php wp_head(); ?>
+    <?php if(is_page(15)){ ?>
+        <script src="https://maps.googleapis.com/maps/api/js?key=" ></script>
+    <?php } ?>
 </head>
 
 <body <?php body_class(); ?> >
