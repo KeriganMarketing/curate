@@ -20,7 +20,7 @@
     <link rel="profile" href="http://gmpg.org/xfn/11">
 	<?php wp_head(); ?>
     <?php if(is_page(15)){ ?>
-        <script src="https://maps.googleapis.com/maps/api/js?key=" ></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo GOOGLE_MAPS_API; ?>" ></script>
     <?php } ?>
 </head>
 
